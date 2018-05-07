@@ -1,0 +1,13 @@
+{
+    "name": "digitalmiig/colegiomiig",
+    "description": "Gestion y administracion de colegios y regiones para Libros y Libros",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Site Digital",
+            "email": "info@sitedigital.com.co"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
