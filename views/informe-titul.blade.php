@@ -1,6 +1,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -119,7 +121,7 @@
 <div class="container">
    <!-- Orders and Products -->
       <div class="container-fluid">
-          @foreach($colegios as $colegios)
+
         <div class="col-lg-12">
             <!-- Latest Orders Block -->
             <div class="block">
@@ -130,35 +132,25 @@
                         <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                     </div>
                     <h2>
-                      Colegio: {{$colegios->nombres}}<br>
-                      Representante: {{$colegios->nombre}}<br>
-                      Cantidad: 
-                      @foreach($totales as $totalesa)
-                      @if($colegios->id == $totalesa->totalid)
-                      {{$totalesa->suma}}
-                      @endif
-                      @endforeach <br>
-                      Total pesos:
-                      @foreach($totalpesos as $totalpesosa)
-                      @if($colegios->id == $totalpesosa->totalid)
-                      {{$totalpesosa->suma}}
-                      @endif
+                      Informanción de títulos basada en unidades<br>
+                      @foreach($totaltitulos as $totaltitulos)
+                      Total Unidades: {{$totaltitulos->suma}}
                       @endforeach
+
                     </h2>
                 </div>
                 <!-- END Latest Orders Title -->
 
                 <!-- Latest Orders Content -->
                 <table class="table table-borderless table-striped table-vcenter table-bordered">
+             
                     <tbody>
-                      @foreach($titulos as $titulosa)
-                      @if($colegios->id == $titulosa->colegio_id)
-                        <tr>
-                            <td class="" style="width: 80%;"><strong>{{$titulosa->nombre}}</strong></td>
-                            <td class="hidden-xs"><a href="javascript:void(0)">{{$titulosa->cantidad}}</a></td>
-                        </tr>
-                      @endif
-                      @endforeach
+                     @foreach($titulos as $titulos)
+                    <tr>
+                     <td>{{$titulos->nombre}}</td>       
+                     <td>{{$titulos->suma}}</td>
+                    </tr>
+                     @endforeach
                     </tbody>
                 </table>
                 <!-- END Latest Orders Content -->
@@ -166,7 +158,7 @@
            
             <!-- END Latest Orders Block -->
         </div>
-        @endforeach
+      
 </div>
 
 
@@ -176,94 +168,12 @@
 
 
 
-    	 <div class="col-lg-6 col-lg-offset-3">
-    	 	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-    	 		<img src="" class="img-responsive" alt="Image">
-    	 	</div>
-
-
-    	
-    	 	
-    	 	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 datos">
-    	 	 <h1>Informe de gestión</h1>
-    	 	 <p><strong>Fecha generación:</strong> {{date('Y-m-d H:i:s')}}<p>
-			   <p><strong>Generado por:</strong> {{Auth::user()->name}} {{Auth::user()->last_name}}</p>
-    	 	</div>
-
-    	 </div>
-
-
-    	    <div class="row">
-			 <div class="col-lg-6 col-lg-offset-3">
-			 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-			 	@foreach($totalcolegios as $totalcolegios)
-			 	<h2 class="text-center">{{$totalcolegios->conteo}}</h2>
-			 	@endforeach
-			 	<h3 class="text-center">Total Colegios</h3>
-			 </div>
-			 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-			 	@foreach($totallibros as $totallibros)
-			 	<h2 class="text-center">{{$totallibros->conteo}}</h2>
-			 	@endforeach
-			 	<h3 class="text-center">Total Libros</h3>
-			 </div>
-
-       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        @foreach($totalibrosedito as $totalibrosedito)
-        <h2 class="text-center">{{$totalibrosedito->conteo}}</h2>
-        @endforeach
-        <h3 class="text-center">Total Libros</h3>
-       </div>
-			 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-			 	@foreach($totalrepresentantes as $totalrepresentantes)
-			 	<h2 class="text-center">{{$totalrepresentantes->conteo}}</h2>
-			 	@endforeach
-			 	<h3 class="text-center">Total Representantes</h3>
-			 </div>
-
-       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+   
   
-        <h2 class="text-center"> @foreach($porcentajeventastotal as $porcentajeventastotal)
-        @foreach($porcentajeventas as $porcentajeventas)
-         {{number_format($porcentajeventas->conteo*100/$porcentajeventastotal->conteo, 2)}} %
-        @endforeach
-       @endforeach</h2>
+
+
     
-        <h3 class="text-center">Total Representantes</h3>
-       </div>
-			 </div>
-			</div>
-
-
-
-    		<div class="row">
-    	
-        		 </strong></th>
-        		</tr>
-    		   </thead>
-  			  </table>
-			 </div>
-			</div>
-
-
-
-
-
-            <div class="row">
-			 <div class="col-lg-6 col-lg-offset-3">
-			  <table class="table table-bordered">
-    		   <thead>
-                
-  			   </thead>
-   			   
-   			   <tbody>
-   			
-
-  
-			   </tbody>
- 			  </table>
-			 </div>
-			</div>
+      
 
             
 

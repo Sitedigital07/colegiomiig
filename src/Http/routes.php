@@ -85,8 +85,25 @@ Route::get('/informe/generalweb', function () {
     return view('colegiomiig::informe-general')->with('colegios', $colegios)->with('representantes', $representantes);
 });
 
+Route::get('/informe/generalventas', function () {
+    $colegios = DB::table('colegios')->get();
+    $representantes = DB::table('representantes')->get();
+    return view('colegiomiig::informe-generalventas')->with('colegios', $colegios)->with('representantes', $representantes);
+});
 
-Route::post('informe/generalauditor', function(){
+Route::get('/informe/vendedor', function () {
+    $colegios = DB::table('colegios')->get();
+    $representantes = DB::table('representantes')->get();
+    return view('colegiomiig::informe-vendedor')->with('colegios', $colegios)->with('representantes', $representantes);
+});
+
+Route::get('/informe/titulos', function () {
+    $titulos = DB::table('titulo')->get();
+    return view('colegiomiig::informe-titulo')->with('titulos', $titulos);
+});
+
+
+Route::post('informe/generalproventas', function(){
        
        $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
        $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
@@ -97,7 +114,7 @@ Route::post('informe/generalauditor', function(){
        $colegios = DB::table('colegios')
          ->join('representantes', 'colegios.representante_id', '=', 'representantes.id')
          ->where('colegios.id', 'like', '%' . $clientes . '%')
-         
+         ->where('representante_id', 'like', '%' . $representantes . '%')
          ->get();
 
         $titulos = DB::table('proventas')
@@ -196,6 +213,198 @@ Route::post('informe/generalauditor', function(){
         
 });
 
+Route::post('informe/generalauditor', function(){
+       
+       $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
+       $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
+       $clientes =  Input::get('cliente') ;
+       $estados =  Input::get('estado') ;
+       $representantes =  Input::get('representante') ;
+   
+       $colegios = DB::table('colegios')
+         ->join('representantes', 'colegios.representante_id', '=', 'representantes.id')
+         ->where('colegios.id', 'like', '%' . $clientes . '%')
+         ->where('representante_id', 'like', '%' . $representantes . '%')
+         ->get();
+
+
+         $titulos = DB::table('campos')
+         ->join('titulo', 'campos.titulo', '=', 'titulo.id')
+         ->where('colegio_id', 'like', '%' . $clientes . '%')
+         ->where('representante_id', 'like', '%' . $representantes . '%')
+         ->where('ano', 'like', '%' . $estados . '%')
+            
+         ->selectRaw('sum(cantidad) as cantidad')
+         ->selectRaw('(colegio_id) as colegio_id')
+         ->selectRaw('(nombre) as nombre')
+         ->groupBy('titulo')
+         ->groupBy('colegio_id')
+         ->get();
+
+         $totales = DB::table('campos')
+         ->where('colegio_id', 'like', '%' . $clientes . '%')
+         ->where('representante_id', 'like', '%' . $representantes . '%')
+         ->where('ano', 'like', '%' . $estados . '%')
+         ->where('titulo', '>', 0)
+         ->selectRaw('sum(cantidad) as suma')
+         ->selectRaw('(colegio_id) as totalid')
+         ->groupBy('colegio_id')
+         ->get();
+
+           $representantes = DB::table('campos')
+         ->join('titulo', 'campos.titulo', '=', 'titulo.id')
+         ->where('colegio_id', 'like', '%' . $clientes . '%')
+         ->where('representante_id', 'like', '%' . $representantes . '%')
+         ->where('ano', 'like', '%' . $estados . '%')
+         
+         ->selectRaw('sum(cantidad) as cantidad')
+         ->selectRaw('(colegio_id) as colegio_id')
+         ->selectRaw('(nombre) as nombre')
+         ->groupBy('titulo')
+         ->groupBy('colegio_id')
+         ->get();
+
+         $totalpesos = DB::table('campos')
+         ->join('titulo', 'campos.titulo', '=', 'titulo.id')
+         ->where('colegio_id', 'like', '%' . $clientes . '%')
+         ->where('ano', 'like', '%' . $estados . '%')
+         
+         ->selectRaw('sum(cantidad*precio) as suma')
+         ->selectRaw('(colegio_id) as totalid')
+         ->groupBy('colegio_id')
+         ->get();
+
+
+         $totalcolegios = DB::table('colegios')
+         ->selectRaw('count(region_id) as conteo')
+        ->where('colegios.id', 'like', '%' . $clientes . '%')
+        ->where('representante_id', 'like', '%' . $representantes . '%')
+         ->get();
+
+         $totallibros = DB::table('campos')
+         ->selectRaw('sum(cantidad) as conteo')
+         ->where('titulo', '>', 0)
+         ->get();
+
+         $totalibrosedito = DB::table('campos')
+         ->selectRaw('sum(cantidad) as conteo')
+         ->where('titulo', '=', 0)
+         ->get(); 
+
+        $porcentajeventastotal = DB::table('campos')
+         ->selectRaw('sum(cantidad) as conteo')
+         ->get();
+
+
+         $porcentajeventas = DB::table('campos')
+         ->selectRaw('sum(cantidad) as conteo')
+         ->where('titulo', '>', 0)
+         ->get();       
+
+          $totalrepresentantes = DB::table('representantes')
+
+         ->selectRaw('count(id) as conteo')
+      
+         ->get();       
+         
+      return view('colegiomiig::informe-generalaud')->with('colegios', $colegios)->with('titulos', $titulos)->with('totales', $totales)->with('totalcolegios', $totalcolegios)->with('totallibros', $totallibros)->with('totalrepresentantes', $totalrepresentantes)->with('totalpesos', $totalpesos)->with('representantes', $representantes)->with('totalibrosedito', $totalibrosedito)->with('porcentajeventastotal', $porcentajeventastotal)->with('porcentajeventas', $porcentajeventas);
+
+        
+});
+
+
+
+
+Route::post('informe/versus', function(){
+       
+       $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
+       $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
+       $clientes =  Input::get('cliente') ;
+       $estados =  Input::get('estado') ;
+       $representantes =  Input::get('representante') ;
+   
+       $vendedores = DB::table('representantes')
+            ->where('representantes.id', 'like', '%' . $representantes . '%')
+            ->get();
+
+        $colegios = DB::table('representantes')
+            ->join('colegios', 'colegios.representante_id', '=', 'representantes.id')
+            ->where('representantes.id', 'like', '%' . $representantes . '%')
+            ->get();
+
+        $totalauditoria = DB::table('campos')
+            ->join('titulo', 'campos.titulo', '=', 'titulo.id')
+            ->selectRaw('sum(cantidad*precio) as suma')
+            ->selectRaw('(colegio_id) as totalid')
+            ->where('ano', 'like', '%' . $estados . '%')
+            ->groupBy('colegio_id')
+            ->get();
+
+        $totalventas = DB::table('proventas')
+            ->join('titulo', 'proventas.titulo', '=', 'titulo.id')
+            ->selectRaw('sum(cantidad*precio) as suma')
+            ->selectRaw('(colegio_id) as totalid')
+            ->where('ano', 'like', '%' . $estados . '%')
+            ->groupBy('colegio_id')
+            ->get();
+
+        $totalrpventa = DB::table('proventas')
+            ->join('titulo', 'proventas.titulo', '=', 'titulo.id')
+            ->selectRaw('sum(cantidad*precio) as suma')
+            ->where('ano', 'like', '%' . $estados . '%')
+            ->selectRaw('(representante_id) as totalid')
+            ->where('titulo', '>', 0)
+            ->groupBy('representante_id')
+            ->get();
+
+        $totalrpauditor = DB::table('campos')
+            ->join('titulo', 'campos.titulo', '=', 'titulo.id')
+            ->selectRaw('sum(cantidad*precio) as suma')
+            ->where('ano', 'like', '%' . $estados . '%')
+            ->selectRaw('(representante_id) as totalid')
+            ->where('titulo', '>', 0)
+            ->groupBy('representante_id')
+            ->get();
+
+     
+        
+       return view('colegiomiig::informe-versus')->with('vendedores', $vendedores)->with('colegios', $colegios)->with('totalauditoria', $totalauditoria)->with('totalventas', $totalventas)->with('totalrpventa', $totalrpventa)->with('totalrpauditor', $totalrpauditor);
+
+        
+});
+
+
+Route::post('informe/titulos', function(){
+       
+       $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
+       $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
+       $clientes =  Input::get('cliente') ;
+       $estados =  Input::get('estado') ;
+       $representantes =  Input::get('representante') ;
+   
+
+
+        $titulos = DB::table('proventas')
+            ->join('titulo', 'proventas.titulo', '=', 'titulo.id')
+            ->selectRaw('sum(cantidad) as suma')
+            ->selectRaw('(nombre) as nombre')
+            ->where('ano', 'like', '%' . $estados . '%')
+            ->groupBy('titulo')
+            ->get();
+
+        $totaltitulos = DB::table('proventas')
+            ->selectRaw('sum(cantidad) as suma')
+            ->where('ano', 'like', '%' . $estados . '%')
+            ->where('titulo', '>', 0)
+            ->get();
+     
+        
+       return view('colegiomiig::informe-titul')->with('titulos', $titulos)->with('totaltitulos', $totaltitulos);
+
+        
+});
+
+
 });
 
 
@@ -209,6 +418,81 @@ Route::get('/gerentereg', function () {
 });
 
 
+
+
+Route::get('/informe/vendedorreg', function () {
+    $colegios = DB::table('colegios')
+    ->where('region_id','=',Auth::user()->region)
+    ->get();
+    $representantes = DB::table('representantes')
+    ->where('region_id','=',Auth::user()->region)
+    ->get();
+    return view('colegiomiig::informe-vendedorreg')->with('colegios', $colegios)->with('representantes', $representantes);
+});
+
+Route::post('informe/versusreg', function(){
+       
+       $min_price = Input::has('min_price') ? Input::get('min_price') : 0;
+       $max_price = Input::has('max_price') ? Input::get('max_price') : 10000000;
+       $clientes =  Input::get('cliente') ;
+       $estados =  Input::get('estado') ;
+       $representantes =  Input::get('representante') ;
+   
+       $vendedores = DB::table('representantes')
+            ->where('representantes.id', 'like', '%' . $representantes . '%')
+            ->where('region_id','=',Auth::user()->region)
+            ->get();
+
+        $colegios = DB::table('representantes')
+            ->join('colegios', 'colegios.representante_id', '=', 'representantes.id')
+            ->where('representantes.id', 'like', '%' . $representantes . '%')
+            ->where('colegios.region_id','=',Auth::user()->region)
+            ->get();
+
+        $totalauditoria = DB::table('campos')
+            ->join('titulo', 'campos.titulo', '=', 'titulo.id')
+            ->selectRaw('sum(cantidad*precio) as suma')
+            ->selectRaw('(colegio_id) as totalid')
+            ->where('ano', 'like', '%' . $estados . '%')
+            ->where('region_id','=',Auth::user()->region)
+            ->groupBy('colegio_id')
+            ->get();
+
+        $totalventas = DB::table('proventas')
+            ->join('titulo', 'proventas.titulo', '=', 'titulo.id')
+            ->selectRaw('sum(cantidad*precio) as suma')
+            ->selectRaw('(colegio_id) as totalid')
+            ->where('ano', 'like', '%' . $estados . '%')
+            ->where('region_id','=',Auth::user()->region)
+            ->groupBy('colegio_id')
+            ->get();
+
+        $totalrpventa = DB::table('proventas')
+            ->join('titulo', 'proventas.titulo', '=', 'titulo.id')
+            ->selectRaw('sum(cantidad*precio) as suma')
+            ->where('ano', 'like', '%' . $estados . '%')
+            ->selectRaw('(representante_id) as totalid')
+            ->where('region_id','=',Auth::user()->region)
+            ->where('titulo', '>', 0)
+            ->groupBy('representante_id')
+            ->get();
+
+        $totalrpauditor = DB::table('campos')
+            ->join('titulo', 'campos.titulo', '=', 'titulo.id')
+            ->selectRaw('sum(cantidad*precio) as suma')
+            ->where('ano', 'like', '%' . $estados . '%')
+            ->selectRaw('(representante_id) as totalid')
+            ->where('region_id','=',Auth::user()->region)
+            ->where('titulo', '>', 0)
+            ->groupBy('representante_id')
+            ->get();
+
+     
+        
+       return view('colegiomiig::informe-versus')->with('vendedores', $vendedores)->with('colegios', $colegios)->with('totalauditoria', $totalauditoria)->with('totalventas', $totalventas)->with('totalrpventa', $totalrpventa)->with('totalrpauditor', $totalrpauditor);
+
+        
+});
 
 
 
@@ -260,6 +544,7 @@ Route::post('informe/general', function(){
          ->selectRaw('sum(cantidad) as suma')
          ->selectRaw('(colegio_id) as totalid')
          ->groupBy('colegio_id')
+         ->where('titulo', '>', 0)
          ->get();
 
            $representantes = DB::table('proventas')

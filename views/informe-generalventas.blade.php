@@ -1,4 +1,4 @@
-@extends ('adminsite.auditor')
+@extends ('adminsite.presentacion')
 
 
 <!-- Define el titulo de la Página -->    
@@ -13,18 +13,24 @@ Gestión de usuarios Libros & Libros
 
 @section('contenido')
 
-
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
-                                
+                                <li>
+                                    <a href="/informe/generalweb"><i class="fa fa-home"></i> informe auditoria</a>
+                                </li>
                                 <li class="active">
-                                    <a href="/gerentereg"><i class="gi gi-charts"></i> Informe ventas</a>
+                                    <a href="/informe/generalventas"><i class="gi gi-charts"></i> Informe ventas</a>
                                 </li>
                                  <li>
-                                    <a href="/informe/vendedorreg"><i class="gi gi-charts"></i> Informe auditoria vs ventas</a>
+                                    <a href="/informe/vendedor"><i class="gi gi-charts"></i> Informe auditoria vs ventas</a>
+                                </li>
+                                <li>
+                                    <a href="/informe/titulos"><i class="gi gi-charts"></i> Informe Titulos</a>
                                 </li>
                             </ul>
                         </div>
+  
+
 
 <div class="container">
   <div class="row">
@@ -41,14 +47,14 @@ Gestión de usuarios Libros & Libros
                                     <!-- END Form Elements Title -->
                                     
                                     <!-- Basic Form Elements Content -->
-                                     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/informe/general'))) }}
+                                     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/informe/generalproventas'))) }}
 
 
                                      	<div class="form-group">
                                             <label class="col-md-3 control-label" for="example-text-input">Colegios</label>
                                             <div class="col-md-9">
                                              <select class="selectpicker col-xs-12 col-sm-12 col-md-12 col-lg-12 form-control input-small" data-show-subtext="true" data-live-search="true" name="cliente">
-                                              <option value="" selected disabled hidden>Seleccione Cliente</option>
+                                              <option value="" selected disabled hidden>Seleccione Colegio</option>
                                                @foreach($colegios as $colegios)
                                               <option value="{{$colegios->id}}">{{$colegios->nombres}} {{$colegios->codigo}}</option>
                                                @endforeach
@@ -57,10 +63,10 @@ Gestión de usuarios Libros & Libros
                                         </div>
                                        
                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-text-input">Colegios</label>
+                                            <label class="col-md-3 control-label" for="example-text-input">Representante</label>
                                             <div class="col-md-9">
-                                             <select class="selectpicker col-xs-12 col-sm-12 col-md-12 col-lg-12 form-control input-small" data-show-subtext="true" data-live-search="true" name="cliente">
-                                              <option value="" selected disabled hidden>Seleccione Cliente</option>
+                                             <select class="selectpicker col-xs-12 col-sm-12 col-md-12 col-lg-12 form-control input-small" data-show-subtext="true" data-live-search="true" name="representante">
+                                              <option value="" selected disabled hidden>Seleccione representante</option>
                                                @foreach($representantes as $representantes)
                                               <option value="{{$representantes->id}}">{{$representantes->nombre}} {{$representantes->apellido}}</option>
                                                @endforeach
@@ -72,10 +78,10 @@ Gestión de usuarios Libros & Libros
                                         
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-email-input">Estado</label>
+                                            <label class="col-md-3 control-label" for="example-email-input">Año</label>
                                             <div class="col-md-9">
                                              <select name="estado" class="form-control">
-                                              <option value="" selected>Seleccione estado</option>
+                                              <option value="" selected>Seleccione año</option>
                                               <option value="2016">2016</option>
                                               <option value="2017">2017</option>
                                               <option value="2018">2018</option>

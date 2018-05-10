@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -119,7 +117,7 @@
 <div class="container">
    <!-- Orders and Products -->
       <div class="container-fluid">
-          @foreach($colegios as $colegios)
+          @foreach($vendedores as $vendedores)
         <div class="col-lg-12">
             <!-- Latest Orders Block -->
             <div class="block">
@@ -130,32 +128,80 @@
                         <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                     </div>
                     <h2>
-                      Colegio: {{$colegios->nombres}}<br>
-                      Representante: {{$colegios->nombre}}<br>
-                      Cantidad: 
-                      @foreach($totales as $totalesa)
-                      @if($colegios->id == $totalesa->totalid)
-                      {{$totalesa->suma}}
+                      Representante: {{$vendedores->nombre}}<br>
+                      @foreach($totalrpventa as $totalrpventav)
+                      @if($vendedores->id == $totalrpventav->totalid)
+                      Venta: $ {{number_format($totalrpventav->suma, 0, ",", ".")}}
                       @endif
-                      @endforeach <br>
-                      Total pesos:
-                      @foreach($totalpesos as $totalpesosa)
-                      @if($colegios->id == $totalpesosa->totalid)
-                      {{$totalpesosa->suma}}
+                      @endforeach<br>
+
+                      @foreach($totalrpauditor as $totalrpauditorv)
+                      @if($vendedores->id == $totalrpauditorv->totalid)
+                      Auditoria:$ {{number_format($totalrpauditorv->suma, 0, ",", ".")}}
+                      @endif
+                      @endforeach<br>
+
+                      @foreach($totalrpauditor as $totalrpauditorv)
+                      @if($totalrpauditorv->totalid == $totalrpventav->totalid)
+                      @foreach($totalrpventa as $totalrpventav)
+                      @if($vendedores->id == $totalrpauditorv->totalid)
+                      @endif
+              
+                      @if($vendedores->id == $totalrpventav->totalid)
+                      Efectividad:<strong> {{number_format($totalrpauditorv->suma*100 / $totalrpventav->suma,2)}}% </strong>
                       @endif
                       @endforeach
+                      @endif
+                      @endforeach
+
                     </h2>
                 </div>
                 <!-- END Latest Orders Title -->
 
                 <!-- Latest Orders Content -->
                 <table class="table table-borderless table-striped table-vcenter table-bordered">
+                   <thead>
+            <th width="4%">ID</th>
+            <th width="40%">Colegio</th>
+            <th width="20%">Código MIIG</th>
+            <th width="20%">Auditoria</th>
+            <th width="20%">Ventas</th>
+            <th width="10%">Porcentaje</th>
+           </thead>
                     <tbody>
-                      @foreach($titulos as $titulosa)
-                      @if($colegios->id == $titulosa->colegio_id)
+                      @foreach($colegios as $colegiosa)
+                      @if($vendedores->id == $colegiosa->representante_id)
                         <tr>
-                            <td class="" style="width: 80%;"><strong>{{$titulosa->nombre}}</strong></td>
-                            <td class="hidden-xs"><a href="javascript:void(0)">{{$titulosa->cantidad}}</a></td>
+                           <td>{{$colegiosa->id}}</td>    
+                           <td>{{$colegiosa->nombres}}</td>
+                           <td>{{$colegiosa->codigo}}</td>
+
+                           @foreach($totalauditoria as $totalauditoriav)
+                           @if($colegiosa->id == $totalauditoriav->totalid)
+                           <td>$ {{number_format($totalauditoriav->suma, 0, ",", ".")}}</td>
+                           @endif
+                           @endforeach
+                           @foreach($totalventas as $totalventasv)
+                           @if($colegiosa->id == $totalventasv->totalid)
+                           <td>$ {{number_format($totalventasv->suma, 0, ",", ".")}}</td>
+                           @endif
+                           @endforeach
+        
+                           @foreach($totalauditoria as $totalauditoriav)
+                           @foreach($totalventas as $totalventasv)
+                           @if($colegiosa->id == $totalauditoriav->totalid)
+                           @if($colegiosa->id == $totalventasv->totalid)
+                            @if($totalauditoriav->suma*100/$totalventasv->suma <= 89)
+                            <td style="color:red"><strong>{{number_format($totalauditoriav->suma*100/$totalventasv->suma,2)}} % </strong></td>
+                            @elseif($totalauditoriav->suma*100/$totalventasv->suma <= 99)
+                            <td style="color:orange"><strong>{{number_format($totalauditoriav->suma*100/$totalventasv->suma,2)}} % </strong></td>
+                            @elseif($totalauditoriav->suma*100/$totalventasv->suma >= 100)
+                            <td style="color:green"><strong>{{number_format($totalauditoriav->suma*100/$totalventasv->suma,2)}} % </strong></td>
+                            @endif
+                           @endif
+                           @endif
+                           @endforeach
+                           @endforeach
                         </tr>
                       @endif
                       @endforeach
@@ -176,94 +222,12 @@
 
 
 
-    	 <div class="col-lg-6 col-lg-offset-3">
-    	 	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-    	 		<img src="" class="img-responsive" alt="Image">
-    	 	</div>
-
-
-    	
-    	 	
-    	 	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 datos">
-    	 	 <h1>Informe de gestión</h1>
-    	 	 <p><strong>Fecha generación:</strong> {{date('Y-m-d H:i:s')}}<p>
-			   <p><strong>Generado por:</strong> {{Auth::user()->name}} {{Auth::user()->last_name}}</p>
-    	 	</div>
-
-    	 </div>
-
-
-    	    <div class="row">
-			 <div class="col-lg-6 col-lg-offset-3">
-			 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-			 	@foreach($totalcolegios as $totalcolegios)
-			 	<h2 class="text-center">{{$totalcolegios->conteo}}</h2>
-			 	@endforeach
-			 	<h3 class="text-center">Total Colegios</h3>
-			 </div>
-			 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-			 	@foreach($totallibros as $totallibros)
-			 	<h2 class="text-center">{{$totallibros->conteo}}</h2>
-			 	@endforeach
-			 	<h3 class="text-center">Total Libros</h3>
-			 </div>
-
-       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        @foreach($totalibrosedito as $totalibrosedito)
-        <h2 class="text-center">{{$totalibrosedito->conteo}}</h2>
-        @endforeach
-        <h3 class="text-center">Total Libros</h3>
-       </div>
-			 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-			 	@foreach($totalrepresentantes as $totalrepresentantes)
-			 	<h2 class="text-center">{{$totalrepresentantes->conteo}}</h2>
-			 	@endforeach
-			 	<h3 class="text-center">Total Representantes</h3>
-			 </div>
-
-       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+   
   
-        <h2 class="text-center"> @foreach($porcentajeventastotal as $porcentajeventastotal)
-        @foreach($porcentajeventas as $porcentajeventas)
-         {{number_format($porcentajeventas->conteo*100/$porcentajeventastotal->conteo, 2)}} %
-        @endforeach
-       @endforeach</h2>
+
+
     
-        <h3 class="text-center">Total Representantes</h3>
-       </div>
-			 </div>
-			</div>
-
-
-
-    		<div class="row">
-    	
-        		 </strong></th>
-        		</tr>
-    		   </thead>
-  			  </table>
-			 </div>
-			</div>
-
-
-
-
-
-            <div class="row">
-			 <div class="col-lg-6 col-lg-offset-3">
-			  <table class="table table-bordered">
-    		   <thead>
-                
-  			   </thead>
-   			   
-   			   <tbody>
-   			
-
-  
-			   </tbody>
- 			  </table>
-			 </div>
-			</div>
+      
 
             
 
