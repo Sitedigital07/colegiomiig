@@ -34,45 +34,45 @@ Gestión de usuarios Libros & Libros
                                             </div>
                                         </div>
                                         <h3 class="widget-content-light">
-                                            Your <strong>VIP Plan</strong>
-                                            <small><a href="page_ready_pricing_tables.html"><strong>Cantidad de Colegios</strong></a></small>
+                                            Informe <strong>Resultados Libros y Libros</strong>
                                         </h3>
                                     </div>
                                     <div class="widget-extra-full">
                                         <div class="row text-center">
-                                            <div class="col-xs-6 col-lg-3">
+                                            <div class="col-xs-6 col-lg-4">
                                                 <h3>
                                                     <strong>{{$colegios}}</strong> <small></small><br>
                                                     <small><i class="fa fa-folder-open-o"></i> Cantidad Colegios</small>
                                                 </h3>
                                             </div>
-                                            <div class="col-xs-6 col-lg-3">
+                                            <div class="col-xs-6 col-lg-4">
                                                 <h3>
                                                     <strong>{{$adopcioncompleta}}</strong> <small></small><br>
                                                     <small><i class="fa fa-hdd-o"></i> Colegios Adopción Completa</small>
                                                 </h3>
                                             </div>
-                                            <div class="col-xs-6 col-lg-3">
+                                            <div class="col-xs-6 col-lg-4">
                                                 <h3>
                                                     <strong>{{$adopcionlimitada}}</strong> <small></small><br>
                                                     <small><i class="fa fa-building-o"></i> Colegios Adopción Limitada</small>
                                                 </h3>
                                             </div>
-                                            <div class="col-xs-6 col-lg-3">
+                                            <div class="col-xs-6 col-lg-4">
                                                 <h3>
                                                     <strong>{{$total}}</strong> <small></small><br>
                                                     <small><i class="fa fa-building-o"></i> Total Libros Vendidos</small>
                                                 </h3>
                                             </div>
-                                            <div class="col-xs-6 col-lg-3">
+                                            <div class="col-xs-6 col-lg-4">
                                                 <h3>
                                                     <strong>{{$totalyl}}</strong> <small></small><br>
-                                                    <small><i class="fa fa-building-o"></i> Total Libros Vendidos</small>
+                                                    <small><i class="fa fa-building-o"></i> Total Libros Vendidos LYL</small>
                                                 </h3>
                                             </div>
-                                            <div class="col-xs-6 col-lg-3">
+                                            <div class="col-xs-6 col-lg-4">
                                                 <h3>
-                                                    <strong>{{$totalyl*100/$total}}%</strong> <small></small><br>Participación libros</small>
+                                                    <strong>{{number_format($totalyl*100/$total,2)}}%</strong> <small></small><br>
+                                                    <small>Participación en el Mercado</small>
                                                 </h3>
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@ Gestión de usuarios Libros & Libros
                                             <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
                                             <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                                         </div>
-                                        <h2><strong>Cantidad títulos</strong> por editorial</h2>
+                                        <h2><strong>Cantidad títulos</strong> por representante</h2>
                                     </div>
                                     <!-- END Top Products Title -->
 
@@ -147,7 +147,7 @@ Gestión de usuarios Libros & Libros
                                             <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
                                             <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                                         </div>
-                                        <h2><strong>Cantidad títulos</strong> por editorial</h2>
+                                        <h2><strong>Cantidad títulos</strong> por colegio</h2>
                                     </div>
                                     <!-- END Top Products Title -->
 

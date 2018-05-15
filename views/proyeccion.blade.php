@@ -55,7 +55,7 @@ Gestión de usuarios Libros & Libros
     <!-- Default panel contents -->
     <div class="panel-heading">Fechas Programación</div>
     <div class="panel-body">
-      <p>Descripción de las fechas.</p>
+  
     </div>
   <div class="container">
     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/crearproyec'))) }}
@@ -73,6 +73,7 @@ Gestión de usuarios Libros & Libros
 @if($conteo == 3)
 @else
 {{Form::submit('Crear', array('class' => 'btn btn-primary')  )}}
+<br>
 <br>
 @endif
 {{ Form::close() }}

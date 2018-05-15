@@ -245,7 +245,7 @@ Gestión de usuarios Libros & Libros
        </div>
 
                                         <div class="form-group form-actions">
-                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-user"></i> Crear</button>
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-user"></i> Crear Colegio</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
                                         </div>
                                        {{ Form::close() }}

@@ -131,7 +131,7 @@
                     </div>
                     <h2>
                       Colegio: {{$colegios->nombres}}<br>
-                      Representante: {{$colegios->nombre}}<br>
+                      Representante: {{$colegios->nombre}} {{$colegios->apellido}}<br>
                       Cantidad: 
                       @foreach($totales as $totalesa)
                       @if($colegios->id == $totalesa->totalid)
@@ -141,7 +141,7 @@
                       Total pesos:
                       @foreach($totalpesos as $totalpesosa)
                       @if($colegios->id == $totalpesosa->totalid)
-                      {{$totalpesosa->suma}}
+                      ${{number_format($totalpesosa->suma, 0, ",", ".")}} 
                       @endif
                       @endforeach
                     </h2>

@@ -844,16 +844,24 @@ function mostrar(id) {
 </head>
 
 <body>
-<div class="card">
-<h1 style="font-size: 22px"><strong>Productos</strong> <span style="font-weight: 100"> Colegio</span> </h1>
-<hr>
+
 @foreach($ano as $ano)
 
 @endforeach
 
-<form action="index.php" method="post">
-  Seleccione Grado 
-    <select id="status" class="form-control input-sm" name="status" onChange="mostrar(this.value);">
+<div class="container-fluid">
+   <!-- Inline Form Block -->
+            <div class="block full">
+                <!-- Inline Form Title -->
+                <div class="block-title">
+                    <h2><strong>Seleccione grado</strong> para auditoría</h2>
+                </div>
+                <!-- END Inline Form Title -->
+
+                <!-- Inline Form Content -->
+                <form action="index.php" method="post">
+
+    <select id="status" class="form-control input-md" name="status" onChange="mostrar(this.value);">
        <option value="" selected>Seleccione grado</option>
 
        @if (DB::table('campos')->where('grado_id', '=', 1)->where('ano', '=', $ano->ano)->where('colegio_id', '=', Request::segment(2))->exists()) 
@@ -925,6 +933,12 @@ function mostrar(id) {
      
      </select>
 </form>
+                <!-- END Inline Form Content -->
+            </div>
+            <!-- END Inline Form Block -->
+</div>
+
+
 
 <div id="primero" class="element" style="display: none;">
   {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/crearproducto'))) }}
@@ -933,7 +947,7 @@ function mostrar(id) {
 
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -973,7 +987,7 @@ function mostrar(id) {
 
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1013,7 +1027,7 @@ function mostrar(id) {
   
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1053,7 +1067,7 @@ function mostrar(id) {
 
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1093,7 +1107,7 @@ function mostrar(id) {
 
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1134,7 +1148,7 @@ function mostrar(id) {
 
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1174,7 +1188,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1215,7 +1229,7 @@ function mostrar(id) {
 
    <div class="modal-footer">
  
-    {{Form::submit('Crear', array('class' => 'btn btn-primary btn-lg')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
@@ -1229,7 +1243,7 @@ function mostrar(id) {
 
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1269,7 +1283,7 @@ function mostrar(id) {
 
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1309,7 +1323,7 @@ function mostrar(id) {
 
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1350,7 +1364,7 @@ function mostrar(id) {
 
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1391,7 +1405,7 @@ function mostrar(id) {
  
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1433,7 +1447,7 @@ function mostrar(id) {
 
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1474,7 +1488,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1516,7 +1530,7 @@ function mostrar(id) {
 
    <div class="modal-footer">
     
-    {{Form::submit('Crear', array('class' => 'btn btn-primary btn-lg')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
@@ -1529,7 +1543,7 @@ function mostrar(id) {
 
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1568,7 +1582,7 @@ function mostrar(id) {
 
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1608,7 +1622,7 @@ function mostrar(id) {
 
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1649,7 +1663,7 @@ function mostrar(id) {
 
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1689,7 +1703,7 @@ function mostrar(id) {
   
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1731,7 +1745,7 @@ function mostrar(id) {
   
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1771,7 +1785,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1813,7 +1827,7 @@ function mostrar(id) {
 
    <div class="modal-footer">
     
-    {{Form::submit('Crear', array('class' => 'btn btn-primary btn-lg')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
@@ -1826,7 +1840,7 @@ function mostrar(id) {
 
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1865,7 +1879,7 @@ function mostrar(id) {
 
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1905,7 +1919,7 @@ function mostrar(id) {
 
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1946,7 +1960,7 @@ function mostrar(id) {
 
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -1987,7 +2001,7 @@ function mostrar(id) {
 
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2029,7 +2043,7 @@ function mostrar(id) {
 
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2070,7 +2084,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2111,7 +2125,7 @@ function mostrar(id) {
 
    <div class="modal-footer">
    
-    {{Form::submit('Crear', array('class' => 'btn btn-primary btn-lg')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
@@ -2125,7 +2139,7 @@ function mostrar(id) {
 
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2164,7 +2178,7 @@ function mostrar(id) {
 
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2203,7 +2217,7 @@ function mostrar(id) {
 
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2243,7 +2257,7 @@ function mostrar(id) {
 
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2283,7 +2297,7 @@ function mostrar(id) {
 
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2324,7 +2338,7 @@ function mostrar(id) {
 
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2363,7 +2377,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2404,7 +2418,7 @@ function mostrar(id) {
 
    <div class="modal-footer">
     
-    {{Form::submit('Crear', array('class' => 'btn btn-primary')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
@@ -2417,7 +2431,7 @@ function mostrar(id) {
 
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2457,7 +2471,7 @@ function mostrar(id) {
 
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2497,7 +2511,7 @@ function mostrar(id) {
   
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2538,7 +2552,7 @@ function mostrar(id) {
  
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2579,7 +2593,7 @@ function mostrar(id) {
 
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2621,7 +2635,7 @@ function mostrar(id) {
 
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2661,7 +2675,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2703,7 +2717,7 @@ function mostrar(id) {
 
    <div class="modal-footer">
     
-    {{Form::submit('Crear', array('class' => 'btn btn-primary btn-lg')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
@@ -2717,7 +2731,7 @@ function mostrar(id) {
 
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2756,7 +2770,7 @@ function mostrar(id) {
 
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2795,7 +2809,7 @@ function mostrar(id) {
  
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2834,7 +2848,7 @@ function mostrar(id) {
 
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2874,7 +2888,7 @@ function mostrar(id) {
 
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2914,7 +2928,7 @@ function mostrar(id) {
 
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2954,7 +2968,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -2995,7 +3009,7 @@ function mostrar(id) {
 
    <div class="modal-footer">
     
-    {{Form::submit('Crear', array('class' => 'btn btn-primary btn-lg')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
@@ -3009,7 +3023,7 @@ function mostrar(id) {
 
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3048,7 +3062,7 @@ function mostrar(id) {
  
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3086,7 +3100,7 @@ function mostrar(id) {
 
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3126,7 +3140,7 @@ function mostrar(id) {
 
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3166,7 +3180,7 @@ function mostrar(id) {
 
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3207,7 +3221,7 @@ function mostrar(id) {
 
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3247,7 +3261,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3287,7 +3301,7 @@ function mostrar(id) {
 
    <div class="modal-footer">
    
-    {{Form::submit('Crear', array('class' => 'btn btn-primary btn-lg')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
@@ -3301,7 +3315,7 @@ function mostrar(id) {
 
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3340,7 +3354,7 @@ function mostrar(id) {
 
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3378,7 +3392,7 @@ function mostrar(id) {
 
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3417,7 +3431,7 @@ function mostrar(id) {
 
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3457,7 +3471,7 @@ function mostrar(id) {
 
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3499,7 +3513,7 @@ function mostrar(id) {
  
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3539,7 +3553,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3580,7 +3594,7 @@ function mostrar(id) {
 
    <div class="modal-footer">
    
-    {{Form::submit('Crear', array('class' => 'btn btn-primary btn-lg')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
@@ -3593,7 +3607,7 @@ function mostrar(id) {
   
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3632,7 +3646,7 @@ function mostrar(id) {
 
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3672,7 +3686,7 @@ function mostrar(id) {
 
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3713,7 +3727,7 @@ function mostrar(id) {
 
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3754,7 +3768,7 @@ function mostrar(id) {
 
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3795,7 +3809,7 @@ function mostrar(id) {
 
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3835,7 +3849,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3876,7 +3890,7 @@ function mostrar(id) {
 
    <div class="modal-footer">
     
-    {{Form::submit('Crear', array('class' => 'btn btn-primary btn-lg')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
@@ -3890,7 +3904,7 @@ function mostrar(id) {
 
   <h4><b>MT</b> - Matematicas</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3929,7 +3943,7 @@ function mostrar(id) {
 
   <h4><b>ES</b> - Español</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -3967,7 +3981,7 @@ function mostrar(id) {
 
   <h4><b>CS</b> - Sociales</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -4007,7 +4021,7 @@ function mostrar(id) {
 
   <h4><b>CL</b> - Comprensión Lectora</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -4047,7 +4061,7 @@ function mostrar(id) {
   
   <h4><b>IG</b> - Interes General</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -4088,7 +4102,7 @@ function mostrar(id) {
 
   <h4><b>ART</b> - Artistica</h4>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-     <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+     <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
     </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -4128,7 +4142,7 @@ function mostrar(id) {
 
   <h4><b>ING</b> - Ingles</h4>
    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control input-sm" value="0" name="cantidad[]" value="" />
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" />
    </div>
 
    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -4169,16 +4183,12 @@ function mostrar(id) {
 
    <div class="modal-footer">
     
-    {{Form::submit('Crear', array('class' => 'btn btn-primary btn-lg')  )}}
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
    </div>
 {{ Form::close() }}
 </div>
 
-@if($data == 1)
-existe
-@else
-No existe
-@endif
+
 </div>
 
 </body>

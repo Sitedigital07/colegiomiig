@@ -128,7 +128,7 @@
                         <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                     </div>
                     <h2>
-                      Representante: {{$vendedores->nombre}}<br>
+                      Representante: {{$vendedores->nombre}} {{$vendedores->apellido}}<br>
                       @foreach($totalrpventa as $totalrpventav)
                       @if($vendedores->id == $totalrpventav->totalid)
                       Venta: $ {{number_format($totalrpventav->suma, 0, ",", ".")}}

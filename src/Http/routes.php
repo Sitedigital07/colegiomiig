@@ -623,6 +623,7 @@ Route::get('/dashboard', function () {
         ->join('campos', 'colegios.id', '=', 'campos.colegio_id')
         ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(nombres) as nombre'))
         ->groupBy('colegio_id')
+        ->orderBy('cantidad', 'desc')
         ->get();
 
 
@@ -630,18 +631,21 @@ Route::get('/dashboard', function () {
         ->join('campos', 'representantes.id', '=', 'campos.representante_id')
         ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(nombre) as nombre'))
         ->groupBy('representante_id')
+        ->orderBy('cantidad', 'desc')
         ->get();
 
         $totaleditoriales = DB::table('editoriales')
          ->join('campos', 'editoriales.id', '=', 'campos.editorial_id')
         ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(editorial) as editorial'))
         ->groupBy('editorial_id')
+        ->orderBy('cantidad', 'desc')
         ->get();
 
     
         $librosano = DB::table('campos')
         ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(ano) as ano'))
         ->groupBy('ano')
+        ->orderBy('cantidad', 'desc')
         ->get();
 
 
@@ -650,6 +654,7 @@ Route::get('/dashboard', function () {
         ->join('ciudades', 'colegios.ciudad_id', '=', 'ciudades.ids')
         ->select(DB::raw('count(*) as cantidad'),DB::raw('(n_ciudad) as ciudad'))
         ->groupBy('ciudad_id')
+        ->orderBy('cantidad', 'desc')
         ->get();
         
     return view('colegiomiig::dashboard')->with('colegios', $colegios)->with('despachos', $despachos)->with('adopcioncompleta', $adopcioncompleta)->with('adopcionlimitada', $adopcionlimitada)->with('total', $total)->with('representantes', $representantes)->with('totaleditoriales', $totaleditoriales)->with('aperturas', $aperturas)->with('colegionames', $colegionames)->with('totalyl', $totalyl)->with('librosano', $librosano);

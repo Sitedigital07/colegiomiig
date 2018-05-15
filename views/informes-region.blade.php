@@ -132,8 +132,8 @@
                         <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                     </div>
                     <h2>
-                      <strong>Colegio: </strong>{{$colegios->nombres}}<br>
-                      <strong>Representante:</strong> {{$colegios->nombre}}<br>
+                      <strong>Colegio: </strong>{{$colegios->nombres}} <br>
+                      <strong>Representante:</strong> {{$colegios->nombre}} {{$colegios->nombre}}<br>
                       <strong>Cantidad: </strong>
                       @foreach($totales as $totalesa)
                       @if($colegios->id == $totalesa->totalid)
