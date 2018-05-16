@@ -23,14 +23,14 @@ Route::post('importadorcolegio', 'Digitalmiig\Colegiomiig\Controllers\Exportador
 Route::get('/memo/ajax-subcat',function(){
 
         $cat_id = Input::get('cat_id');
-        $subcategories = App\Ciudad::where('region_id', '=', $cat_id)->get();
+        $subcategories = Digitalmiig\Colegiomiig\Ciudad::where('region_id', '=', $cat_id)->get();
         return Response::json($subcategories);
 });
 
 Route::get('/mema/ajax-subcat',function(){
 
         $cat_id = Input::get('cat_id');
-        $subcategories = App\Representante::where('agencia', '=', $cat_id)->get();
+        $subcategories = Digitalmiig\Usuariomiig\Representante::where('agencia', '=', $cat_id)->get();
         return Response::json($subcategories);
 });
 
@@ -605,7 +605,7 @@ Route::post('informe/general', function(){
 
 
 Route::get('/dashboard', function () {
-    $colegios = App\Colegio::all()->count();
+    $colegios = Digitalmiig\Colegiomiig\Colegio::all()->count();
     $adopcioncompleta = DB::table('colegios')->where('adopcion', '=', 'Completa')->count();
     $adopcionlimitada = DB::table('colegios')->where('adopcion', '=', 'Limitada')->count();
 
@@ -768,11 +768,11 @@ Route::get('/eliminar-poblacion/{id}', 'Digitalmiig\Colegiomiig\Controllers\Pobl
 
 Route::get('/crear-producto/{id}', function ($id) {
     $asignaturas = DB::table('datos')->where('colegio_id', '=', $id)->get();
-    $categories = App\Grado::all();
+    $categories = Digitalmiig\Titulomiig\Grado::all();
     $grados = DB::table('grados')->get();
-    $region = App\Colegio::find($id);
+    $region = Digitalmiig\Colegiomiig\Colegio::find($id);
     $data = DB::table('campos')->where('colegio_id', $id)->whereIn('grado_id', [1, 2, 3])->exists();
-    $visuales = App\Colegio::find($id);
+    $visuales = Digitalmiig\Colegiomiig\Colegio::find($id);
     $titulo = DB::table('titulo')->get();
     $colegios = DB::table('colegios')->where('id','=',$id)->get();
     $editorial = DB::table('editoriales')->get();
