@@ -411,9 +411,9 @@ Route::post('informe/titulos', function(){
 Route::group(['middleware' => ['gerentereg']], function (){
 Route::get('/gerentereg', function () {
     $colegios = DB::table('colegios')
-    ->where('region_id', '=', Auth::user()->region)->get();
+    ->where('region_id', '=', Auth::user()->regionid)->get();
     $representantes = DB::table('representantes')
-    ->where('region_id', '=', Auth::user()->region)->get();
+    ->where('region_id', '=', Auth::user()->regionid)->get();
     return view('colegiomiig::gerentereg')->with('colegios', $colegios)->with('representantes', $representantes);
 });
 
@@ -422,10 +422,10 @@ Route::get('/gerentereg', function () {
 
 Route::get('/informe/vendedorreg', function () {
     $colegios = DB::table('colegios')
-    ->where('region_id','=',Auth::user()->region)
+    ->where('region_id','=',Auth::user()->regionid)
     ->get();
     $representantes = DB::table('representantes')
-    ->where('region_id','=',Auth::user()->region)
+    ->where('region_id','=',Auth::user()->regionid)
     ->get();
     return view('colegiomiig::informe-vendedorreg')->with('colegios', $colegios)->with('representantes', $representantes);
 });
@@ -440,13 +440,13 @@ Route::post('informe/versusreg', function(){
    
        $vendedores = DB::table('representantes')
             ->where('representantes.id', 'like', '%' . $representantes . '%')
-            ->where('region_id','=',Auth::user()->region)
+            ->where('region_id','=',Auth::user()->regionid)
             ->get();
 
         $colegios = DB::table('representantes')
             ->join('colegios', 'colegios.representante_id', '=', 'representantes.id')
             ->where('representantes.id', 'like', '%' . $representantes . '%')
-            ->where('colegios.region_id','=',Auth::user()->region)
+            ->where('colegios.region_id','=',Auth::user()->regionid)
             ->get();
 
         $totalauditoria = DB::table('campos')
@@ -454,7 +454,7 @@ Route::post('informe/versusreg', function(){
             ->selectRaw('sum(cantidad*precio) as suma')
             ->selectRaw('(colegio_id) as totalid')
             ->where('ano', 'like', '%' . $estados . '%')
-            ->where('region_id','=',Auth::user()->region)
+            ->where('region_id','=',Auth::user()->regionid)
             ->groupBy('colegio_id')
             ->get();
 
@@ -463,7 +463,7 @@ Route::post('informe/versusreg', function(){
             ->selectRaw('sum(cantidad*precio) as suma')
             ->selectRaw('(colegio_id) as totalid')
             ->where('ano', 'like', '%' . $estados . '%')
-            ->where('region_id','=',Auth::user()->region)
+            ->where('region_id','=',Auth::user()->regionid)
             ->groupBy('colegio_id')
             ->get();
 
@@ -472,7 +472,7 @@ Route::post('informe/versusreg', function(){
             ->selectRaw('sum(cantidad*precio) as suma')
             ->where('ano', 'like', '%' . $estados . '%')
             ->selectRaw('(representante_id) as totalid')
-            ->where('region_id','=',Auth::user()->region)
+            ->where('region_id','=',Auth::user()->regionid)
             ->where('titulo', '>', 0)
             ->groupBy('representante_id')
             ->get();
@@ -482,7 +482,7 @@ Route::post('informe/versusreg', function(){
             ->selectRaw('sum(cantidad*precio) as suma')
             ->where('ano', 'like', '%' . $estados . '%')
             ->selectRaw('(representante_id) as totalid')
-            ->where('region_id','=',Auth::user()->region)
+            ->where('region_id','=',Auth::user()->regionid)
             ->where('titulo', '>', 0)
             ->groupBy('representante_id')
             ->get();
@@ -507,7 +507,7 @@ Route::post('informe/general', function(){
        $colegios = DB::table('colegios')
          ->join('representantes', 'colegios.representante_id', '=', 'representantes.id')
          ->where('colegios.id', 'like', '%' . $clientes . '%')
-         ->where('colegios.region_id','=',Auth::user()->region)
+         ->where('colegios.region_id','=',Auth::user()->regionid)
          ->get();
 
         $titulos = DB::table('proventas')
@@ -515,7 +515,7 @@ Route::post('informe/general', function(){
          ->where('colegio_id', 'like', '%' . $clientes . '%')
          ->where('representante_id', 'like', '%' . $representantes . '%')
          ->where('ano', 'like', '%' . $estados . '%')
-         ->where('region_id','=',Auth::user()->region)
+         ->where('region_id','=',Auth::user()->regionid)
          ->selectRaw('sum(cantidad) as cantidad')
          ->selectRaw('(colegio_id) as colegio_id')
          ->selectRaw('(nombre) as nombre')
@@ -528,7 +528,7 @@ Route::post('informe/general', function(){
          ->where('colegio_id', 'like', '%' . $clientes . '%')
          ->where('representante_id', 'like', '%' . $representantes . '%')
          ->where('ano', 'like', '%' . $estados . '%')
-         ->where('region_id','=',Auth::user()->region)
+         ->where('region_id','=',Auth::user()->regionid)
          ->selectRaw('sum(cantidad) as cantidad')
          ->selectRaw('(colegio_id) as colegio_id')
          ->selectRaw('(nombre) as nombre')
@@ -540,7 +540,7 @@ Route::post('informe/general', function(){
          ->where('colegio_id', 'like', '%' . $clientes . '%')
          ->where('representante_id', 'like', '%' . $representantes . '%')
          ->where('ano', 'like', '%' . $estados . '%')
-         ->where('region_id','=',Auth::user()->region)
+         ->where('region_id','=',Auth::user()->regionid)
          ->selectRaw('sum(cantidad) as suma')
          ->selectRaw('(colegio_id) as totalid')
          ->groupBy('colegio_id')
@@ -552,7 +552,7 @@ Route::post('informe/general', function(){
          ->where('colegio_id', 'like', '%' . $clientes . '%')
          ->where('representante_id', 'like', '%' . $representantes . '%')
          ->where('ano', 'like', '%' . $estados . '%')
-         ->where('region_id','=',Auth::user()->region)
+         ->where('region_id','=',Auth::user()->regionid)
          ->selectRaw('sum(cantidad) as cantidad')
          ->selectRaw('(colegio_id) as colegio_id')
          ->selectRaw('(nombre) as nombre')
@@ -564,7 +564,7 @@ Route::post('informe/general', function(){
          ->join('titulo', 'proventas.titulo', '=', 'titulo.id')
          ->where('colegio_id', 'like', '%' . $clientes . '%')
          ->where('ano', 'like', '%' . $estados . '%')
-         ->where('region_id','=',Auth::user()->region)
+         ->where('region_id','=',Auth::user()->regionid)
          ->selectRaw('sum(cantidad*precio) as suma')
          ->selectRaw('(colegio_id) as totalid')
          ->groupBy('colegio_id')
@@ -573,21 +573,21 @@ Route::post('informe/general', function(){
 
          $totalcolegios = DB::table('colegios')
 
-         ->where('region_id','=',Auth::user()->region)
+         ->where('region_id','=',Auth::user()->regionid)
          ->selectRaw('count(region_id) as conteo')
          ->groupBy('region_id')
          ->get();
 
          $totallibros = DB::table('proventas')
        
-         ->where('region_id','=',Auth::user()->region)
+         ->where('region_id','=',Auth::user()->regionid)
          ->selectRaw('sum(cantidad) as conteo')
          ->groupBy('region_id')
          ->get();         
 
           $totalrepresentantes = DB::table('representantes')
        
-         ->where('region_id','=',Auth::user()->region)
+         ->where('region_id','=',Auth::user()->regionid)
          ->selectRaw('count(id) as conteo')
          ->groupBy('region_id')
          ->get();         
@@ -708,15 +708,29 @@ Route::get('/lista-ciudades/{id}', 'Digitalmiig\Colegiomiig\Controllers\Sectores
 
 Route::get('/crear-ciudad/{id}', function () {
     $ciudad = DB::table('registros')->get();
-    return view('colegiomiig::crear-ciudad')->with('ciudad', $ciudad);
+    $region = DB::table('regiones')->get();
+    return view('colegiomiig::crear-ciudad')->with('ciudad', $ciudad)->with('region', $region);
+});
+
+Route::get('/memar/ajax-subcater',function(){
+
+        $cat_id = Input::get('cat_id');
+        $subcategories = Digitalmiig\Usuariomiig\User::where('regionid', '=', $cat_id)->where('rol_id', '=', 5)->get();
+        return Response::json($subcategories);
 });
 
 Route::post('/crearciudad', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@create');
 
 Route::get('/editar-ciudad/{id}', function ($id) {
-    $ciudades = DB::table('ciudades')->where('ids', $id)->get();
-    return view('colegiomiig::editar-ciudad')->with('ciudades', $ciudades);
+    $ciudades = DB::table('ciudades')
+    ->join('regiones', 'ciudades.region_id', '=', 'regiones.id')
+    ->join('users', 'ciudades.asistente', '=', 'users.id')
+    ->where('ciudades.ids', $id)->get();
+    $region = DB::table('regiones')->get();
+    return view('colegiomiig::editar-ciudad')->with('ciudades', $ciudades)->with('region', $region);
 });
+
+
 
 Route::post('/editarciudad/{id}', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@update');
 

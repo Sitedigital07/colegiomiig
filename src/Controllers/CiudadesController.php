@@ -34,7 +34,8 @@ class CiudadesController extends Controller
     {
         $ciudades = new Ciudad;
         $ciudades->n_ciudad = Input::get('ciudad');
-        $ciudades->region_id = Input::get('region_id');
+        $ciudades->region_id = Input::get('regional');
+        $ciudades->asistente = Input::get('asistente');
         $ciudades->save();
 
         return Redirect('lista-ciudades/'.$ciudades->region_id)->with('status', 'ok_create');

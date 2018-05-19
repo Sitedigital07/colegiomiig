@@ -11,6 +11,7 @@ Gestión de usuarios Libros & Libros
 @section('cabecera')
  @parent
  <link rel="stylesheet" href="/validaciones/dist/css/bootstrapValidator.css"/>
+
  <script type="text/javascript" src="/validaciones/vendor/jquery/jquery.min.js"></script>
  <script type="text/javascript" src="/validaciones/dist/js/bootstrapValidator.js"></script>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
@@ -58,10 +59,33 @@ Gestión de usuarios Libros & Libros
                                             </div>
                                         </div>
 
+                                           <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Región</label>
+                                            <div class="col-md-9">
+                                                <select class="form-control" name="regional" data-live-search="true" id="regional">
+                                                    <option value="" disabled selected>Seleccione región</option>
+                                                        @foreach($region as $region)
+                                                      <option value="{{$region->id}}">{{$region->region}}</option>
+                                                        @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                           <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Asistente</label>
+                                            <div class="col-md-9">
+                                                <select class="form-control" name="asistente" data-live-search="true" id="asistente">
+                                                    <option value="" disabled selected>Seleccione asistente</option>
+                                                   
+                                                      <option value=""></option>
+                                                 
+                                                </select>
+                                            </div>
+                                        </div>
                                         
                                        
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                   {{Form::hidden('region_id', Request::segment(2), array('class' => 'form-control','placeholder'=>'Registre password'))}}
+
 
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">
@@ -78,7 +102,21 @@ Gestión de usuarios Libros & Libros
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
 
+ <script type="text/javascript">
+     
+      $('#regional').on('change',function(e){
+        console.log(e);
 
+        var cat_id = e.target.value;
+
+        $.get('/memar/ajax-subcater?cat_id=' + cat_id, function(data){
+            $('#asistente').empty();
+            $.each(data, function(index, subcatObj){
+              $('#asistente').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+            });
+        });
+      });
+   </script>  
 
 <script type="text/javascript">
 $(document).ready(function() {

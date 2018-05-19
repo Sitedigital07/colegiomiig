@@ -30,7 +30,7 @@ Gestión de usuarios Libros & Libros
                                     </div>
                                     <!-- END Form Elements Title -->
                                     @foreach($ciudades as $ciudades)
-                                    @endforeach
+                                    
                                     <!-- Basic Form Elements Content -->
                                     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/editarciudad',$ciudades->ids))) }}
                                        
@@ -41,8 +41,33 @@ Gestión de usuarios Libros & Libros
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Región</label>
+                                            <div class="col-md-9">
+                                                <select class="form-control" name="regional" data-live-search="true" id="regional">
+                                                   
+                                                    <option value="{{$ciudades->region_id}}">{{$ciudades->region}}</option>
+                                                        @foreach($region as $region)
+                                                      <option value="{{$region->id}}">{{$region->region}}</option>
+                                                        @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                           <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-select">Asistente</label>
+                                            <div class="col-md-9">
+                                                <select class="form-control" name="asistente" data-live-search="true" id="asistente">
+                                               
+                                                    <option value="{{$ciudades->asistente}}">{{$ciudades->name}}</option>
+                                                      <option value=""></option>
+                                                 
+                                                </select>
+                                            </div>
+                                        </div>
+
                                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                      {{Form::hidden('region_id', $ciudades->region_id, array('class' => 'form-control','placeholder'=>'Registre password'))}}
+                                     
                                       
 
                                         <div class="form-group form-actions">
@@ -53,8 +78,28 @@ Gestión de usuarios Libros & Libros
                                         </div>
                                    {{ Form::close() }}
                                     <!-- END Basic Form Elements Content -->
+                                    @endforeach
                                 </div>
                               </div>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+
+ <script type="text/javascript">
+     
+      $('#regional').on('change',function(e){
+        console.log(e);
+
+        var cat_id = e.target.value;
+
+        $.get('/memar/ajax-subcater?cat_id=' + cat_id, function(data){
+            $('#asistente').empty();
+            $.each(data, function(index, subcatObj){
+              $('#asistente').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+            });
+        });
+      });
+   </script>  
 
 <script type="text/javascript">
 $(document).ready(function() {
