@@ -402,7 +402,7 @@ Gestión de usuarios Libros & Libros
         $.get('/mema/ajax-subcat?cat_id=' + cat_id, function(data){
             $('#representante').empty();
             $.each(data, function(index, subcatObj){
-              $('#representante').append('<option value="'+subcatObj.id+'">'+subcatObj.nombre+'</option>');
+              $('#representante').append('<option value="'+subcatObj.id+'">'+subcatObj.nombre+' '+subcatObj.apellido+'</option>');
             });
         });
       });
