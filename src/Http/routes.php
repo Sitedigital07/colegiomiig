@@ -1,6 +1,7 @@
 <?php
 
 // Rol Auditor
+Route::group(['middleware' => ['auditor']], function (){
 
 Route::get('/lista-colegios', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@index');
 
@@ -406,7 +407,7 @@ Route::post('informe/titulos', function(){
 
 
 });
-
+});
 
 Route::group(['middleware' => ['gerentereg']], function (){
 Route::get('/gerentereg', function () {
@@ -598,7 +599,7 @@ Route::post('informe/general', function(){
         
 });
 
-});
+
 
 
 
@@ -660,7 +661,7 @@ Route::get('/dashboard', function () {
     return view('colegiomiig::dashboard')->with('colegios', $colegios)->with('despachos', $despachos)->with('adopcioncompleta', $adopcioncompleta)->with('adopcionlimitada', $adopcionlimitada)->with('total', $total)->with('representantes', $representantes)->with('totaleditoriales', $totaleditoriales)->with('aperturas', $aperturas)->with('colegionames', $colegionames)->with('totalyl', $totalyl)->with('librosano', $librosano);
 });
 
-
+});
 
 
 
@@ -749,6 +750,7 @@ Route::post('/crearproyec', 'Digitalmiig\Colegiomiig\Controllers\ColegiosControl
 
 
 
+Route::group(['middleware' => ['auditorjr']], function (){
 
 // Rol AuditorJR
 Route::get('/auditorjr', function () {
@@ -798,17 +800,17 @@ Route::get('/crear-producto/{id}', function ($id) {
 
 Route::post('/crearproducto', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@createproducto');
 
-Route::group(['middleware' => ['auditorjr']], function (){
+
 
 Route::get('/editar-colegiorp/{id}', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@edicion');
 
-});
+
 
 
 Route::post('/update-colegiojr/{id}', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@updatejr');
 
 
 
-
+});
 
 
