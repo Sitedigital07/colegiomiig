@@ -56,11 +56,11 @@ Gestión de usuarios Libros & Libros
                                             <div class="col-md-9">
                                                 <select class="form-control" name="representante">
                                                  @foreach($gerentes as $gerentes)
-                                                  <option value="{{$gerentes->id}}">{{$gerentes->name}}</option>
+                                                  <option value="{{$gerentes->id}}">{{$gerentes->name}} {{$gerentes->last_name}}</option>
                                                  @endforeach
                                                  @foreach($lista as $lista)
                                                  @if($lista->rol_id == 4)
-                                                 <option value="{{$lista->id}}">{{$lista->name}}</option>
+                                                 <option value="{{$lista->id}}">{{$lista->name}} {{$lista->last_name}}</option>
                                                  @else
                                                  @endif
                                                  @endforeach
