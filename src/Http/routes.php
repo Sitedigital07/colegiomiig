@@ -22,33 +22,6 @@ Route::get('exportadorcolegio/{type}', 'Digitalmiig\Colegiomiig\Controllers\Expo
 Route::post('importadorcolegio', 'Digitalmiig\Colegiomiig\Controllers\ExportadorController@importador');
 
 
-Route::get('validaciudad', function () {
-          $user = DB::table('ciudades')->where('n_ciudad', Input::get('ciudad'))->count();
-    if($user > 0) {
-        $isAvailable = FALSE;
-    } else {
-        $isAvailable = TRUE;
-    }
-    echo json_encode(
-            array(
-                'valid' => $isAvailable
-            )); 
-
-});
-
-Route::get('validacioncodigo', function () {
-          $user = DB::table('colegios')->where('codigo', Input::get('codigo'))->count();
-    if($user > 0) {
-        $isAvailable = FALSE;
-    } else {
-        $isAvailable = TRUE;
-    }
-    echo json_encode(
-            array(
-                'valid' => $isAvailable
-            )); 
-
-});
 
 Route::group(['middleware' => ['auditor']], function (){
 
@@ -805,6 +778,34 @@ Route::get('/mema/ajax-subcat',function(){
 
 Route::get('validacioncorreo', function () {
           $user = DB::table('users')->where('email', Input::get('email'))->count();
+    if($user > 0) {
+        $isAvailable = FALSE;
+    } else {
+        $isAvailable = TRUE;
+    }
+    echo json_encode(
+            array(
+                'valid' => $isAvailable
+            )); 
+
+});
+
+Route::get('validaciudad', function () {
+          $user = DB::table('ciudades')->where('n_ciudad', Input::get('ciudad'))->count();
+    if($user > 0) {
+        $isAvailable = FALSE;
+    } else {
+        $isAvailable = TRUE;
+    }
+    echo json_encode(
+            array(
+                'valid' => $isAvailable
+            )); 
+
+});
+
+Route::get('validacioncodigo', function () {
+          $user = DB::table('colegios')->where('codigo', Input::get('codigo'))->count();
     if($user > 0) {
         $isAvailable = FALSE;
     } else {
