@@ -112,7 +112,7 @@ Gestión de usuarios Libros & Libros
         $.get('/memar/ajax-subcater?cat_id=' + cat_id, function(data){
             $('#asistente').empty();
             $.each(data, function(index, subcatObj){
-              $('#asistente').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+              $('#asistente').append('<option value="'+subcatObj.id+'">'+subcatObj.name+ subcatObj.last_name+'</option>');
             });
         });
       });

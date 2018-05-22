@@ -21,34 +21,6 @@ Route::get('exportadorcolegio/{type}', 'Digitalmiig\Colegiomiig\Controllers\Expo
 
 Route::post('importadorcolegio', 'Digitalmiig\Colegiomiig\Controllers\ExportadorController@importador');
 
-Route::get('/memo/ajax-subcat',function(){
-
-        $cat_id = Input::get('cat_id');
-        $subcategories = Digitalmiig\Colegiomiig\Ciudad::where('region_id', '=', $cat_id)->get();
-        return Response::json($subcategories);
-});
-
-Route::get('/mema/ajax-subcat',function(){
-
-        $cat_id = Input::get('cat_id');
-        $subcategories = Digitalmiig\Usuariomiig\Representante::where('agencia', '=', $cat_id)->get();
-        return Response::json($subcategories);
-});
-
-
-Route::get('validacioncorreo', function () {
-          $user = DB::table('users')->where('email', Input::get('email'))->count();
-    if($user > 0) {
-        $isAvailable = FALSE;
-    } else {
-        $isAvailable = TRUE;
-    }
-    echo json_encode(
-            array(
-                'valid' => $isAvailable
-            )); 
-
-});
 
 Route::get('validaciudad', function () {
           $user = DB::table('ciudades')->where('n_ciudad', Input::get('ciudad'))->count();
@@ -814,3 +786,33 @@ Route::post('/update-colegiojr/{id}', 'Digitalmiig\Colegiomiig\Controllers\Coleg
 });
 
 
+
+
+Route::get('/memo/ajax-subcat',function(){
+
+        $cat_id = Input::get('cat_id');
+        $subcategories = Digitalmiig\Colegiomiig\Ciudad::where('region_id', '=', $cat_id)->get();
+        return Response::json($subcategories);
+});
+
+Route::get('/mema/ajax-subcat',function(){
+
+        $cat_id = Input::get('cat_id');
+        $subcategories = Digitalmiig\Usuariomiig\Representante::where('agencia', '=', $cat_id)->get();
+        return Response::json($subcategories);
+});
+
+
+Route::get('validacioncorreo', function () {
+          $user = DB::table('users')->where('email', Input::get('email'))->count();
+    if($user > 0) {
+        $isAvailable = FALSE;
+    } else {
+        $isAvailable = TRUE;
+    }
+    echo json_encode(
+            array(
+                'valid' => $isAvailable
+            )); 
+
+});
