@@ -15,14 +15,14 @@ Gestión de usuarios Libros & Libros
 
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
+                                <li class="active">
+                                    <a href="/lista-colegios"><i class="fa fa-building"></i> Colegios</a>
+                                </li>
                                 <li>
-                                    <a href="/lista-colegios"><i class="fa fa-home"></i> Colegios</a>
+                                    <a href="/crear-colegio"><i class="fa fa-plus-circle"></i> Crear colegio</a>
                                 </li>
-                                <li class="active">
-                                    <a href="/crear-colegio"><i class="gi gi-charts"></i> Crear colegio</a>
-                                </li>
-                                <li class="active">
-                                    <a href="/excel-colegios"><i class="gi gi-charts"></i> Importar Exportar</a>
+                                <li>
+                                    <a href="/excel-colegios"><i class="fa fa-download"></i> Importar Exportar</a>
                                 </li>
                             </ul>
                         </div>

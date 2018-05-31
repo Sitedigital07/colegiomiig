@@ -57,7 +57,7 @@ Gestión de usuarios Libros & Libros
 
 
 
-    <script type="text/javascript">
+      <script type="text/javascript">
     $( function() {
     $("#category1a").change( function() {
         if ($(this).val() === "1") {
@@ -927,6 +927,42 @@ Gestión de usuarios Libros & Libros
     });
     </script>
 
+          <script type="text/javascript">
+    $( function() {
+    $("#category12h").change( function() {
+        if ($(this).val() === "1") {
+            $("#12h").prop("hidden", false);
+        } else {
+            $("#12h").prop("hidden", true);
+        }
+    });
+    });
+    </script>
+
+          <script type="text/javascript">
+    $( function() {
+    $("#category13i").change( function() {
+        if ($(this).val() === "1") {
+            $("#13i").prop("hidden", false);
+        } else {
+            $("#13i").prop("hidden", true);
+        }
+    });
+    });
+    </script>
+
+          <script type="text/javascript">
+    $( function() {
+    $("#category14j").change( function() {
+        if ($(this).val() === "1") {
+            $("#14j").prop("hidden", false);
+        } else {
+            $("#14j").prop("hidden", true);
+        }
+    });
+    });
+    </script>
+
 
 
 <script type="text/javascript">
@@ -943,6 +979,9 @@ function mostrar(id) {
     $("#noveno").hide();
     $("#decimo").hide();
     $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
   }
   
   if (id == "segundo") {
@@ -957,6 +996,9 @@ function mostrar(id) {
     $("#noveno").hide();
     $("#decimo").hide();
     $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
   }
   
   if (id == "tercero") {
@@ -971,6 +1013,9 @@ function mostrar(id) {
     $("#noveno").hide();
     $("#decimo").hide();
     $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
   }
   
    if (id == "cuarto") {
@@ -985,6 +1030,9 @@ function mostrar(id) {
     $("#noveno").hide();
     $("#decimo").hide();
     $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
   }
 
     if (id == "quinto") {
@@ -999,6 +1047,9 @@ function mostrar(id) {
     $("#noveno").hide();
     $("#decimo").hide();
     $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
   }
 
     if (id == "sexto") {
@@ -1013,6 +1064,9 @@ function mostrar(id) {
     $("#noveno").hide();
     $("#decimo").hide();
     $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
   }
 
     if (id == "septimo") {
@@ -1027,6 +1081,9 @@ function mostrar(id) {
     $("#noveno").hide();
     $("#decimo").hide();
     $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
   }
 
     if (id == "octavo") {
@@ -1041,6 +1098,9 @@ function mostrar(id) {
     $("#noveno").hide();
     $("#decimo").hide();
     $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
   }
 
     if (id == "noveno") {
@@ -1055,6 +1115,9 @@ function mostrar(id) {
     $("#noveno").show();
     $("#decimo").hide();
     $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
   }
 
     if (id == "decimo") {
@@ -1069,6 +1132,9 @@ function mostrar(id) {
     $("#noveno").hide();
     $("#decimo").show();
     $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
   }
 
   if (id == "once") {
@@ -1083,6 +1149,60 @@ function mostrar(id) {
     $("#noveno").hide();
     $("#decimo").hide();
     $("#once").show();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").hide();
+  }
+
+    if (id == "prejardin") {
+    $("#primero").hide();
+    $("#segundo").hide();
+    $("#tercero").hide();
+    $("#cuarto").hide();
+    $("#quinto").hide();
+    $("#sexto").hide();
+    $("#septimo").hide();
+    $("#octavo").hide();
+    $("#noveno").hide();
+    $("#decimo").hide();
+    $("#once").hide();
+    $("#prejardin").show();
+    $("#jardin").hide();
+    $("#transicion").hide();
+  }
+
+   if (id == "jardin") {
+    $("#primero").hide();
+    $("#segundo").hide();
+    $("#tercero").hide();
+    $("#cuarto").hide();
+    $("#quinto").hide();
+    $("#sexto").hide();
+    $("#septimo").hide();
+    $("#octavo").hide();
+    $("#noveno").hide();
+    $("#decimo").hide();
+    $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").show();
+    $("#transicion").hide();
+  }
+
+   if (id == "transicion") {
+    $("#primero").hide();
+    $("#segundo").hide();
+    $("#tercero").hide();
+    $("#cuarto").hide();
+    $("#quinto").hide();
+    $("#sexto").hide();
+    $("#septimo").hide();
+    $("#octavo").hide();
+    $("#noveno").hide();
+    $("#decimo").hide();
+    $("#once").hide();
+    $("#prejardin").hide();
+    $("#jardin").hide();
+    $("#transicion").show();
   }
 
 }
@@ -1109,6 +1229,24 @@ function mostrar(id) {
 
     <select id="status" class="form-control input-md" name="status" onChange="mostrar(this.value);">
        <option value="" selected>Seleccione grado</option>
+
+       @if (DB::table('campos')->where('grado_id', '=', 12)->where('ano', '=', $ano->ano)->where('colegio_id', '=', Request::segment(2))->exists()) 
+       <option value="prejardin" disabled>Prejardin</option>
+       @else
+       <option value="prejardin">Prejardin</option>
+       @endif
+
+       @if (DB::table('campos')->where('grado_id', '=', 13)->where('ano', '=', $ano->ano)->where('colegio_id', '=', Request::segment(2))->exists()) 
+       <option value="jardin" disabled>Jardin</option>
+       @else
+       <option value="jardin">Jardin</option>
+       @endif
+
+       @if (DB::table('campos')->where('grado_id', '=', 14)->where('ano', '=', $ano->ano)->where('colegio_id', '=', Request::segment(2))->exists()) 
+       <option value="transicion" disabled>Transición</option>
+       @else
+       <option value="transicion">Transición</option>
+       @endif
 
        @if (DB::table('campos')->where('grado_id', '=', 1)->where('ano', '=', $ano->ano)->where('colegio_id', '=', Request::segment(2))->exists()) 
        <option value="primero" disabled>Primero</option>
@@ -3574,7 +3712,7 @@ function mostrar(id) {
     </select>
    </div>
 
- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4" id="9a" class="element">
+ <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4" id="9a" class="element" hidden>
     <select class="form-control input-sm" name="titulo[]" id="category" required="required">
      <option value="0" selected>Seleccione editorial</option>
       @foreach($titulof as $titulo)
@@ -4437,7 +4575,181 @@ function mostrar(id) {
 
 
 </div>
+<div class="container">
+    
 
+<div id="prejardin" class="element" style="display: none;">
+  {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/crearproventa'))) }}
+
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-12">
+  
+
+  <h4><b>PJ</b> - Prejardin</h4>
+   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" required/>
+   </div>
+
+   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+    <select class="form-control input-sm" name="edt[]" id="category12h" required/>
+     <option value="" selected>Seleccione editorial</option>
+      @foreach($editorialf as $editorial)
+       <option value="{{$editorial->id}}">{{$editorial->editorial}}</option>
+      @endforeach
+    </select>
+   </div>
+
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4" id="12h" class="element" hidden>
+    <select class="form-control input-sm" name="titulo[]" id="category" required/>
+     <option value="0" selected>Seleccione editorial</option>
+      @foreach($titulof as $titulo)
+      @if($titulo->grado == 12)
+      @if($titulo->asignatura == 8)
+       <option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
+       @endif
+       @endif
+      @endforeach
+    </select>
+   </div>
+
+   <input type="hidden" name="materia[]" value="8" />
+   <input type="hidden" name="subcategory[]" value="12" />
+   <input type="hidden" name="region[]" value="{{$region->region_id}}" />
+   <input type="hidden" name="colegio[]" value="{{$region->id}}" />
+   <input type="hidden" name="representante[]" value="{{$region->representante_id}}" />
+   <input type="hidden" name="ano[]" value="{{$date->ano}}" />
+
+  </div>
+
+
+  <div class="modal-footer">
+    
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
+   </div>
+{{ Form::close() }}
+
+</div>
+     
+
+</div>
+
+
+
+
+<div class="container">
+    
+
+<div id="jardin" class="element" style="display: none;">
+  {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/crearproventa'))) }}
+
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-12">
+  
+
+  <h4><b>JD</b> - Jardin</h4>
+   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" required/>
+   </div>
+
+   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+    <select class="form-control input-sm" name="edt[]" id="category13i" required/>
+     <option value="" selected>Seleccione editorial</option>
+      @foreach($editorialf as $editorial)
+       <option value="{{$editorial->id}}">{{$editorial->editorial}}</option>
+      @endforeach
+    </select>
+   </div>
+
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4" id="13i" class="element" hidden>
+    <select class="form-control input-sm" name="titulo[]" id="category" required/>
+     <option value="0" selected>Seleccione editorial</option>
+      @foreach($titulof as $titulo)
+      @if($titulo->grado == 13)
+      @if($titulo->asignatura == 9)
+       <option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
+       @endif
+       @endif
+      @endforeach
+    </select>
+   </div>
+
+   <input type="hidden" name="materia[]" value="9" />
+   <input type="hidden" name="subcategory[]" value="13" />
+   <input type="hidden" name="region[]" value="{{$region->region_id}}" />
+   <input type="hidden" name="colegio[]" value="{{$region->id}}" />
+   <input type="hidden" name="representante[]" value="{{$region->representante_id}}" />
+   <input type="hidden" name="ano[]" value="{{$date->ano}}" />
+
+  </div>
+
+
+  <div class="modal-footer">
+    
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
+   </div>
+{{ Form::close() }}
+
+</div>
+     
+
+</div>
+
+
+
+<div class="container">
+    
+
+<div id="transicion" class="element" style="display: none;">
+  {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/crearproventa'))) }}
+
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-12">
+  
+
+  <h4><b>TS</b> - Transición</h4>
+   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <input type="number" class="form-control input-sm" value="0" name="cantidad[]" value="" required/>
+   </div>
+
+   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+    <select class="form-control input-sm" name="edt[]" id="category14j" required/>
+     <option value="" selected>Seleccione editorial</option>
+      @foreach($editorialf as $editorial)
+       <option value="{{$editorial->id}}">{{$editorial->editorial}}</option>
+      @endforeach
+    </select>
+   </div>
+
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4" id="14j" class="element" hidden>
+    <select class="form-control input-sm" name="titulo[]" id="category" required/>
+     <option value="0" selected>Seleccione editorial</option>
+      @foreach($titulof as $titulo)
+      @if($titulo->grado == 14)
+      @if($titulo->asignatura == 10)
+       <option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
+       @endif
+       @endif
+      @endforeach
+    </select>
+   </div>
+
+   <input type="hidden" name="materia[]" value="10" />
+   <input type="hidden" name="subcategory[]" value="14" />
+   <input type="hidden" name="region[]" value="{{$region->region_id}}" />
+   <input type="hidden" name="colegio[]" value="{{$region->id}}" />
+   <input type="hidden" name="representante[]" value="{{$region->representante_id}}" />
+   <input type="hidden" name="ano[]" value="{{$date->ano}}" />
+
+  </div>
+
+
+  <div class="modal-footer">
+    
+    {{Form::submit('Crear datos auditoría', array('class' => 'btn btn-primary')  )}}
+   </div>
+{{ Form::close() }}
+
+</div>
+     
+
+</div>
 </body>
 </html>
 </div>

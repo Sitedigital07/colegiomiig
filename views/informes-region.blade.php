@@ -69,54 +69,14 @@
                                             </div>
                                         </div>
                                         <h3 class="widget-content-light">
-                                           <strong> Informe </strong> para la gestión de <strong>Ventas</strong>
+                                           <strong> Informe </strong> para la gestión de <strong>Auditoria</strong>
                                             
                                         </h3>
                                     </div>
-                                    <div class="widget-extra-full">
-                                        <div class="row text-center">
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-folder-open-o"></i> Cantidad Colegios</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-hdd-o"></i> Colegios Adopción Completa</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-building-o"></i> Colegios Adopción Limitada</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-building-o"></i> Total Libros Vendidos</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-building-o"></i> Total Libros Vendidos</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong>%</strong> <small></small><br>Participación libros</small>
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
+                                 
                                 </div>
 </div>
 </div>
-
-
 
 <div class="container">
    <!-- Orders and Products -->
@@ -132,18 +92,24 @@
                         <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                     </div>
                     <h2>
-                      <strong>Colegio: </strong>{{$colegios->nombres}} <br>
-                      <strong>Representante:</strong> {{$colegios->nombre}} {{$colegios->nombre}}<br>
-                      <strong>Cantidad: </strong>
+                      Colegio: {{$colegios->nombres}}<br>
+                      Representante: {{$colegios->nombre}} {{$colegios->apellido}}<br>
+                      Cantidad: 
                       @foreach($totales as $totalesa)
                       @if($colegios->id == $totalesa->totalid)
                       {{$totalesa->suma}}
                       @endif
                       @endforeach <br>
-                      <strong>Total pesos: </strong>
+                      Total pesos:
                       @foreach($totalpesos as $totalpesosa)
                       @if($colegios->id == $totalpesosa->totalid)
-                      ${{number_format($totalpesosa->suma, 0, ",", ".")}} 
+                      $ {{number_format($totalpesosa->suma, 0, ",", ".")}} <br>
+                      ESSEG: $ {{number_format($totalpesosa->suma*10/100, 0, ",", ".")}} 
+                      @endif
+                      @endforeach
+                      @foreach($totalmercado as $totalmercadosa)
+                      @if($colegios->id == $totalmercadosa->totalid)
+                      <br>Totales mercado: {{$totalmercadosa->total*7}}
                       @endif
                       @endforeach
                     </h2>

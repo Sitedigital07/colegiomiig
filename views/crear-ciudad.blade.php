@@ -23,10 +23,10 @@ Gestión de usuarios Libros & Libros
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
                                 <li>
-                                    <a href="/sectores"><i class="gi gi-charts"></i> Regionales</a>
+                                    <a href="/sectores"><i class="fa fa-map-marker"></i> Regionales</a>
                                 </li>
-                                <li>
-                                    <a href="/crear-ciudad/{{Request::segment(2)}}"><i class="gi gi-charts"></i> Crear ciudad</a>
+                                <li class="active">
+                                    <a href="/crear-ciudad/{{Request::segment(2)}}"><i class="fa fa-plus-circle"></i> Crear ciudad</a>
                                 </li>
                             </ul>
                         </div>

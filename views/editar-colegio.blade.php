@@ -240,9 +240,10 @@ Gestión de usuarios Libros & Libros
        @endif
        </div>
      </div>
-     <br>
+     </br>
    
                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                         </br>
                                          <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Dirección de domicilio</label>
                                             {{Form::text('domicilio', $colegios->domicilio, array('class' => 'form-control','placeholder'=>''))}}
@@ -304,9 +305,9 @@ Gestión de usuarios Libros & Libros
        </div>
        <div class="col-xs-3 col-sm-3 col-md-2 col-lg-3">
        @if($colegios->interme == 1)
-       <input type="checkbox" name="interme" value="1" checked> Intermediarios<br>
+       <input type="checkbox" name="interme" value="1" checked> Codificados<br>
        @else
-       <input type="checkbox" name="interme" value=""> Intermediarios<br>
+       <input type="checkbox" name="interme" value=""> Codificados<br>
        @endif
        </div>
        <div class="col-xs-3 col-sm-3 col-md-2 col-lg-3">

@@ -16,7 +16,7 @@ Gestión de usuarios Libros & Libros
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
                                 <li>
-                                    <a href="/informe/generalweb"><i class="fa fa-home"></i> informe auditoria</a>
+                                    <a href="/informe/generalweb"><i class="gi gi-charts"></i> informe auditoria</a>
                                 </li>
                                 <li>
                                     <a href="/informe/generalventas"><i class="gi gi-charts"></i> Informe ventas</a>

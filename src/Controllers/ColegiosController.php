@@ -41,7 +41,7 @@ class ColegiosController extends Controller
    public function region()
     {
 
-         $colegios = DB::table('colegios')->where('region_id','=', Auth::user()->region)->get();
+         $colegios = DB::table('colegios')->where('ciudad_id','=', Auth::user()->ciudadid)->get();
         
         return view('colegiomiig::colegios-region')->with('colegios', $colegios);
     }
@@ -387,8 +387,7 @@ $arrData = array("cantidad"=>$cantidad[$key], "titulo"=>$titulo[$key], "editoria
 Proventa::insert($arrData);
 }
 
-    return Redirect('proyeccionventas/'.$colegio[$key])->with('status', 'ok_create');
-}  
+    return Redirect('proyeccionventas/'.$colegio[$key])->with('status', 'ok_create');}  
 
 
 

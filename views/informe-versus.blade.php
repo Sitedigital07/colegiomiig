@@ -69,45 +69,7 @@
                                             
                                         </h3>
                                     </div>
-                                    <div class="widget-extra-full">
-                                        <div class="row text-center">
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-folder-open-o"></i> Cantidad Colegios</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-hdd-o"></i> Colegios Adopción Completa</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-building-o"></i> Colegios Adopción Limitada</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-building-o"></i> Total Libros Vendidos</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-building-o"></i> Total Libros Vendidos</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong>%</strong> <small></small><br>Participación libros</small>
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
+                                 
                                 </div>
 </div>
 </div>
@@ -137,7 +99,8 @@
 
                       @foreach($totalrpauditor as $totalrpauditorv)
                       @if($vendedores->id == $totalrpauditorv->totalid)
-                      Auditoria:$ {{number_format($totalrpauditorv->suma, 0, ",", ".")}}
+                      Auditoria: $ {{number_format($totalrpauditorv->suma, 0, ",", ".")}}<br>
+                      ESSEG: $ {{number_format($totalrpauditorv->suma*10/100, 0, ",", ".")}} 
                       @endif
                       @endforeach<br>
 

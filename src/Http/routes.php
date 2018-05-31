@@ -3,6 +3,47 @@
 // Rol Auditor
 Route::group(['middleware' => ['auditor']], function (){
 
+Route::post('/crearciudad', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@create');
+
+Route::get('/editar-ciudad/{id}', function ($id) {
+    $ciudades = DB::table('ciudades')
+    ->join('regiones', 'ciudades.region_id', '=', 'regiones.id')
+    ->join('users', 'ciudades.asistente', '=', 'users.id')
+    ->where('ciudades.ids', $id)->get();
+    $region = DB::table('regiones')->get();
+    return view('colegiomiig::editar-ciudad')->with('ciudades', $ciudades)->with('region', $region);
+});
+
+
+
+Route::post('/editarciudad/{id}', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@update');
+
+Route::get('/eliminar-ciudad/{id}', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@destroy');
+
+
+Route::get('/sectores', 'Digitalmiig\Colegiomiig\Controllers\SectoresController@index');
+
+Route::get('/crear-sector', function () {
+    $users = DB::table('users')->get();
+    return view('colegiomiig::crear-sector')->with('users', $users);
+});
+
+Route::post('/crearsector', 'Digitalmiig\Colegiomiig\Controllers\SectoresController@create');
+
+Route::get('/editar-sector/{id}', 'Digitalmiig\Colegiomiig\Controllers\SectoresController@edit');
+
+Route::post('/editarsector/{id}', 'Digitalmiig\Colegiomiig\Controllers\SectoresController@update');
+
+Route::get('/lista-ciudades/{id}', 'Digitalmiig\Colegiomiig\Controllers\SectoresController@show');
+
+Route::get('/crear-ciudad/{id}', function () {
+    $ciudad = DB::table('registros')->get();
+    $region = DB::table('regiones')->get();
+    return view('colegiomiig::crear-ciudad')->with('ciudad', $ciudad)->with('region', $region);
+});
+
+
+
 Route::get('/lista-colegios', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@index');
 
 Route::get('/crear-colegio', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@createcolegio');
@@ -128,6 +169,13 @@ Route::post('informe/generalproventas', function(){
     
          ->get();
 
+         $totalmercado = DB::table('colegios')
+         ->join('datos', 'colegios.id', '=', 'datos.colegio_id')
+         ->selectRaw('(total) as total')
+         ->selectRaw('(colegio_id) as totalid')
+        
+         ->get();
+
          $totallibros = DB::table('proventas')
          ->selectRaw('sum(cantidad) as conteo')
          ->where('titulo', '>', 0)
@@ -154,7 +202,7 @@ Route::post('informe/generalproventas', function(){
       
          ->get();       
          
-      return view('colegiomiig::informe-generalaud')->with('colegios', $colegios)->with('titulos', $titulos)->with('totales', $totales)->with('totalcolegios', $totalcolegios)->with('totallibros', $totallibros)->with('totalrepresentantes', $totalrepresentantes)->with('totalpesos', $totalpesos)->with('representantes', $representantes)->with('totalibrosedito', $totalibrosedito)->with('porcentajeventastotal', $porcentajeventastotal)->with('porcentajeventas', $porcentajeventas);
+      return view('colegiomiig::informe-generalaud')->with('colegios', $colegios)->with('titulos', $titulos)->with('totales', $totales)->with('totalcolegios', $totalcolegios)->with('totallibros', $totallibros)->with('totalrepresentantes', $totalrepresentantes)->with('totalpesos', $totalpesos)->with('representantes', $representantes)->with('totalibrosedito', $totalibrosedito)->with('porcentajeventastotal', $porcentajeventastotal)->with('porcentajeventas', $porcentajeventas)->with('totalmercado', $totalmercado);
 
         
 });
@@ -220,6 +268,12 @@ Route::post('informe/generalauditor', function(){
          ->groupBy('colegio_id')
          ->get();
 
+         $totalmercado = DB::table('colegios')
+         ->join('datos', 'colegios.id', '=', 'datos.colegio_id')
+         ->selectRaw('(total) as total')
+         ->selectRaw('(colegio_id) as totalid')
+        
+         ->get();
 
          $totalcolegios = DB::table('colegios')
          ->selectRaw('count(region_id) as conteo')
@@ -253,13 +307,81 @@ Route::post('informe/generalauditor', function(){
       
          ->get();       
          
-      return view('colegiomiig::informe-generalaud')->with('colegios', $colegios)->with('titulos', $titulos)->with('totales', $totales)->with('totalcolegios', $totalcolegios)->with('totallibros', $totallibros)->with('totalrepresentantes', $totalrepresentantes)->with('totalpesos', $totalpesos)->with('representantes', $representantes)->with('totalibrosedito', $totalibrosedito)->with('porcentajeventastotal', $porcentajeventastotal)->with('porcentajeventas', $porcentajeventas);
+      return view('colegiomiig::informe-generalaud')->with('colegios', $colegios)->with('titulos', $titulos)->with('totales', $totales)->with('totalcolegios', $totalcolegios)->with('totallibros', $totallibros)->with('totalrepresentantes', $totalrepresentantes)->with('totalpesos', $totalpesos)->with('representantes', $representantes)->with('totalibrosedito', $totalibrosedito)->with('porcentajeventastotal', $porcentajeventastotal)->with('porcentajeventas', $porcentajeventas)->with('totalmercado', $totalmercado);
 
         
 });
 
 
+Route::get('/dashboard', function () {
+    $colegios = Digitalmiig\Colegiomiig\Colegio::all()->count();
+    $adopcioncompleta = DB::table('colegios')->where('adopcion', '=', 'Completa')->count();
+    $adopcionlimitada = DB::table('colegios')->where('adopcion', '=', 'Limitada')->count();
 
+        $despachos=DB::table('regiones')
+        ->join('colegios', 'regiones.id', '=', 'colegios.region_id')
+        ->select(DB::raw('count(*) as cantidad'),DB::raw('(region) as region'))
+        ->groupBy('region_id')
+        ->get();
+
+        $total = DB::table('campos')->sum('cantidad');
+        $totalyl = DB::table('campos')->where('editorial_id','=',1)->sum('cantidad');
+
+        $colegionames = DB::table('colegios')
+        ->join('campos', 'colegios.id', '=', 'campos.colegio_id')
+        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(nombres) as nombre'))
+        ->groupBy('colegio_id')
+        ->where('editorial_id','=',1)
+        ->orderBy('cantidad', 'desc')
+        ->get();
+
+        $representantes = DB::table('representantes')
+        ->join('campos', 'representantes.id', '=', 'campos.representante_id')
+        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(nombre) as nombre'))
+        ->groupBy('representante_id')
+        ->where('editorial_id','=',1)
+        ->orderBy('cantidad', 'desc')
+        ->get();
+
+        $totaleditoriales = DB::table('editoriales')
+        ->join('campos', 'editoriales.id', '=', 'campos.editorial_id')
+        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(editorial) as editorial'))
+        ->groupBy('editorial_id')
+        ->orderBy('cantidad', 'desc')
+        ->get();
+    
+        $librosano = DB::table('campos')
+        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(ano) as ano'))
+        ->groupBy('ano')
+        ->orderBy('cantidad', 'desc')
+        ->where('editorial_id','=',1)
+        ->get();
+
+        $aperturas = DB::table('colegios')
+        ->join('ciudades', 'colegios.ciudad_id', '=', 'ciudades.ids')
+        ->select(DB::raw('count(*) as cantidad'),DB::raw('(n_ciudad) as ciudad'))
+        ->groupBy('ciudad_id')
+        ->orderBy('cantidad', 'desc')
+        ->get();
+
+        $costoregion = DB::table('campos')
+        ->join('titulo', 'campos.titulo', '=', 'titulo.id')
+        ->join('regiones', 'campos.region_id', '=', 'regiones.id')
+        ->select(DB::raw('sum(cantidad*precio) as cantidad'),DB::raw('(region) as region'))
+        ->groupBy('region_id')
+        ->orderBy('cantidad', 'desc')
+        ->get();
+
+        $costoregionventa = DB::table('proventas')
+        ->join('titulo', 'proventas.titulo', '=', 'titulo.id')
+        ->join('regiones', 'proventas.region_id', '=', 'regiones.id')
+        ->select(DB::raw('sum(cantidad*precio) as cantidad'),DB::raw('(region) as region'))
+        ->groupBy('region_id')
+        ->orderBy('cantidad', 'desc')
+        ->get();
+        
+    return view('colegiomiig::dashboard')->with('colegios', $colegios)->with('despachos', $despachos)->with('adopcioncompleta', $adopcioncompleta)->with('adopcionlimitada', $adopcionlimitada)->with('total', $total)->with('representantes', $representantes)->with('totaleditoriales', $totaleditoriales)->with('aperturas', $aperturas)->with('colegionames', $colegionames)->with('totalyl', $totalyl)->with('librosano', $librosano)->with('costoregion', $costoregion)->with('costoregionventa', $costoregionventa);
+});
 
 Route::post('informe/versus', function(){
        
@@ -529,7 +651,14 @@ Route::post('informe/general', function(){
          ->where('region_id','=',Auth::user()->regionid)
          ->selectRaw('sum(cantidad) as conteo')
          ->groupBy('region_id')
-         ->get();         
+         ->get();  
+
+          $totalmercado = DB::table('colegios')
+         ->join('datos', 'colegios.id', '=', 'datos.colegio_id')
+         ->selectRaw('(total) as total')
+         ->selectRaw('(colegio_id) as totalid')
+        
+         ->get();       
 
           $totalrepresentantes = DB::table('representantes')
        
@@ -539,7 +668,7 @@ Route::post('informe/general', function(){
          ->get();         
 
          
-      return view('colegiomiig::informes-region')->with('colegios', $colegios)->with('titulos', $titulos)->with('totales', $totales)->with('totalcolegios', $totalcolegios)->with('totallibros', $totallibros)->with('totalrepresentantes', $totalrepresentantes)->with('totalpesos', $totalpesos)->with('representantes', $representantes);
+      return view('colegiomiig::informes-region')->with('colegios', $colegios)->with('titulos', $titulos)->with('totales', $totales)->with('totalcolegios', $totalcolegios)->with('totallibros', $totallibros)->with('totalrepresentantes', $totalrepresentantes)->with('totalpesos', $totalpesos)->with('representantes', $representantes)->with('totalmercado', $totalmercado);
 
         
 });
@@ -550,61 +679,7 @@ Route::post('informe/general', function(){
 
 
 
-Route::get('/dashboard', function () {
-    $colegios = Digitalmiig\Colegiomiig\Colegio::all()->count();
-    $adopcioncompleta = DB::table('colegios')->where('adopcion', '=', 'Completa')->count();
-    $adopcionlimitada = DB::table('colegios')->where('adopcion', '=', 'Limitada')->count();
 
-     $despachos=DB::table('regiones')
-            ->join('colegios', 'regiones.id', '=', 'colegios.region_id')
-            ->select(DB::raw('count(*) as cantidad'),DB::raw('(region) as region'))
-            ->groupBy('region_id')
-            ->get();
-
-    $total = DB::table('campos')->sum('cantidad');
-    $totalyl = DB::table('campos')->where('editorial_id','=',1)->sum('cantidad');
-
-
-    $colegionames = DB::table('colegios')
-        ->join('campos', 'colegios.id', '=', 'campos.colegio_id')
-        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(nombres) as nombre'))
-        ->groupBy('colegio_id')
-        ->orderBy('cantidad', 'desc')
-        ->get();
-
-
-    $representantes = DB::table('representantes')
-        ->join('campos', 'representantes.id', '=', 'campos.representante_id')
-        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(nombre) as nombre'))
-        ->groupBy('representante_id')
-        ->orderBy('cantidad', 'desc')
-        ->get();
-
-        $totaleditoriales = DB::table('editoriales')
-         ->join('campos', 'editoriales.id', '=', 'campos.editorial_id')
-        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(editorial) as editorial'))
-        ->groupBy('editorial_id')
-        ->orderBy('cantidad', 'desc')
-        ->get();
-
-    
-        $librosano = DB::table('campos')
-        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(ano) as ano'))
-        ->groupBy('ano')
-        ->orderBy('cantidad', 'desc')
-        ->get();
-
-
-
-        $aperturas = DB::table('colegios')
-        ->join('ciudades', 'colegios.ciudad_id', '=', 'ciudades.ids')
-        ->select(DB::raw('count(*) as cantidad'),DB::raw('(n_ciudad) as ciudad'))
-        ->groupBy('ciudad_id')
-        ->orderBy('cantidad', 'desc')
-        ->get();
-        
-    return view('colegiomiig::dashboard')->with('colegios', $colegios)->with('despachos', $despachos)->with('adopcioncompleta', $adopcioncompleta)->with('adopcionlimitada', $adopcionlimitada)->with('total', $total)->with('representantes', $representantes)->with('totaleditoriales', $totaleditoriales)->with('aperturas', $aperturas)->with('colegionames', $colegionames)->with('totalyl', $totalyl)->with('librosano', $librosano);
-});
 
 });
 
@@ -637,26 +712,7 @@ Route::get('/dashboard', function () {
 
 
 
-Route::get('/sectores', 'Digitalmiig\Colegiomiig\Controllers\SectoresController@index');
 
-Route::get('/crear-sector', function () {
-    $users = DB::table('users')->get();
-    return view('colegiomiig::crear-sector')->with('users', $users);
-});
-
-Route::post('/crearsector', 'Digitalmiig\Colegiomiig\Controllers\SectoresController@create');
-
-Route::get('/editar-sector/{id}', 'Digitalmiig\Colegiomiig\Controllers\SectoresController@edit');
-
-Route::post('/editarsector/{id}', 'Digitalmiig\Colegiomiig\Controllers\SectoresController@update');
-
-Route::get('/lista-ciudades/{id}', 'Digitalmiig\Colegiomiig\Controllers\SectoresController@show');
-
-Route::get('/crear-ciudad/{id}', function () {
-    $ciudad = DB::table('registros')->get();
-    $region = DB::table('regiones')->get();
-    return view('colegiomiig::crear-ciudad')->with('ciudad', $ciudad)->with('region', $region);
-});
 
 Route::get('/memar/ajax-subcater',function(){
 
@@ -665,22 +721,7 @@ Route::get('/memar/ajax-subcater',function(){
         return Response::json($subcategories);
 });
 
-Route::post('/crearciudad', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@create');
 
-Route::get('/editar-ciudad/{id}', function ($id) {
-    $ciudades = DB::table('ciudades')
-    ->join('regiones', 'ciudades.region_id', '=', 'regiones.id')
-    ->join('users', 'ciudades.asistente', '=', 'users.id')
-    ->where('ciudades.ids', $id)->get();
-    $region = DB::table('regiones')->get();
-    return view('colegiomiig::editar-ciudad')->with('ciudades', $ciudades)->with('region', $region);
-});
-
-
-
-Route::post('/editarciudad/{id}', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@update');
-
-Route::get('/eliminar-ciudad/{id}', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@destroy');
 
 
 Route::get('proyeccion/{id}', function ($id) {

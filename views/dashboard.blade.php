@@ -97,7 +97,48 @@ Gestión de usuarios Libros & Libros
 
 </div>
 
+<div class="container">
+      <div class="col-lg-12">
+                                <!-- Top Products Block -->
+                                <div class="block">
+                                    <!-- Top Products Title -->
+                                    <div class="block-title">
+                                        <div class="block-options pull-right">
+                                            <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                                        </div>
+                                        <h2><strong>Cantidad títulos</strong> por ciudad</h2>
+                                    </div>
+                                    <!-- END Top Products Title -->
 
+                                    <!-- Top Products Content -->
+                                    <table class="table table-borderless table-striped table-vcenter table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center"><a href="page_ecom_product_edit.html"><strong>Ciudad</strong></a></td>
+                                                <td><a href="page_ecom_product_edit.html">Datos auditoria</a></td>
+                                                <td><a href="page_ecom_product_edit.html">Datos venta</a></td>
+                                                <td><a href="page_ecom_product_edit.html">Porcentaje</a></td>
+                                            </tr>
+                                            @foreach($costoregion as $costoregion)
+                                            @foreach($costoregionventa as $costoregionventa)
+                                            <tr>
+                                                <td class="text-center"><a href="page_ecom_product_edit.html"><strong>{{$costoregion->region}}</strong></a></td>
+                                                <td><a href="page_ecom_product_edit.html">{{number_format($costoregion->cantidad, 0, ",", ".")}}</a></td>
+                                                <td><a href="page_ecom_product_edit.html">{{number_format($costoregionventa->cantidad, 0, ",", ".")}}</a></td>
+                                                <td><a href="page_ecom_product_edit.html">{{number_format($costoregion->cantidad*100/$costoregionventa->cantidad,2)}}%</a></td>
+                                            </tr>
+                                  
+                                            @endforeach
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <!-- END Top Products Content -->
+                                </div>
+                                <!-- END Top Products Block -->
+            
+</div>
+</div>
 
 <div class="container">
 
@@ -259,6 +300,10 @@ Gestión de usuarios Libros & Libros
                                 <!-- END Top Products Block -->
             
 </div>
+
+
+
+
 
   <div class="col-lg-6">
                                 <!-- Top Products Block -->

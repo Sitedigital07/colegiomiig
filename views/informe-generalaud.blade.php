@@ -71,50 +71,10 @@
                                             
                                         </h3>
                                     </div>
-                                    <div class="widget-extra-full">
-                                        <div class="row text-center">
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-folder-open-o"></i> Cantidad Colegios</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-hdd-o"></i> Colegios Adopción Completa</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-building-o"></i> Colegios Adopción Limitada</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-building-o"></i> Total Libros Vendidos</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong></strong> <small></small><br>
-                                                    <small><i class="fa fa-building-o"></i> Total Libros Vendidos</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong>%</strong> <small></small><br>Participación libros</small>
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
+                                 
                                 </div>
 </div>
 </div>
-
-
 
 <div class="container">
    <!-- Orders and Products -->
@@ -141,7 +101,13 @@
                       Total pesos:
                       @foreach($totalpesos as $totalpesosa)
                       @if($colegios->id == $totalpesosa->totalid)
-                      ${{number_format($totalpesosa->suma, 0, ",", ".")}} 
+                      $ {{number_format($totalpesosa->suma, 0, ",", ".")}} <br>
+                      ESSEG: $ {{number_format($totalpesosa->suma*10/100, 0, ",", ".")}} 
+                      @endif
+                      @endforeach
+                      @foreach($totalmercado as $totalmercadosa)
+                      @if($colegios->id == $totalmercadosa->totalid)
+                      <br>Totales mercado: {{$totalmercadosa->total*7}}
                       @endif
                       @endforeach
                     </h2>
@@ -176,99 +142,4 @@
 
 
 
-    	 <div class="col-lg-6 col-lg-offset-3">
-    	 	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-    	 		<img src="" class="img-responsive" alt="Image">
-    	 	</div>
-
-
-    	
-    	 	
-    	 	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 datos">
-    	 	 <h1>Informe de gestión</h1>
-    	 	 <p><strong>Fecha generación:</strong> {{date('Y-m-d H:i:s')}}<p>
-			   <p><strong>Generado por:</strong> {{Auth::user()->name}} {{Auth::user()->last_name}}</p>
-    	 	</div>
-
-    	 </div>
-
-
-    	    <div class="row">
-			 <div class="col-lg-6 col-lg-offset-3">
-			 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-			 	@foreach($totalcolegios as $totalcolegios)
-			 	<h2 class="text-center">{{$totalcolegios->conteo}}</h2>
-			 	@endforeach
-			 	<h3 class="text-center">Total Colegios</h3>
-			 </div>
-			 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-			 	@foreach($totallibros as $totallibros)
-			 	<h2 class="text-center">{{$totallibros->conteo}}</h2>
-			 	@endforeach
-			 	<h3 class="text-center">Total Libros</h3>
-			 </div>
-
-       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        @foreach($totalibrosedito as $totalibrosedito)
-        <h2 class="text-center">{{$totalibrosedito->conteo}}</h2>
-        @endforeach
-        <h3 class="text-center">Total Libros</h3>
-       </div>
-			 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-			 	@foreach($totalrepresentantes as $totalrepresentantes)
-			 	<h2 class="text-center">{{$totalrepresentantes->conteo}}</h2>
-			 	@endforeach
-			 	<h3 class="text-center">Total Representantes</h3>
-			 </div>
-
-       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-  
-        <h2 class="text-center"> @foreach($porcentajeventastotal as $porcentajeventastotal)
-        @foreach($porcentajeventas as $porcentajeventas)
-         {{number_format($porcentajeventas->conteo*100/$porcentajeventastotal->conteo, 2)}} %
-        @endforeach
-       @endforeach</h2>
-    
-        <h3 class="text-center">Total Representantes</h3>
-       </div>
-			 </div>
-			</div>
-
-
-
-    		<div class="row">
-    	
-        		 </strong></th>
-        		</tr>
-    		   </thead>
-  			  </table>
-			 </div>
-			</div>
-
-
-
-
-
-            <div class="row">
-			 <div class="col-lg-6 col-lg-offset-3">
-			  <table class="table table-bordered">
-    		   <thead>
-                
-  			   </thead>
-   			   
-   			   <tbody>
-   			
-
-  
-			   </tbody>
- 			  </table>
-			 </div>
-			</div>
-
-            
-
-
-
-    </body>
-</html>
-
+   

@@ -15,10 +15,10 @@ Gestión de usuarios Libros & Libros
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
                                 <li class="active">
-                                    <a href="/sectores"><i class="fa fa-home"></i> Regionales</a>
+                                    <a href="/sectores"><i class="fa fa-map-marker"></i> Regionales</a>
                                 </li>
                                 <li>
-                                    <a href="/crear-sector"><i class="gi gi-charts"></i> Crear Regional</a>
+                                    <a href="/crear-sector"><i class="fa fa-plus-circle"></i> Crear Regional</a>
                                 </li>
                             </ul>
                         </div>

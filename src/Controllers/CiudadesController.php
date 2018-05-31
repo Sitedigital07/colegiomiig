@@ -18,7 +18,7 @@ class CiudadesController extends Controller
      */
     public function index()
     {
-        $ciudades = DB::table('ciudades')->where('region_id','=', Auth::user()->region)->get();
+        $ciudades = DB::table('ciudades')->where('asistente','=', Auth::user()->id)->get();
         
         return view('colegiomiig::asistente-ciudades')->with('ciudades', $ciudades);
     }

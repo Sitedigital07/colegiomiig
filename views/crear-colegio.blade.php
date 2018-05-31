@@ -22,10 +22,10 @@ Gestión de usuarios Libros & Libros
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
                                 <li>
-                                    <a href="/lista-colegios"><i class="fa fa-home"></i> Colegios</a>
+                                    <a href="/lista-colegios"><i class="fa fa-building"></i> Colegios</a>
                                 </li>
                                 <li class="active">
-                                    <a href="/crear-colegio"><i class="gi gi-charts"></i> Crear colegio</a>
+                                    <a href="/crear-colegio"><i class="fa fa-plus-circle"></i> Crear colegio</a>
                                 </li>
                             </ul>
                         </div>
@@ -184,6 +184,7 @@ Gestión de usuarios Libros & Libros
                                         </div>
                                        
                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                         </br>
                                          <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Dirección de domicilio</label>
                                             {{Form::text('domicilio', '', array('class' => 'form-control','placeholder'=>''))}}
@@ -227,7 +228,7 @@ Gestión de usuarios Libros & Libros
                                              <input type="checkbox" name="venta_d" value="1"> Venta Directa<br>
                                             </div>
                                             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-3">
-                                             <input type="checkbox" name="interme" value="1"> Intermediarios<br>
+                                             <input type="checkbox" name="interme" value="1"> Codificados<br>
                                             </div>
                                             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-3">
                                              <input type="checkbox" name="c_aliados" value="1"> Clientes Aliados<br>
@@ -245,7 +246,7 @@ Gestión de usuarios Libros & Libros
        </div>
 
                                         <div class="form-group form-actions">
-                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-user"></i> Crear Colegio</button>
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Crear Colegio</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
                                         </div>
                                        {{ Form::close() }}

@@ -65,72 +65,72 @@ document.getElementById('reso').value = subtotal;
 
 <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Pre-Jardin:
-<input type="number" class="form-control" name="sum1" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum1" value="0" onkeyup="sumar(this);" required/>
 </div>
 
 <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Jardin:
-<input type="number" class="form-control" name="sum2" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum2" value="0" onkeyup="sumar(this);" required/>
 </div>
 
 <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Transicion:
-<input type="number" class="form-control" name="sum3" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum3" value="0" onkeyup="sumar(this);" required/>
 </div>
 
 <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Primero:
-<input type="number" class="form-control" name="sum4" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum4" value="0" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Segundo:
-<input type="number" class="form-control" name="sum5" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum5" value="0" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Tercero:
-<input type="number" class="form-control" name="sum6" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum6" value="0" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Cuarto:
-<input type="number" class="form-control" name="sum7" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum7" value="0" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Quinto:
-<input type="number" class="form-control" name="sum8" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum8" value="0" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Sexto:
-<input type="number" class="form-control" name="sum9" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum9" value="0" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Septimo:
-<input type="number" class="form-control" name="sum10" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum10" value="0" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Octavo:
-<input type="number" class="form-control" name="sum11" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum11" value="0" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Noveno:
-<input type="number" class="form-control" name="sum12" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum12" value="0" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Decimo:
-<input type="number" class="form-control" name="sum13" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum13" value="0" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Once:
-<input type="number" class="form-control" name="sum14" value="0" onkeyup="sumar(this);" />
+<input type="number" class="form-control" name="sum14" value="0" onkeyup="sumar(this);" required/>
 </div>
 
  {{Form::hidden('colegio_id', Request::segment(2), array('class' => 'form-control','placeholder'=>''))}}

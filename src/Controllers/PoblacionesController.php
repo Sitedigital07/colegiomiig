@@ -47,8 +47,8 @@ class PoblacionesController extends Controller
         $user->once = Input::get('sum14');
         $user->ano = $date->ano;
         $user->colegio_id = Input::get('colegio_id');
-        $user->total = Input::get('res');
-       
+        $user->total = $user->prejardin+$user->jardin+$user->transicion+$user->primero+$user->segundo+$user->tercero+$user->cuarto+$user->quinto+$user->sexto+$user->septimo+$user->octavo;+$user->noveno
+        +$user->decimo +$user->once;      
         $user->save();
 
         return Redirect('poblacion-registrada/'.$user->colegio_id)->with('status', 'ok_create');
@@ -126,7 +126,8 @@ class PoblacionesController extends Controller
         $user->decimo = Input::get('sum13');
         $user->once = Input::get('sum14');
         $user->colegio_id = Input::get('colegio_id');
-        $user->total = Input::get('res')-3;
+        $user->total = $user->prejardin+$user->jardin+$user->transicion+$user->primero+$user->segundo+$user->tercero+$user->cuarto+$user->quinto+$user->sexto+$user->septimo+$user->octavo;+$user->noveno
+        +$user->decimo +$user->once;
         $user->save();
     return Redirect('/poblacion-registrada/'.$user->colegio_id)->with('status', 'ok_update');
     }

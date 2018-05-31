@@ -16,19 +16,19 @@ Gestión de usuarios Libros & Libros
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
                               <li>
-                                    <a href="/lista-colegios"><i class="fa fa-home"></i> Colegios</a>
+                                    <a href="/lista-colegios"><i class="fa fa-building"></i> Colegios</a>
                                 </li>
-                                <li class="active">
-                                    <a href="/crear-colegio"><i class="gi gi-charts"></i> Crear colegio</a>
+                                <li>
+                                    <a href="/crear-colegio"><i class="fa fa-plus-circle"></i> Crear colegio</a>
                                 </li>
                               <li class="active">
-                                    <a href="{{ URL::to('exportadorcolegio/xls') }}"><i class="gi gi-charts"></i> Descargar xls</a>
+                                    <a href="{{ URL::to('exportadorcolegio/xls') }}"><i class="fa fa-file-excel-o"></i> Descargar xls</a>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::to('exportadorcolegio/xlsx') }}"><i class="fa fa-home"></i> Descargar xlsx</a>
+                                    <a href="{{ URL::to('exportadorcolegio/xlsx') }}"><i class="fa fa-file-excel-o"></i> Descargar xlsx</a>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::to('exportadorcolegio/csv') }}"><i class="fa fa-home"></i> Descargar CSV</a>
+                                    <a href="{{ URL::to('exportadorcolegio/csv') }}"><i class="fa fa-file-excel-o"></i> Descargar CSV</a>
                                 </li>
                             </ul>
                         </div>

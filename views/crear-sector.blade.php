@@ -19,7 +19,16 @@ Gestión de usuarios Libros & Libros
 
 @section('contenido')
 
-
+<div class="content-header">
+                            <ul class="nav-horizontal text-center">
+                                <li>
+                                    <a href="/sectores"><i class="fa fa-map-marker"></i> Regionales</a>
+                                </li>
+                                <li class="active">
+                                    <a href="/crear-sector"><i class="fa fa-plus-circle"></i> Crear Regional</a>
+                                </li>
+                            </ul>
+                        </div>
 
 
 <div class="container">
@@ -64,7 +73,7 @@ Gestión de usuarios Libros & Libros
 
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">
-                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Crear sector</button>
                                                 <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
                                             </div>
                                         </div>

@@ -16,17 +16,15 @@ Gestión de usuarios Libros & Libros
 
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
-                                <li class="active">
-                                    <a href="/asistente"><i class="gi gi-charts"></i> Dashboard</a>
-                                </li>
-                                <li class="active">
-                                    <a href="/asistente-representantes"><i class="gi gi-charts"></i> Representantes</a>
+                                
+                                <li>
+                                    <a href="/asistente-representantes"><i class="fa fa-users"></i> Representantes</a>
                                 </li>
                                 <li>
-                                    <a href="/colegios-region"><i class="fa fa-home"></i> Colegios</a>
+                                    <a href="/colegios-region"><i class="fa fa-building"></i> Colegios</a>
                                 </li>
-                                 <li>
-                                    <a href="/asistente-ciudades"><i class="fa fa-home"></i> Ciudades</a>
+                                 <li class="active">
+                                    <a href="/asistente-ciudades"><i class="fa fa-map"></i> Agencias</a>
                                 </li>
                             </ul>
                         </div>
