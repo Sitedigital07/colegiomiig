@@ -109,14 +109,20 @@
                       @foreach($totalrpventa as $totalrpventav)
                       @if($vendedores->id == $totalrpauditorv->totalid)
                       @endif
-              
+                      @endforeach
+                      @endif
+                      @endforeach
+
+               
+                       @foreach($totalrpauditor as $totalrpauditorv)
+                      @if($vendedores->id == $totalrpauditorv->totalid)
+                      @foreach($totalrpventa as $totalrpventav)
                       @if($vendedores->id == $totalrpventav->totalid)
                       Efectividad:<strong> {{number_format($totalrpauditorv->suma*100 / $totalrpventav->suma,2)}}% </strong>
                       @endif
                       @endforeach
                       @endif
                       @endforeach
-
                     </h2>
                 </div>
                 <!-- END Latest Orders Title -->

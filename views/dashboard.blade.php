@@ -107,7 +107,7 @@ Gestión de usuarios Libros & Libros
                                             <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
                                             <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                                         </div>
-                                        <h2><strong>Cantidad títulos</strong> por ciudad</h2>
+                                        <h2><strong>Resultado</strong> ventas por región</h2>
                                     </div>
                                     <!-- END Top Products Title -->
 
