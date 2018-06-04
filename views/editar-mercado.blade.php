@@ -125,7 +125,7 @@ Once:
 <input type="number" class="form-control" name="sum14" value="{{$datos->once}}" onkeyup="sumar(this);" required/>
 </div>
 
- {{Form::text('colegio_id', $datos->colegio_id, array('class' => 'form-control','placeholder'=>''))}}
+ {{Form::hidden('colegio_id', $datos->colegio_id, array('class' => 'form-control','placeholder'=>''))}}
  <input type="hidden" class="form-control" name="_token" value="{{ csrf_token() }}">
 <div class="container">
 <button type="submit" class="btn btn-primary">Registrar población</button>
