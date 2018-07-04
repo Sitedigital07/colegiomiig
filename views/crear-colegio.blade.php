@@ -63,6 +63,7 @@ Gestión de usuarios Libros & Libros
                                             {{ Form::select('jornada', ['' => '-- Seleccione jornada --',
                                             'Diurna' => 'Diurna',
                                             'Tarde' => 'Tarde',
+                                            'Dual' => 'Dual',
                                             'Unica' => 'Unica'], null, array('class' => 'form-control')) }}    
                                         </div>
                                         <div class="form-group col-lg-6">
@@ -192,7 +193,7 @@ Gestión de usuarios Libros & Libros
 
                                         <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Email contacto</label>
-                                            {{Form::text('emailcol', '', array('class' => 'form-control','placeholder'=>''))}}
+                                            {{Form::text('email', '', array('class' => 'form-control','placeholder'=>''))}}
                                         </div>
                                       </div>
 
@@ -353,7 +354,7 @@ $(document).ready(function() {
                         message: 'El campo colegio debe contener un minimo de 2 y un maximo de 200 Caracteres'
                     },
                     regexp: {
-                        regexp: /^[- a-zA-Z0-9_\.]+$/,
+                        regexp: /^[- a-zA-Z0-9ñ_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     }
                 }
@@ -387,7 +388,7 @@ $(document).ready(function() {
                     },
                     
                     regexp: {
-                        regexp: /^[- a-zA-Z0-9_\.]+$/,
+                        regexp: /^[- a-zA-Z0-9ñ_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     }
                 }
@@ -405,7 +406,7 @@ $(document).ready(function() {
                         message: 'El campo razón social debe contener un minimo de 2 y un maximo de 200 Caracteres'
                     },
                     regexp: {
-                        regexp: /^[- a-zA-Z0-9_\.]+$/,
+                        regexp: /^[- a-zA-Z0-ñ9_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     }
                 }
@@ -423,7 +424,7 @@ $(document).ready(function() {
                         message: 'El campo nit debe contener un minimo de 2 y un maximo de 15 Caracteres'
                     },
                     regexp: {
-                        regexp: /^[- 0-9_\.]+$/,
+                        regexp: /^[- 0-9ñ_\.]+$/,
                         message: 'El campo nit solo admite caracteres numericos'
                     }
                 }
@@ -437,7 +438,7 @@ $(document).ready(function() {
                     },
                     
                     regexp: {
-                        regexp: /^[- a-zA-Z0-9_\.]+$/,
+                        regexp: /^[- a-zA-Z0-9ñ_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     }
                 }
@@ -451,7 +452,7 @@ $(document).ready(function() {
                     },
                     
                     regexp: {
-                        regexp: /^[- a-zA-Z0-9_\.]+$/,
+                        regexp: /^[- a-zA-Z0-9ñ_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     }
                 }
@@ -465,7 +466,7 @@ $(document).ready(function() {
                     },
                     
                     regexp: {
-                        regexp: /^[- a-zA-Z0-9_\.]+$/,
+                        regexp: /^[- a-zA-Z0-9ñ_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     }
                 }
@@ -478,7 +479,7 @@ $(document).ready(function() {
                     },
                     
                     regexp: {
-                        regexp: /^[- a-zA-Z0-9_\.]+$/,
+                        regexp: /^[- a-zA-Z0-9ñ_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     }
                 }
