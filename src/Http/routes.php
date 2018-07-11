@@ -98,8 +98,8 @@ Route::post('informe/generalproventas', function(){
        $estados =  Input::get('estado') ;
        $representantes =  Input::get('representante') ;
    
-       $colegios = DB::table('colegios')
-         ->join('representantes', 'colegios.representante_id', '=', 'representantes.id')
+       $colegios = DB::table('representantes')
+         ->join('colegios', 'representantes.id', '=', 'colegios.representante_id')
          ->where('colegios.id', 'like', '%' . $clientes . '%')
          ->where('representante_id', 'like', '%' . $representantes . '%')
          ->get();
@@ -215,12 +215,11 @@ Route::post('informe/generalauditor', function(){
        $estados =  Input::get('estado') ;
        $representantes =  Input::get('representante') ;
    
-       $colegios = DB::table('colegios')
-         ->join('representantes', 'colegios.representante_id', '=', 'representantes.id')
+       $colegios = DB::table('representantes')
+         ->join('colegios', 'representantes.id', '=', 'colegios.representante_id')
          ->where('colegios.id', 'like', '%' . $clientes . '%')
          ->where('representante_id', 'like', '%' . $representantes . '%')
          ->get();
-
 
          $titulos = DB::table('campos')
          ->join('titulo', 'campos.titulo', '=', 'titulo.id')
