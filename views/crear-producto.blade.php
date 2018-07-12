@@ -4603,7 +4603,7 @@ function mostrar(id) {
      <option value="0" selected>Seleccione editorial</option>
       @foreach($titulof as $titulo)
       @if($titulo->grado == 12)
-      @if($titulo->asignatura == 8)
+      @if($titulo->asignatura == 12)
        <option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
        @endif
        @endif
@@ -4663,7 +4663,7 @@ function mostrar(id) {
      <option value="0" selected>Seleccione editorial</option>
       @foreach($titulof as $titulo)
       @if($titulo->grado == 13)
-      @if($titulo->asignatura == 9)
+      @if($titulo->asignatura == 13)
        <option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
        @endif
        @endif
@@ -4722,7 +4722,7 @@ function mostrar(id) {
      <option value="0" selected>Seleccione editorial</option>
       @foreach($titulof as $titulo)
       @if($titulo->grado == 14)
-      @if($titulo->asignatura == 10)
+      @if($titulo->asignatura == 14)
        <option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
        @endif
        @endif

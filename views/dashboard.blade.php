@@ -120,13 +120,13 @@ Gestión de usuarios Libros & Libros
                                                 <td><a href="page_ecom_product_edit.html">Datos venta</a></td>
                                                 <td><a href="page_ecom_product_edit.html">Porcentaje</a></td>
                                             </tr>
-                                            @foreach($costoregion as $costoregion)
-                                            @foreach($costoregionventa as $costoregionventa)
+                                            @foreach($costoregion as $costoregions)
+                                            @foreach($costoregionventa as $costoregionventas)
                                             <tr>
-                                                <td class="text-center"><a href="page_ecom_product_edit.html"><strong>{{$costoregion->region}}</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">{{number_format($costoregion->cantidad, 0, ",", ".")}}</a></td>
-                                                <td><a href="page_ecom_product_edit.html">{{number_format($costoregionventa->cantidad, 0, ",", ".")}}</a></td>
-                                                <td><a href="page_ecom_product_edit.html">{{number_format($costoregion->cantidad*100/$costoregionventa->cantidad,2)}}%</a></td>
+                                                <td class="text-center"><a href="page_ecom_product_edit.html"><strong>{{$costoregions->region}}</strong></a></td>
+                                                <td><a href="page_ecom_product_edit.html">{{number_format($costoregions->cantidad, 0, ",", ".")}}</a></td>
+                                                <td><a href="page_ecom_product_edit.html">{{number_format($costoregionventas->cantidad, 0, ",", ".")}}</a></td>
+                                                <td><a href="page_ecom_product_edit.html">{{number_format($costoregions->cantidad*100/$costoregionventas->cantidad,2)}}%</a></td>
                                             </tr>
                                   
                                             @endforeach
@@ -314,7 +314,7 @@ Gestión de usuarios Libros & Libros
                                             <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
                                             <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                                         </div>
-                                        <h2><strong>Cantidad títulos</strong> por ciudad</h2>
+                                        <h2><strong>Cantidad títulos</strong> por año</h2>
                                     </div>
                                     <!-- END Top Products Title -->
 
