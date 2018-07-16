@@ -44,7 +44,7 @@ Gestión de usuarios Libros & Libros
                             @foreach($ciudades as $ciudades)
                        
                             <div class="col-sm-12 col-lg-3">
-                                <a href="/colegios-region" class="widget widget-hover-effect1 themed-background">
+                                <a href="/colegios-regioncid/{{encrypt($ciudades->ids)}}" class="widget widget-hover-effect1 themed-background">
                                     <div class="widget-simple">
                                         <img src="/adminsite/img/placeholders/avatars/avatar.jpg" alt="avatar" class="widget-image img-circle pull-left">
                                         <h4 class="widget-content widget-content-light">

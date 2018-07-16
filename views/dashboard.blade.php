@@ -167,7 +167,7 @@ Gestión de usuarios Libros & Libros
                                             </tr>
                                              @foreach ($representantes as $representantes)
                                             <tr>
-                                                <td class="text-center"><a href="page_ecom_product_edit.html"><strong>{{$representantes->nombre}}</strong></a></td>
+                                                <td class="text-center"><a href="page_ecom_product_edit.html"><strong>{{$representantes->nombre}} {{$representantes->apellido}}</strong></a></td>
                                                 <td><a href="page_ecom_product_edit.html">{{$representantes->cantidad}}</a></td>
                                             </tr>
                                             @endforeach

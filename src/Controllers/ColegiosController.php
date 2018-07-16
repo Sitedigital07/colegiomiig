@@ -5,6 +5,7 @@ namespace Digitalmiig\Colegiomiig\Controllers;
 use Illuminate\Routing\Controller;
 use DB;
 use Input;
+use \Crypt;
 use Digitalmiig\Colegiomiig\Region;
 use Digitalmiig\Usuariomiig\Representante;
 use Digitalmiig\Colegiomiig\Colegio;
@@ -41,8 +42,21 @@ class ColegiosController extends Controller
    public function region()
     {
 
-         $colegios = DB::table('colegios')->where('ciudad_id','=', Auth::user()->ciudadid)->get();
+         $roles = DB::table('ciudades')->where('asistente', '=', Auth::user()->id)->pluck('ids');
+
+          $colegios = DB::table('colegios')
+                    ->whereIn('ciudad_id', $roles)->get();
         
+        return view('colegiomiig::colegios-region')->with('colegios', $colegios);
+    }
+
+
+public function regionciudad($id)
+    {
+
+
+        $id =  Crypt::decrypt($id);
+        $colegios = DB::table('colegios')->where('ciudad_id', '=', $id)->get();
         return view('colegiomiig::colegios-region')->with('colegios', $colegios);
     }
 

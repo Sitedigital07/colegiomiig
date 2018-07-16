@@ -336,7 +336,7 @@ Route::get('/dashboard', function () {
 
         $representantes = DB::table('representantes')
         ->join('campos', 'representantes.id', '=', 'campos.representante_id')
-        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(nombre) as nombre'))
+        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(nombre) as nombre'),DB::raw('(apellido) as apellido'))
         ->groupBy('representante_id')
         ->where('editorial_id','=',1)
         ->orderBy('cantidad', 'desc')
