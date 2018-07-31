@@ -56,7 +56,7 @@ Gestión de usuarios Libros & Libros
                                              <select class="selectpicker col-xs-12 col-sm-12 col-md-12 col-lg-12 form-control input-small" data-show-subtext="true" data-live-search="true" name="cliente">
                                               <option value="" selected disabled hidden>Seleccione Colegio</option>
                                                @foreach($colegios as $colegios)
-                                              <option value="{{$colegios->id}}">{{$colegios->nombres}} {{$colegios->codigo}}</option>
+                                              <option value="{{$colegios->id}}">{{$colegios->nombres}} {{$colegios->codigo}} </option>
                                                @endforeach
                                               </select>
                                             </div>

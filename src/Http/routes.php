@@ -1,6 +1,7 @@
 <?php
 
 // Rol Auditor
+Route::post('/editarproventa/{id}', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@editarproventa');
 Route::group(['middleware' => ['auditor']], function (){
 
 Route::post('/crearciudad', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@create');
@@ -51,6 +52,8 @@ Route::get('/crear-colegio', 'Digitalmiig\Colegiomiig\Controllers\ColegiosContro
 Route::post('/crearcolegio', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@create');
 
 Route::get('/editar-colegio/{id}', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@edit');
+
+
 
 Route::post('/update-colegio/{id}', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@update');
 
@@ -336,7 +339,7 @@ Route::get('/dashboard', function () {
 
         $representantes = DB::table('representantes')
         ->join('campos', 'representantes.id', '=', 'campos.representante_id')
-        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(nombre) as nombre'),DB::raw('(apellido) as apellido'))
+        ->select(DB::raw('sum(cantidad) as cantidad'),DB::raw('(nombre) as nombre'),DB::raw('(apellido) as apellidp'))
         ->groupBy('representante_id')
         ->where('editorial_id','=',1)
         ->orderBy('cantidad', 'desc')

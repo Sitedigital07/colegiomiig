@@ -379,9 +379,9 @@ Campo::insert($arrData);
 
     return Redirect('crear-producto/'.$colegio[$key])->with('status', 'ok_create');}  
 
-     public function createproventaweb() {
+     public function createproventawebold() {
 
-$cantidad = Input::get('cantidad');
+
 $editorial = Input::get('edt');
 $grado = Input::get('subcategory');
 $materia = Input::get('materia');
@@ -393,11 +393,11 @@ $titulo = Input::get('titulo');
 $ano = Input::get('ano');
 
 
-foreach($cantidad as $key => $n ) {
+foreach($titulo as $key => $n ) {
 
 /*Load array */
 
-$arrData = array("cantidad"=>$cantidad[$key], "titulo"=>$titulo[$key], "editorial_id"=>$editorial[$key], "grado_id"=>$grado[$key], "materia_id"=>$materia[$key], "ano"=>$ano[$key], "region_id"=>$region[$key], "colegio_id"=>$colegio[$key], "representante_id"=>$representante[$key]);
+$arrData = array("titulo"=>$titulo[$key], "editorial_id"=>$editorial[$key], "grado_id"=>$grado[$key], "materia_id"=>$materia[$key], "ano"=>$ano[$key], "region_id"=>$region[$key], "colegio_id"=>$colegio[$key], "representante_id"=>$representante[$key]);
 Proventa::insert($arrData);
 }
 
@@ -405,5 +405,217 @@ Proventa::insert($arrData);
 
 
 
+     public function editarproventa() {
+
+$editorial = Input::get('edt');
+$grado = Input::get('subcategory');
+$materia = Input::get('materia');
+$region = Input::get('region');
+$colegio = Input::get('colegio');
+$representante = Input::get('representante');
+$colegio_id = Input::get('colegiored');
+$titulo = Input::get('titulo');
+$ano = Input::get('ano');
+
+
+foreach($titulo as $key => $n ) {
+
+/*Load array */
+
+$arrData = array("titulo"=>$titulo[$key], "editorial_id"=>$editorial[$key], "grado_id"=>$grado[$key], "ano"=>$ano[$key], "region_id"=>$region[$key], "colegio_id"=>$colegio[$key], "representante_id"=>$representante[$key]);
+Proventa::where('colegio_id', $colegio = Input::get('colegio'))->where('grado_id', $grado = Input::get('subcategory'))->where('materia_id', $materia = Input::get('materia'))
+              ->update($arrData);
 }
+
+
+    return Redirect('proyeccionventas/'.$colegio[$key])->with('status', 'ok_create');}  
+
+
+
+
+     public function respaldo($request) {
+
+foreach (Input::get('colegio') as $key => $value) {
+$asistencia = Proventa::find(Input::get('colegio')[$key]);
+
+$asistencia->editorial_id = Input::get('edt')[$key];
+
+$asistencia->titulo = Input::get('titulo')[$key];
+$asistencia->ano = Input::get('ano')[$key];
+ $asistencia->update();
+}
+
+    return Redirect('proyeccionventas/'.$colegio[$key])->with('status', 'ok_create');}  
+
+
+
+
+
+
+public function createproventaweb()
+    {
+        $user = new Proventa;
+
+        $user->colegio_id = Input::get('colegio');
+        $user->grado_id = Input::get('subcategory');
+        $user->region_id = Input::get('region');
+        $user->representante_id = Input::get('representante');
+        $user->ano = Input::get('ano');
+        $user->pr_matematicas = Input::get('pr_matematicas');
+        $user->pr_titulo_mat = Input::get('pr_titulo_mat');
+        $user->pr_espanol = Input::get('pr_espanol');
+        $user->pr_titulo_esp = Input::get('pr_titulo_esp');
+        $user->pr_ciencias = Input::get('pr_ciencias');
+        $user->pr_titulo_cie = Input::get('pr_titulo_cie');
+        $user->pr_comprension = Input::get('pr_comprension');
+        $user->pr_titulo_com = Input::get('pr_titulo_com');
+        $user->pr_interes = Input::get('pr_interes');
+        $user->pr_titulo_int = Input::get('pr_titulo_int');
+        $user->pr_artistica = Input::get('pr_artistica');
+        $user->pr_titulo_art = Input::get('pr_titulo_art');
+        $user->pr_ingles = Input::get('pr_ingles');
+        $user->pr_titulo_ing = Input::get('pr_titulo_ing');
+
+        $user->save();
+
+          return Redirect('proyeccionventas/'.$user->colegio_id)->with('status', 'ok_create');
+    }
+
+
+public function editarproventaweb($id)
+    {
+       
+        $input = Input::all();
+        $user = Proventa::find($id);
+        $user->colegio_id = Input::get('colegio');
+        $user->grado_id = Input::get('subcategory');
+        $user->region_id = Input::get('region');
+        $user->representante_id = Input::get('representante');
+        $user->ano = Input::get('ano');
+        $user->pr_matematicas = Input::get('pr_matematicas');
+        $user->pr_titulo_mat = Input::get('pr_titulo_mat');
+        $user->pr_espanol = Input::get('pr_espanol');
+        $user->pr_titulo_esp = Input::get('pr_titulo_esp');
+        $user->pr_ciencias = Input::get('pr_ciencias');
+        $user->pr_titulo_cie = Input::get('pr_titulo_cie');
+        $user->pr_comprension = Input::get('pr_comprension');
+        $user->pr_titulo_com = Input::get('pr_titulo_com');
+        $user->pr_interes = Input::get('pr_interes');
+        $user->pr_titulo_int = Input::get('pr_titulo_int');
+        $user->pr_artistica = Input::get('pr_artistica');
+        $user->pr_titulo_art = Input::get('pr_titulo_art');
+        $user->pr_ingles = Input::get('pr_ingles');
+        $user->pr_titulo_ing = Input::get('pr_titulo_ing');
+
+        $user->save();
+
+         return Redirect('proyeccionventas/'.$user->colegio_id)->with('status', 'ok_create');
+
+    }
+
+ 
+ public function editargrado($id)
+    {
+
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        $date = DB::table('configuracion')->where('id', '=', 1)->get();   
+        $datef = DB::table('configuracion')->where('id', '=', 1)->get();   
+        return view('usuariomiig::editargrado')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('date', $date)->with('datef', $datef);
+    }
+
+     public function editargradosegundo($id)
+    {
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        return view('usuariomiig::editargradosegundo')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof);
+    }
+
+      public function editargradotercero($id)
+    {
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        return view('usuariomiig::editargradotercero')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof);
+    }
+
+      public function editargradocuarto($id)
+    {
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        return view('usuariomiig::editargradocuarto')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof);
+    }
+
+      public function editargradoquinto($id)
+    {
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        return view('usuariomiig::editargradoquinto')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof);
+    }
+
+      public function editargradosexto($id)
+    {
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        return view('usuariomiig::editargradosexto')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof);
+    }
+
+      public function editargradoseptimo($id)
+    {
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        return view('usuariomiig::editargradoseptimo')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof);
+    }
+
+      public function editargradooctavo($id)
+    {
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        return view('usuariomiig::editargradooctavo')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof);
+    }
+
+      public function editargradonoveno($id)
+    {
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        return view('usuariomiig::editargradonoveno')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof);
+    }
+
+      public function editargradodecimo($id)
+    {
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        return view('usuariomiig::editargradodecimoo')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof);
+    }
+
+      public function editargradoonce($id)
+    {
+        $proventas = DB::table('proventas')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')->get();
+        $titulo = DB::table('titulo')->get();
+        return view('usuariomiig::editargradoonce')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof);
+    }
+
+}
+
 
