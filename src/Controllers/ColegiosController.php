@@ -262,6 +262,16 @@ public function regionciudad($id)
     return Redirect('/lista-colegios')->with('status', 'ok_update');
     }
 
+public function actucolegio($id)
+    {
+        $colegio = Input::get('colegio');
+        $input = Input::all();
+        $user = Proventa::find($id);
+        $user->cierre = Input::get('cierre');
+        $user->save();
+    return Redirect('/proyeccionventas/'.$colegio)->with('status', 'ok_update');
+    }
+
 
     public function updatejr(Request $request, $id)
     {
