@@ -726,12 +726,6 @@ Route::get('/memar/ajax-subcater',function(){
 
 
 
-Route::get('proyeccion/{id}', function ($id) {
-    $represen = DB::table('colegios')->where('id', '=', $id)->get();
-    $fechas =  DB::table('proyeccion')->where('colegio_id', $id)->orderBy('id', 'asc')->get();
-    $conteo = DB::table('proyeccion')->where('colegio_id', $id)->count();
-    return view('colegiomiig::proyeccion')->with('fechas', $fechas)->with('conteo', $conteo)->with('represen', $represen);
-});
 
 Route::post('/crearproyec', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@createpro');
 

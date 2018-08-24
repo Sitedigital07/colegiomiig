@@ -55,8 +55,8 @@ Gestión de usuarios Libros & Libros
   </div>
 
 
-
-
+@foreach($ano as $ano)
+@endforeach
 
   <div class="container">
           <!-- Datatables Content -->
@@ -80,18 +80,31 @@ Gestión de usuarios Libros & Libros
                                         </tr>
                                     </thead>
                                     <tbody>
+                                      {{DB::table('proyeccion')->where('colegio_id','=',5)->count()}}
+
+                                                                                 <?php
+date_default_timezone_set('America/Los_Angeles');
+$date = date('Y-m-d');
+echo $date;
+?>
+                             
                                       @foreach($colegios as $colegio)
                                         <tr>
-                                        
+                                        @if(DB::table('proyeccion')->where('colegio_id','=',$colegio->id)->where('ano','=',$ano->ano)->count() == 0)
                                           <td>
-                                               @if($colegio->estadoaud == 'Auditado')
-                                               <span class="label label-primary">Auditado</span>
-                                               @elseif($colegio->estadoaud == 'No-auditado')
-                                               <span class="label label-danger">No Auditado</span>
-                                               @elseif($colegio->estadoaud == 'En-proceso')
-                                               <span class="label label-warning">En proceso</span>
-                                               @endif
-                                             </td>
+                                                <span class="label label-info">Sin registro</span>
+                                          </td>
+                                          @elseif(DB::table('proyeccion')->where('colegio_id','=',$colegio->id)->where('ano','=',$ano->ano)->max('date_com') > $date)
+                                           <td>
+                                                <span class="label label-warning">En proceso</span>
+                                          </td>
+                                           @elseif(DB::table('proyeccion')->where('colegio_id','=',$colegio->id)->where('ano','=',$ano->ano)->max('date_com') < $date)
+                                           <td>
+                                                <span class="label label-danger">Fecha excedida</span>
+                                          </td>
+
+                                        @endif 
+
                                             <td class="text-center">{{$colegio->codigo}}</td>
                                             <td class="text-center">{{$colegio->nombres}}</td>
                                             <td>{{$colegio->r_social}}</td>
@@ -100,7 +113,11 @@ Gestión de usuarios Libros & Libros
                                              <td>{{$colegio->domicilio}}</td>
 
                                             <td class="text-center">
-                                              <a href="/proyeccionventas/{{$colegio->id}}"  class="btn btn-primary">Ventas</a>
+                                              @if (DB::table('proventas')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->exists())
+                                              <a href="/proyeccionventasadopcion/{{$colegio->id}}"  class="btn btn-warning">Adopcion</a>
+                                              @else
+                                              <a href="/proyeccionventas/{{$colegio->id}}"  class="btn btn-primary">Meta</a>
+                                              @endif
                                               <a href="/proyeccion/{{$colegio->id}}"  class="btn btn-primary">Cierre</a>
                                             </td>
 

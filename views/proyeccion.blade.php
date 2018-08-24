@@ -1,4 +1,4 @@
-@extends ('adminsite.presentacion')
+@extends ('adminsite.asistente')
 
 <!-- Define el titulo de la Página -->    
 @section('title')
@@ -12,20 +12,23 @@ Gestión de usuarios Libros & Libros
 @stop
 
 @section('contenido')
+
+@foreach($ano as $ano)
+@endforeach
 <br><br>
 
   <div class="container">
-      @if($conteo == 1)
+     @if(DB::table('proyeccion')->where('colegio_id','=',Request::segment(2))->where('ano','=',$ano->ano)->count() == 1)
 <div class="alert alert-warning">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <strong>Usted Ya posee una fecha</strong> Principal
   </div>
-  @elseif($conteo == 2)
+ @elseif(DB::table('proyeccion')->where('colegio_id','=',Request::segment(2))->where('ano','=',$ano->ano)->count() == 2)
   <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>Usted Ya posee una fecha</strong> Seundaria
+    <strong>Usted Ya posee una Segunda</strong> Fecha
   </div>
-   @elseif($conteo == 3)
+ @elseif(DB::table('proyeccion')->where('colegio_id','=',Request::segment(2))->where('ano','=',$ano->ano)->count() == 3)
   <div class="alert alert-info">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <strong>Usted Ya posee una fecha</strong> Adicional
@@ -67,10 +70,12 @@ Gestión de usuarios Libros & Libros
   </div>
 </div>
 <input type="hidden" name="colegio" value="{{$represen->id}}">
+<input type="hidden" name="ano" value="{{$ano->ano}}">
 <input type="hidden" name="representante" value="{{$represen->representante_id}}">
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-@if($conteo == 3)
+
+@if(DB::table('proyeccion')->where('colegio_id','=',Request::segment(2))->where('ano','=',$ano->ano)->count() == 3)
 @else
 {{Form::submit('Crear', array('class' => 'btn btn-primary')  )}}
 <br>
@@ -89,6 +94,8 @@ Gestión de usuarios Libros & Libros
 
 <div class="container">
  @foreach($fechas as $fechas)
+
+@if($fechas->ano == $ano->ano)
 <div class="col-sm-6 col-lg-4">
                                 <a href="javascript:void(0)" class="widget widget-hover-effect2">
                                     <div class="widget-extra themed-background">
@@ -97,7 +104,8 @@ Gestión de usuarios Libros & Libros
                                     <div class="widget-extra-full"><span class="h2 animation-expandOpen">{{$fechas->date_com}}</span></div>
                                 </a>
                             </div>
-
+@else
+@endif
 @endforeach
 </div>
 

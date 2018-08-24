@@ -84,7 +84,7 @@ Gestión de usuarios Libros & Libros
                                              <td>{{$colegioaud->domicilio}}</td>
                                             <td class="text-center">
                                                <a href="/poblacion-registrada/{{$colegioaud->id}}" type="button" class="btn btn-info">Mercadeo</a>
-                         <a href="/crear-producto/{{$colegioaud->id}}"><button type="button" class="btn btn-warning">Producto</button></a>
+                         <a href="/proyeccionventasadopcionaud/{{$colegioaud->id}}"><button type="button" class="btn btn-warning">Auditoria</button></a>
                          <a href="/editar-colegiorp/{{$colegioaud->id}}"><button type="button" class="btn btn-primary">Actualizar datos</button></a>
                                             </td>
                                         </tr>
