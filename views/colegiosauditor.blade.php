@@ -71,10 +71,8 @@ Gestión de usuarios Libros & Libros
                                            <td>
                                                @if($colegioaud->estadoaud == 'Auditado')
                                                <span class="label label-primary">Auditado</span>
-                                               @elseif($colegioaud->estadoaud == 'No-auditado')
+                                               @elseif($colegioaud->estadoaud == 'No Auditado')
                                                <span class="label label-danger">No Auditado</span>
-                                               @elseif($colegioaud->estadoaud == 'En-proceso')
-                                               <span class="label label-warning">En proceso</span>
                                                @endif
                                              </td>
                                             <td class="text-center">{{$colegioaud->codigo}}</td>
@@ -83,9 +81,9 @@ Gestión de usuarios Libros & Libros
                                             <td>{{$colegioaud->emailcol}}</td>
                                              <td>{{$colegioaud->domicilio}}</td>
                                             <td class="text-center">
-                                               <a href="/poblacion-registrada/{{$colegioaud->id}}" type="button" class="btn btn-info">Mercadeo</a>
-                         <a href="/proyeccionventasadopcionaud/{{$colegioaud->id}}"><button type="button" class="btn btn-warning">Auditoria</button></a>
-                         <a href="/editar-colegiorp/{{$colegioaud->id}}"><button type="button" class="btn btn-primary">Actualizar datos</button></a>
+                                               <a href="/poblacion-registrada/{{$colegioaud->id}}" type="button" class="btn btn-info">Crear Mercadeo</a><br>
+                         <a href="/proyeccionventasadopcionaud/{{$colegioaud->id}}"><button type="button" class="btn btn-warning">Crear Auditoria</button></a><br>
+                         <a href="/editar-colegiorp/{{$colegioaud->id}}"><button type="button" class="btn btn-primary">Actualizar Datos</button></a>
                                             </td>
                                         </tr>
                                         @endforeach

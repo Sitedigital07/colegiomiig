@@ -300,9 +300,8 @@ Gestión de usuarios Libros & Libros
                                          <div class="form-group col-lg-12">
                                           <label for="example-nf-email">Estado Auditoria</label>
                                             {{ Form::select('estadoaud', [$colegios->estadoaud => $colegios->estadoaud,
-                                            'Auditado' => 'Auditado',
-                                            'No-auditado' => 'No-auditado',
-                                            'En-proceso' => 'En-proceso'], null, array('class' => 'form-control')) }}  
+                                            'No Auditado' => 'No Auditado',
+                                            'Auditado' => 'Auditado'], null, array('class' => 'form-control')) }}  
                                         </div>
        </div>
        <input type="hidden" name="auditor" value="{{Auth::user()->id}}">

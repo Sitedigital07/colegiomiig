@@ -85,7 +85,6 @@ Gestión de usuarios Libros & Libros
                                             <td class="text-center">
                                             
 											   <a href="/editar-poblacion/{{$poblacion->id}}"><button type="button" class="btn btn-primary">Actualizar datos</button></a>
-                         <a href="/eliminar-poblacion/{{$poblacion->id}}"><button type="button" class="btn btn-danger">Eliminar</button></a>
                                             </td>
                                         </tr>
                                         @endforeach

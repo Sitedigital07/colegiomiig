@@ -113,12 +113,16 @@ echo $date;
                                              <td>{{$colegio->domicilio}}</td>
 
                                             <td class="text-center">
-                                              @if (DB::table('proventas')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->exists())
-                                              <a href="/proyeccionventasadopcion/{{$colegio->id}}"  class="btn btn-warning">Adopcion</a>
+                                              @if (DB::table('proventas')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->where('cierre', '=', 1)->exists())
+                                              <a href="/proyeccionventasadopcion/{{$colegio->id}}"  class="btn btn-warning">Crear Adopcion</a>
                                               @else
-                                              <a href="/proyeccionventas/{{$colegio->id}}"  class="btn btn-primary">Meta</a>
+                                              <a href="/proyeccionventas/{{$colegio->id}}"  class="btn btn-success">Generar Meta</a>
                                               @endif
-                                              <a href="/proyeccion/{{$colegio->id}}"  class="btn btn-primary">Cierre</a>
+                                              @if (DB::table('proyeccion')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->exists())
+                                              <a href="/proyeccion/{{$colegio->id}}"  class="btn btn-info">Amplicar Cierre</a>
+                                              @else
+                                              <a href="/proyeccion/{{$colegio->id}}"  class="btn btn-primary">Crear Cierre</a>
+                                              @endif
                                             </td>
 
                                          

@@ -53,10 +53,9 @@ Gestión de usuarios Libros & Libros
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Codigo MIIG</label>
-                                            {{Form::text('codigo', '', array('class' => 'form-control','placeholder'=>''))}}
+                                            {{Form::text('codigo', '', array('class' => 'form-control','placeholder'=>'','style'=>'text-transform:uppercase'))}}
                                         </div>
                                     </div>
-
                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                          <div class="form-group col-lg-6">
                                             <label for="example-nf-email">Jornada</label>
@@ -365,6 +364,10 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'El campo código MIIG es requerido'
+                    },
+                     regexp: {
+                        regexp: /^[-a-zA-Z0-9ñ_\.]+$/,
+                        message: 'No son validos los datos ingresados'
                     },
                     stringLength: {
                         min: 2,

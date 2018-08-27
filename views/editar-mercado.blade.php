@@ -59,65 +59,115 @@ document.getElementById('reso').value = subtotal;
 Pre-Jardin:
 <input type="number" class="form-control" name="sum1" value="{{$datos->prejardin}}" onkeyup="sumar(this);" required/>
 </div>
-
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Pre-Jardin activa:
+<input type="number" class="form-control" name="sum1a" value="{{$datos->prejardinact}}" onkeyup="sumar(this);" required/>
+</div>
 <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Jardin:
 <input type="number" class="form-control" name="sum2" value="{{$datos->jardin}}" onkeyup="sumar(this);" required/>
 </div>
-
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Jardin activa:
+<input type="number" class="form-control" name="sum2a" value="{{$datos->jardinact}}" onkeyup="sumar(this);" required/>
+</div>
 <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Transicion:
 <input type="number" class="form-control" name="sum3" value="{{$datos->transicion}}" onkeyup="sumar(this);" required/>
+</div>
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Transicion activa:
+<input type="number" class="form-control" name="sum3a" value="{{$datos->transicionact}}" onkeyup="sumar(this);" required/>
 </div>
 
 <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Primero:
 <input type="number" class="form-control" name="sum4" value="{{$datos->primero}}" onkeyup="sumar(this);" required/>
 </div>
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Primero activa:
+<input type="number" class="form-control" name="sum4a" value="{{$datos->primeroact}}" onkeyup="sumar(this);" required/>
+</div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Segundo:
 <input type="number" class="form-control" name="sum5" value="{{$datos->segundo}}" onkeyup="sumar(this);" required/>
+</div>
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Segundo activa:
+<input type="number" class="form-control" name="sum5a" value="{{$datos->segundoact}}" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Tercero:
 <input type="number" class="form-control" name="sum6" value="{{$datos->tercero}}" onkeyup="sumar(this);" required/>
 </div>
+ <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Tercero activa:
+<input type="number" class="form-control" name="sum6a" value="{{$datos->terceroact}}" onkeyup="sumar(this);" required/>
+</div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Cuarto:
 <input type="number" class="form-control" name="sum7" value="{{$datos->cuarto}}" onkeyup="sumar(this);" required/>
+</div>
+ <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Cuarto activa:
+<input type="number" class="form-control" name="sum7a" value="{{$datos->cuartoact}}" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Quinto:
 <input type="number" class="form-control" name="sum8" value="{{$datos->quinto}}" onkeyup="sumar(this);" required/>
 </div>
+ <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Quinto activa
+<input type="number" class="form-control" name="sum8a" value="{{$datos->quintoact}}" onkeyup="sumar(this);" required/>
+</div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Sexto:
 <input type="number" class="form-control" name="sum9" value="{{$datos->sexto}}" onkeyup="sumar(this);" required/>
+</div>
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Sexto activa:
+<input type="number" class="form-control" name="sum9a" value="{{$datos->sextoact}}" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Septimo:
 <input type="number" class="form-control" name="sum10" value="{{$datos->septimo}}" onkeyup="sumar(this);" required/>
 </div>
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Septimo activa:
+<input type="number" class="form-control" name="sum10a" value="{{$datos->septimoact}}" onkeyup="sumar(this);" required/>
+</div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Octavo:
 <input type="number" class="form-control" name="sum11" value="{{$datos->octavo}}" onkeyup="sumar(this);" required/>
+</div>
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Octavo activa:
+<input type="number" class="form-control" name="sum11a" value="{{$datos->octavoact}}" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Noveno:
 <input type="number" class="form-control" name="sum12" value="{{$datos->noveno}}" onkeyup="sumar(this);" required/>
 </div>
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Noveno activa:
+<input type="number" class="form-control" name="sum12a" value="{{$datos->novenoact}}" onkeyup="sumar(this);" required/>
+</div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Decimo:
 <input type="number" class="form-control" name="sum13" value="{{$datos->decimo}}" onkeyup="sumar(this);" required/>
+</div>
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Decimo activa:
+<input type="number" class="form-control" name="sum13a" value="{{$datos->decimoact}}" onkeyup="sumar(this);" required/>
 </div>
 
   <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -125,10 +175,15 @@ Once:
 <input type="number" class="form-control" name="sum14" value="{{$datos->once}}" onkeyup="sumar(this);" required/>
 </div>
 
+ <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+Once activa:
+<input type="number" class="form-control" name="sum14a" value="{{$datos->onceact}}" onkeyup="sumar(this);" required/>
+</div>
+
  {{Form::hidden('colegio_id', $datos->colegio_id, array('class' => 'form-control','placeholder'=>''))}}
  <input type="hidden" class="form-control" name="_token" value="{{ csrf_token() }}">
 <div class="container">
-<button type="submit" class="btn btn-primary">Registrar población</button>
+<button type="submit" class="btn btn-primary">Editar población</button>
 </div>
 <input type="hidden" id="res" name="res" value="{{$datos->total}}"/>
 

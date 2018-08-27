@@ -99,7 +99,6 @@ Gestión de usuarios Libros & Libros
 
                                             <td class="text-center">
                                                <a href="editar-colegio/{{$colegio->id}}" class="btn btn-primary">Editar</a>
-					                                     <a href="proyeccion/{{$colegio->id}}"  class="btn btn-danger">Cierre</button>
                                             </td>
                                         </tr>
                                         @endforeach

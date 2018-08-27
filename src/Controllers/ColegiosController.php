@@ -681,7 +681,7 @@ public function editarproventawebadopcion($id)
 
         $user->save();
 
-         return Redirect('proyeccionventas/'.$user->colegio_id)->with('status', 'ok_create');
+         return Redirect('proyeccionventasadopcion/'.$user->colegio_id)->with('status', 'ok_create');
 
     }
 

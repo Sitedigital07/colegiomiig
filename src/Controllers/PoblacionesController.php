@@ -139,6 +139,20 @@ class PoblacionesController extends Controller
         $user->noveno = Input::get('sum12');
         $user->decimo = Input::get('sum13');
         $user->once = Input::get('sum14');
+        $user->prejardinact = Input::get('sum1a');
+        $user->jardinact = Input::get('sum2a');
+        $user->transicionact = Input::get('sum3a');
+        $user->primeroact = Input::get('sum4a');
+        $user->segundoact = Input::get('sum5a');;
+        $user->terceroact = Input::get('sum6a');
+        $user->cuartoact = Input::get('sum7a');
+        $user->quintoact = Input::get('sum8a');
+        $user->sextoact = Input::get('sum9a');
+        $user->septimoact = Input::get('sum10a');
+        $user->octavoact = Input::get('sum11a');
+        $user->novenoact = Input::get('sum12a');
+        $user->decimoact = Input::get('sum13a');
+        $user->onceact = Input::get('sum14a');
         $user->colegio_id = Input::get('colegio_id');
         $user->total = $user->prejardin+$user->jardin+$user->transicion+$user->primero+$user->segundo+$user->tercero+$user->cuarto+$user->quinto+$user->sexto+$user->septimo+$user->octavo;+$user->noveno
         +$user->decimo +$user->once;

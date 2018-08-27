@@ -63,140 +63,140 @@ document.getElementById('reso').value = subtotal;
                           <div class="row">
                                <form name="a" action="/poblaciones" method="post" id="form">
 
-<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Pre-Jardin:
 <input type="number" class="form-control" name="sum1" value="0" onkeyup="sumar(this);" required/>
 </div>
-<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Pre-Jardin activa:
 <input type="number" class="form-control" name="sum1a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Jardin:
 <input type="number" class="form-control" name="sum2" value="0" onkeyup="sumar(this);" required/>
 </div>
-<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Jardin activa:
 <input type="number" class="form-control" name="sum2a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Transicion:
 <input type="number" class="form-control" name="sum3" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Transicion activa:
 <input type="number" class="form-control" name="sum3a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Primero:
 <input type="number" class="form-control" name="sum4" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Primero activa:
 <input type="number" class="form-control" name="sum4a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Segundo:
 <input type="number" class="form-control" name="sum5" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Segundo activa:
 <input type="number" class="form-control" name="sum5a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Tercero:
 <input type="number" class="form-control" name="sum6" value="0" onkeyup="sumar(this);" required/>
 </div>
 
- <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+ <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Tercero activa:
 <input type="number" class="form-control" name="sum6a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Cuarto:
 <input type="number" class="form-control" name="sum7" value="0" onkeyup="sumar(this);" required/>
 </div>
 
- <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+ <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Cuarto activa:
 <input type="number" class="form-control" name="sum7a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Quinto:
 <input type="number" class="form-control" name="sum8" value="0" onkeyup="sumar(this);" required/>
 </div>
 
- <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+ <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Quinto activa
 <input type="number" class="form-control" name="sum8a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Sexto:
 <input type="number" class="form-control" name="sum9" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Sexto activa:
 <input type="number" class="form-control" name="sum9a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Septimo:
 <input type="number" class="form-control" name="sum10" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Septimo activa:
 <input type="number" class="form-control" name="sum10a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Octavo:
 <input type="number" class="form-control" name="sum11" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Octavo activa:
 <input type="number" class="form-control" name="sum11a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Noveno:
 <input type="number" class="form-control" name="sum12" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Noveno activa:
 <input type="number" class="form-control" name="sum12a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Decimo:
 <input type="number" class="form-control" name="sum13" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Decimo activa:
 <input type="number" class="form-control" name="sum13a" value="0" onkeyup="sumar(this);" required/>
 </div>
 
-  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+  <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Once:
 <input type="number" class="form-control" name="sum14" value="0" onkeyup="sumar(this);" required/>
 </div>
 
- <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+ <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 Once activa:
 <input type="number" class="form-control" name="sum14a" value="0" onkeyup="sumar(this);" required/>
 </div>
