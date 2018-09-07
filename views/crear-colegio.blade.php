@@ -81,42 +81,11 @@ Gestión de usuarios Libros & Libros
                                             {{Form::label('adopcion', 'Adopción' )}}
                                             {{ Form::select('adopcion', ['' => 'Seleccione Adopción',
                                             'Completa' => 'Completa',
-                                            'Limitada' => 'Limitada'], null, array('class' => 'form-control')) }}
+                                            'Limitada' => 'Limitada',
+                                            'Especial' => 'Especial'], null, array('class' => 'form-control')) }}
                                         </div>
                                       </div>
-                                         <div class="form-group col-lg-12">
-                                            
-                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                             <input type="checkbox" name="mt" value="1"> <b>MT</b> - Matematicas<br>
-                                            </div>
-                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                             <input type="checkbox" name="es" value="1"> <b>ES</b> - Español<br>
-                                            </div>
-                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                             <input type="checkbox" name="sc" value="1"> <b>CS</b> - Sociales <br>
-                                            </div>
-                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                             <input type="checkbox" name="cl" value="1"> <b>CL</b> - Comprensión Lectora<br>
-                                            </div><br><br>
-                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                             <input type="checkbox" name="ig" value="1"> <b>IG</b> - Interes General<br>
-                                            </div>
-                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                             <input type="checkbox" name="art" value="1"> <b>ART</b> - Artistica<br>
-                                            </div>
-                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                             <input type="checkbox" name="ing" value="1"> <b>ING</b> - Ingles<br>
-                                            </div>
-                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                             <input type="checkbox" name="pj" value="1"> <b>PJ</b> - Prejardin<br>
-                                            </div><br><br>
-                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                             <input type="checkbox" name="jd" value="1"> <b>JD</b> - Jardin<br>
-                                            </div>
-                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                             <input type="checkbox" name="ts" value="1"> <b>TS</b> - Transición<br>
-                                            </div>
-                                        </div>
+                                        
                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                          <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Regional</label>

@@ -71,82 +71,11 @@ Gestión de usuarios Libros & Libros
                                              {{Form::label('adopcion', 'Adopción' )}}
                                              {{ Form::select('adopcion', [$colegios->adopcion => $colegios->adopcion,
                                              'Completa' => 'Completa',
-                                             'Limitada' => 'Limitada'], null, array('class' => 'form-control')) }}
+                                             'Limitada' => 'Limitada',
+                                             'Especial' => 'Especial'], null, array('class' => 'form-control')) }}
                                         </div>
                                       </div>
-                                         <div class="form-group col-lg-12">
-                                            
-                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      @if($colegios->mt == 1)
-       <input type="checkbox" name="mt" value="1" checked> <b>MT</b> - Matematicas<br>
-       @else
-       <input type="checkbox" name="mt" value=""> <b>MT</b> - Matematicas<br>
-       @endif
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-       @if($colegios->es == 1)
-       <input type="checkbox" name="es" value="1" checked> <b>ES</b> - Español<br>
-       @else
-       <input type="checkbox" name="es" value=""> <b>ES</b> - Español<br>
-       @endif
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-       @if($colegios->sc == 1)
-       <input type="checkbox" name="sc" value="1" checked> <b>CS</b> - Sociales<br>
-       @else
-       <input type="checkbox" name="sc" value=""> <b>CS</b> - Sociales<br>
-       @endif
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-       @if($colegios->cl == 1)
-       <input type="checkbox" name="cl" value="1" checked> <b>CL</b> - Compresión Lectora<br>
-       @else
-       <input type="checkbox" name="cl" value=""> <b>CL</b> - Compresión Lectora<br>
-       @endif
-       </div><br><br>
-       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        @if($colegios->ig == 1)
-       <input type="checkbox" name="ig" value="1" checked> <b>IG</b> - Interes General<br>
-       @else
-        <input type="checkbox" name="ig" value=""> <b>IG</b> - Interes General<br>
-        @endif
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-       @if($colegios->art == 1)
-       <input type="checkbox" name="art" value="1" checked> <b>ART</b> - Artistica<br>
-       @else
-       <input type="checkbox" name="art" value=""> <b>ART</b> - Artistica<br>
-       @endif
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-       @if($colegios->ing == 1)
-       <input type="checkbox" name="ing" value="1" checked> <b>ING</b> - Ingles<br>
-       @else
-       <input type="checkbox" name="ing" value=""> <b>ING</b> - Ingles<br>
-       @endif 
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-          @if($colegios->pj == 1)
-       <input type="checkbox" name="pj" value="1" checked> <b>PJ</b> - Prejardin<br>
-       @else
-       <input type="checkbox" name="pj" value=""> <b>PJ</b> - Prejardin<br>
-       @endif
-       </div><br><br>
-       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-       @if($colegios->jd == 1)
-       <input type="checkbox" name="jd" value="1" checked> <b>JD</b> - Jardin<br>
-       @else
-       <input type="checkbox" name="jd" value=""> <b>JD</b> - Jardin<br>
-       @endif
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-       @if($colegios->ts == 1)
-       <input type="checkbox" name="ts" value="1" checked> <b>TS</b> - Transición<br>
-       @else
-       <input type="checkbox" name="ts" value=""> <b>TS</b> - Transición<br>
-       @endif
-     </div>
-                                        </div>
+                                        
                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                          <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Regional</label>

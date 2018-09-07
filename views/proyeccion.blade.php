@@ -75,7 +75,7 @@ Gestión de usuarios Libros & Libros
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
-@if(DB::table('proyeccion')->where('colegio_id','=',Request::segment(2))->where('ano','=',$ano->ano)->count() == 2)
+@if(DB::table('proyeccion')->where('colegio_id','=',Request::segment(2))->where('ano','=',$ano->ano)->count() == 1)
 @else
 {{Form::submit('Crear', array('class' => 'btn btn-primary')  )}}
 <br>

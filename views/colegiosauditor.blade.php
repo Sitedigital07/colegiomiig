@@ -41,7 +41,8 @@ Gestión de usuarios Libros & Libros
 
 
 
-
+@foreach($ano as $ano)
+@endforeach
 
   <div class="container">
           <!-- Datatables Content -->
@@ -81,9 +82,14 @@ Gestión de usuarios Libros & Libros
                                             <td>{{$colegioaud->emailcol}}</td>
                                              <td>{{$colegioaud->domicilio}}</td>
                                             <td class="text-center">
-                                               <a href="/poblacion-registrada/{{$colegioaud->id}}" type="button" class="btn btn-info">Crear Mercadeo</a><br>
-                         <a href="/proyeccionventasadopcionaud/{{$colegioaud->id}}"><button type="button" class="btn btn-warning">Crear Auditoria</button></a><br>
-                         <a href="/editar-colegiorp/{{$colegioaud->id}}"><button type="button" class="btn btn-primary">Actualizar Datos</button></a>
+                                             <a href="/poblacion-registrada/{{$colegioaud->id}}" type="button" class="btn btn-info">Crear Mercadeo</a><br>
+                                             <a href="/proyeccionventasadopcionaud/{{$colegioaud->id}}"><button type="button" class="btn btn-warning">Crear Auditoria</button></a><br>
+                                             <a href="/editar-colegiorp/{{$colegioaud->id}}"><button type="button" class="btn btn-primary">Actualizar Datos</button></a>
+                                             @if (DB::table('proyeccion')->where('colegio_id', '=', $colegioaud->id)->where('ano', '=', $ano->ano)->exists())
+                                              <a  class="btn btn-info" type="button" disabled>Ya tiene fecha</a>
+                                             @else
+                                              <a href="/proyeccion/{{$colegioaud->id}}"  class="btn btn-primary">Crear Cierre</a>
+                                             @endif
                                             </td>
                                         </tr>
                                         @endforeach

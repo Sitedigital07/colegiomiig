@@ -74,8 +74,8 @@ Gestión de usuarios Libros & Libros
                                             <th class="text-center">Código</th>
                                             <th class="text-center">Nombre</th>
                                             <th>Ciudad</th>
-                                            <th>Email</th>
-                                            <th>Auditor</th>
+                                            <th>Representante</th>
+                                       
                                             <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
@@ -108,9 +108,12 @@ echo $date;
                                             <td class="text-center">{{$colegio->codigo}}</td>
                                             <td class="text-center">{{$colegio->nombres}}</td>
                                             <td>{{$colegio->r_social}}</td>
-                                            <td>{{$colegio->emailcol}}</td>
-                                             
-                                             <td>{{$colegio->domicilio}}</td>
+                                            @foreach($representantes as $representantesa)
+                                            @if($representantesa->id == $colegio->representante_id)
+                                            <td>{{$representantesa->nombre}} {{$representantesa->apellido}}</td>
+                                            @endif
+                                             @endforeach
+                                            
 
                                             <td class="text-center">
                                               @if (DB::table('proventas')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->where('cierre', '=', 1)->exists())
@@ -118,11 +121,7 @@ echo $date;
                                               @else
                                               <a href="/proyeccionventas/{{$colegio->id}}"  class="btn btn-success">Generar Meta</a>
                                               @endif
-                                              @if (DB::table('proyeccion')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->exists())
-                                              <a href="/proyeccion/{{$colegio->id}}"  class="btn btn-info">Amplicar Cierre</a>
-                                              @else
-                                              <a href="/proyeccion/{{$colegio->id}}"  class="btn btn-primary">Crear Cierre</a>
-                                              @endif
+                                          
                                             </td>
 
                                          

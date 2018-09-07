@@ -160,6 +160,14 @@ Gestión de usuarios Libros & Libros
                                         </div>
                                       </div>
 
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+      <br>     
+<hr style="border:1px solid #27ae60" width="100%" size="10"/>
+<li class="text-primary"><strong>DATOS GENERALES</strong></li>
+
+ <hr style="border:1px solid #27ae60" width="100%" size="10"/>
+       </div>      
+
                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Persona contacto</label>
@@ -177,46 +185,7 @@ Gestión de usuarios Libros & Libros
                                             {{Form::text('representante_le', $colegios->representante, array('class' => 'form-control','placeholder'=>''))}}
                                         </div>
                                       </div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
-                                            <b>Definición adopcion</b><br>
-                                            </div>
-                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
-      @if($colegios->junta_d == 1)
-       <input type="checkbox" name="junta_d" value="1" checked> Junta Directiva<br>
-       @else
-       <input type="checkbox" name="junta_d" value=""> Junta Directiva<br>
-       @endif
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
-       @if($colegios->rector == 1)
-       <input type="checkbox" name="rector" value="1" checked> Rector<br>
-       @else
-        <input type="checkbox" name="rector" value=""> Rector<br>
-       @endif
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
-       @if($colegios->coordinador == 1)
-       <input type="checkbox" name="coordinador" value="1" checked> Coordinador<br>
-       @else
-       <input type="checkbox" name="coordinador" value=""> Coordinador<br>
-       @endif
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
-       @if($colegios->docente == 1)
-       <input type="checkbox" name="docente" value="1" checked> Docente<br>
-       @else
-       <input type="checkbox" name="docente" value=""> Docente<br>
-       @endif
-       </div>
-       <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
-       @if($colegios->propietario == 1)
-       <input type="checkbox" name="propietario" value="1" checked> Dueño<br>
-       @else
-        <input type="checkbox" name="propietario" value=""> Dueño<br>
-       @endif
-       </div>
-     </div>
+
      <br>
    
                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -296,6 +265,106 @@ Gestión de usuarios Libros & Libros
        </div>
 
                                         </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+      <br><br> 
+      <hr style="border:1px solid #27ae60" width="100%" size="10"/>        
+<li class="text-primary"><strong>DATOS DE QUIEN DEFINE</strong></li>
+<hr style="border:1px solid #27ae60" width="100%" size="10"/>
+       </div>      
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+                                            <b>Definición adopcion</b><br>
+                                            </div>
+                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+      @if($colegios->junta_d == 1)
+       <input type="checkbox" name="junta_d" value="1" checked> Junta Directiva<br>
+       @else
+       <input type="checkbox" name="junta_d" value=""> Junta Directiva<br>
+       @endif
+       </div>
+       <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+       @if($colegios->rector == 1)
+       <input type="checkbox" name="rector" value="1" checked> Rector<br>
+       @else
+        <input type="checkbox" name="rector" value=""> Rector<br>
+       @endif
+       </div>
+       <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+       @if($colegios->coordinador == 1)
+       <input type="checkbox" name="coordinador" value="1" checked> Coordinador<br>
+       @else
+       <input type="checkbox" name="coordinador" value=""> Coordinador<br>
+       @endif
+       </div>
+       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+       @if($colegios->docente == 1)
+       <input type="checkbox" name="docente" value="1" checked> Docente<br>
+       @else
+       <input type="checkbox" name="docente" value=""> Docente<br>
+       @endif
+       </div>
+       <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+       @if($colegios->propietario == 1)
+       <input type="checkbox" name="propietario" value="1" checked> Dueño<br>
+       @else
+        <input type="checkbox" name="propietario" value=""> Dueño<br>
+       @endif
+       </div>
+     </div>
+<br><br><br>
+
+       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group col-lg-6">
+                                            <label for="example-nf-password">Nombres</label>
+                                             {{Form::text('nombredefine', $colegios->nombredefine, array('class' => 'form-control','placeholder'=>''))}}
+                                        </div>
+
+                                         <div class="form-group col-lg-6">
+                                            <label for="example-nf-password">Apellidos</label>
+                                            {{Form::text('apellidodefine', $colegios->apellidodefine, array('class' => 'form-control','placeholder'=>''))}}
+                                        </div>
+                                      </div> 
+
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group col-lg-6">
+                                            <label for="example-nf-password">Email de contácto</label>
+                                             {{Form::text('emaildefine', $colegios->emaildefine, array('class' => 'form-control','placeholder'=>''))}}
+                                        </div>
+
+                                         <div class="form-group col-lg-6">
+                                            <label for="example-nf-password">Dirección</label>
+                                            {{Form::text('direcciondefine', $colegios->direcciondefine, array('class' => 'form-control','placeholder'=>''))}}
+                                        </div>
+                                      </div>
+           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group col-lg-6">
+                                            <label for="example-nf-password">Teléfono celular</label>
+                                             {{Form::text('telefonoceldefine', $colegios->telefonoceldefine, array('class' => 'form-control','placeholder'=>''))}}
+                                        </div>
+
+                                         <div class="form-group col-lg-6">
+                                            <label for="example-nf-password">Teléfono oficina</label>
+                                            {{Form::text('telefonodefine', $colegios->telefonodefine, array('class' => 'form-control','placeholder'=>''))}}
+                                        </div>
+                                      </div> 
+
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                
+                                        <div class="form-group col-lg-12">
+                                            <label for="example-nf-password">Observaciones</label>
+                                            {{Form::textarea('nota', $colegios->nota, array('class' => 'form-control','placeholder'=>''))}}
+                                        </div> 
+                                         </div>
+                                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+      <br><br>    
+      <hr style="border:1px solid #27ae60" width="100%" size="10"/>        
+<li class="text-primary"><b>ESTADO DE AUDITORÍA</b></li>
+<hr style="border:1px solid #27ae60" width="100%" size="10"/>
+       </div>      
+
+
                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                          <div class="form-group col-lg-12">
                                           <label for="example-nf-email">Estado Auditoria</label>
