@@ -4,6 +4,7 @@ namespace Digitalmiig\Colegiomiig\Controllers;
 
 use Illuminate\Routing\Controller;
 use Digitalmiig\Colegiomiig\Dato;
+use Digitalmiig\Colegiomiig\Proventa;
 use Input;
 use DB;
 
@@ -99,6 +100,16 @@ class PoblacionesController extends Controller
             ->where('colegios.id', '=', $id)
             ->get();
         return view('colegiomiig::mercado-registrado')->with('poblacion', $poblacion)->with('poblacionweb', $poblacionweb);
+    }
+
+     public function format($id)
+    {
+        
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();
+        foreach($ano as $anoes){
+        $res = Proventa::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();  
+        }
+        return Redirect('colegios-region');
     }
 
     /**

@@ -13,6 +13,7 @@ use Digitalmiig\Colegiomiig\Proyec;
 use Digitalmiig\Colegiomiig\Config;
 use Digitalmiig\Colegiomiig\Campo;
 use Digitalmiig\Colegiomiig\Proventa;
+use Digitalmiig\Colegiomiig\Esseg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,10 +46,9 @@ class ColegiosController extends Controller
          $roles = DB::table('ciudades')->where('asistente', '=', Auth::user()->id)->pluck('ids');
          $ano = DB::table('configuracion')->where('id', '=', 1)->get();
          $colegios = DB::table('colegios')
-                    ->whereIn('ciudad_id', $roles)->get();
+                    ->where('representante_id','=',Auth::user()->representante_id)->get();
          $fechas = DB::table('proyeccion')->get();
          $representantes = DB::table('representantes')->get();
-         
 
         return view('colegiomiig::colegios-region')->with('colegios', $colegios)->with('ano', $ano)->with('fechas', $fechas)->with('representantes', $representantes);
     }
@@ -350,10 +350,21 @@ public function actucolegio($id)
 
      public function colegioauditores($id)
     {
-        $colegiosaud = DB::table('colegios')->where('ciudad_id', '=', $id)->get();
-        $ano =  DB::table('configuracion')->where('id', '=', 1)->get();
-        return view('colegiomiig::colegiosauditor')->with('colegiosaud', $colegiosaud)->with('ano', $ano);
+        $roles = DB::table('ciudades')->where('asistente', '=', Auth::user()->id)->pluck('ids');
+         $ano = DB::table('configuracion')->where('id', '=', 1)->get();
+         $colegios = DB::table('colegios')
+                    ->where('representante_id','=',Auth::user()->representante_id)->get();
+         $fechas = DB::table('proyeccion')->get();
+         $representantes = DB::table('representantes')->get();
+         
+
+        return view('colegiomiig::colegios-region')->with('colegios', $colegios)->with('ano', $ano)->with('fechas', $fechas)->with('representantes', $representantes);
     }
+
+
+
+
+
 
       public function createcolegio()
     {
@@ -497,7 +508,34 @@ public function createproventaweb()
         $user->pr_artistica = Input::get('pr_artistica');
         $user->pr_titulo_art = Input::get('pr_titulo_art');
         $user->pr_ingles = Input::get('pr_ingles');
-        $user->pr_titulo_ing = Input::get('pr_titulo_ing');
+        $user->pr_poblacion_mat = Input::get('pr_poblacion_mat');
+        $user->pr_vender_mat = Input::get('pr_vender_mat');
+        $user->pr_muestra_mat = Input::get('pr_muestra_mat');
+        $user->pr_metas_mat = Input::get('pr_metas_mat');
+        $user->pr_poblacion_esp = Input::get('pr_poblacion_esp');
+        $user->pr_vender_esp = Input::get('pr_vender_esp');
+        $user->pr_muestra_esp = Input::get('pr_muestra_esp');
+        $user->pr_metas_esp = Input::get('pr_metas_esp');
+        $user->pr_poblacion_cie = Input::get('pr_poblacion_cie');
+        $user->pr_vender_cie = Input::get('pr_vender_cie');
+        $user->pr_muestra_cie = Input::get('pr_muestra_cie');
+        $user->pr_metas_cie = Input::get('pr_metas_cie');
+        $user->pr_poblacion_com = Input::get('pr_poblacion_com');
+        $user->pr_vender_com = Input::get('pr_vender_com');
+        $user->pr_muestra_com = Input::get('pr_muestra_com');
+        $user->pr_metas_com = Input::get('pr_metas_com');
+        $user->pr_poblacion_int = Input::get('pr_poblacion_int');
+        $user->pr_vender_int = Input::get('pr_vender_int');
+        $user->pr_muestra_int = Input::get('pr_muestra_int');
+        $user->pr_metas_int = Input::get('pr_metas_int');
+        $user->pr_poblacion_art = Input::get('pr_poblacion_art');
+        $user->pr_vender_art = Input::get('pr_vender_art');
+        $user->pr_muestra_art = Input::get('pr_muestra_art');
+        $user->pr_metas_art = Input::get('pr_metas_art');
+        $user->pr_poblacion_ing = Input::get('pr_poblacion_ing');
+        $user->pr_vender_ing = Input::get('pr_vender_ing');
+        $user->pr_muestra_ing = Input::get('pr_muestra_ing');
+        $user->pr_metas_ing = Input::get('pr_metas_ing');
         $user->metadopcion = 0;
         $user->save();
 
@@ -505,6 +543,36 @@ public function createproventaweb()
 
           return Redirect('/proyeccionventas/'.$user->colegio_id)->with('status', 'ok_create');
     }
+
+
+public function createsseg()
+    {
+        $user = new Esseg;
+        $user->esseg = Input::get('esseg');
+        $user->ano = Input::get('ano');
+        $user->colegio_id = Input::get('colegio');
+        $user->save();
+
+
+
+          return Redirect('/colegios-region')->with('status', 'ok_create');
+    }
+
+public function updateesseg($id)
+    {
+        $input = Input::all();
+        $user = Esseg::find($id);
+        $user->esseg = Input::get('esseg');
+        $user->ano = Input::get('ano');
+        $user->colegio_id = Input::get('colegio');
+        $user->save();
+
+
+
+          return Redirect('/proyeccionventas/'.$user->colegio_id)->with('status', 'ok_create');
+    }
+
+
 
 
 public function createproventawebadopcion()
@@ -598,6 +666,34 @@ public function editarproventaweb($id)
         $user->pr_titulo_art = Input::get('pr_titulo_art');
         $user->pr_ingles = Input::get('pr_ingles');
         $user->pr_titulo_ing = Input::get('pr_titulo_ing');
+        $user->pr_poblacion_mat = Input::get('pr_poblacion_mat');
+        $user->pr_vender_mat = Input::get('pr_vender_mat');
+        $user->pr_muestra_mat = Input::get('pr_muestra_mat');
+        $user->pr_metas_mat = Input::get('pr_metas_mat');
+        $user->pr_poblacion_esp = Input::get('pr_poblacion_esp');
+        $user->pr_vender_esp = Input::get('pr_vender_esp');
+        $user->pr_muestra_esp = Input::get('pr_muestra_esp');
+        $user->pr_metas_esp = Input::get('pr_metas_esp');
+        $user->pr_poblacion_cie = Input::get('pr_poblacion_cie');
+        $user->pr_vender_cie = Input::get('pr_vender_cie');
+        $user->pr_muestra_cie = Input::get('pr_muestra_cie');
+        $user->pr_metas_cie = Input::get('pr_metas_cie');
+        $user->pr_poblacion_com = Input::get('pr_poblacion_com');
+        $user->pr_vender_com = Input::get('pr_vender_com');
+        $user->pr_muestra_com = Input::get('pr_muestra_com');
+        $user->pr_metas_com = Input::get('pr_metas_com');
+        $user->pr_poblacion_int = Input::get('pr_poblacion_int');
+        $user->pr_vender_int = Input::get('pr_vender_int');
+        $user->pr_muestra_int = Input::get('pr_muestra_int');
+        $user->pr_metas_int = Input::get('pr_metas_int');
+        $user->pr_poblacion_art = Input::get('pr_poblacion_art');
+        $user->pr_vender_art = Input::get('pr_vender_art');
+        $user->pr_muestra_art = Input::get('pr_muestra_art');
+        $user->pr_metas_art = Input::get('pr_metas_art');
+        $user->pr_poblacion_ing = Input::get('pr_poblacion_ing');
+        $user->pr_vender_ing = Input::get('pr_vender_ing');
+        $user->pr_muestra_ing = Input::get('pr_muestra_ing');
+        $user->pr_metas_ing = Input::get('pr_metas_ing');
 
         $user->save();
 
@@ -713,8 +809,10 @@ public function editarproventawebadopcion($id)
 
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
-        $titulo = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
         $date = DB::table('configuracion')->where('id', '=', 1)->get();   
         $datef = DB::table('configuracion')->where('id', '=', 1)->get();   
@@ -726,9 +824,11 @@ public function editarproventawebadopcion($id)
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-        $titulo = DB::table('titulo')->get();
         return view('usuariomiig::editargradosegundo')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
@@ -736,8 +836,10 @@ public function editarproventawebadopcion($id)
     {
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
-        $titulo = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
         return view('usuariomiig::editargradotercero')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
@@ -746,8 +848,10 @@ public function editarproventawebadopcion($id)
     {
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
-        $titulo = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
         return view('usuariomiig::editargradocuarto')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
@@ -756,8 +860,10 @@ public function editarproventawebadopcion($id)
     {
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
-        $titulo = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
         return view('usuariomiig::editargradoquinto')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
@@ -766,8 +872,10 @@ public function editarproventawebadopcion($id)
     {
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
-        $titulo = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
         return view('usuariomiig::editargradosexto')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
@@ -776,8 +884,10 @@ public function editarproventawebadopcion($id)
     {
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
-        $titulo = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
         return view('usuariomiig::editargradoseptimo')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
@@ -786,8 +896,10 @@ public function editarproventawebadopcion($id)
     {
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
-        $titulo = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
         return view('usuariomiig::editargradooctavo')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
@@ -796,8 +908,10 @@ public function editarproventawebadopcion($id)
     {
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
-        $titulo = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
         return view('usuariomiig::editargradonoveno')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
@@ -806,18 +920,22 @@ public function editarproventawebadopcion($id)
     {
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
-        $titulo = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-        return view('usuariomiig::editargradodecimoo')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
+        return view('usuariomiig::editargradodecimo')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
       public function editargradoonce($id)
     {
         $proventas = DB::table('proventas')->where('id', '=', $id)->get();
         $titulowebf = DB::table('titulo')->get();
-        $titulof = DB::table('titulo')->get();
-        $titulo = DB::table('titulo')->get();
+        $titulof = DB::table('titulo')
+        ->join('colegios','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('titulo')
+        ->join('colegios','colegios.adopcion', '=', 'titulo.portafolio')->get();
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
         return view('usuariomiig::editargradoonce')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }

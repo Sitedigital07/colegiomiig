@@ -741,26 +741,16 @@ Route::get('/auditorjr', function () {
 });
 
 
-Route::get('/colegios/auditores/{id}', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@colegioauditores');
-
-Route::get('/poblacion-registrada/{id}', 'Digitalmiig\Colegiomiig\Controllers\PoblacionesController@show');
 
 
-Route::get('/colegio-poblacion/{id}', function ($id) {
-    date_default_timezone_set('America/Bogota');
-    $date = date('Y');
-    $ano =  DB::table('configuracion')->where('id', '=', 1)->get();
-    $datos = DB::table('datos')->where('colegio_id', $id)->get();
-    $data = DB::table('datos')->where('colegio_id', $id)->where('ano', $date)->exists();
 
-    return view('colegiomiig::crear-mercado')->with('data', $data)->with('date', $date)->with('datos', $datos)->with('ano', $ano);
-});
 
-Route::post('/poblaciones', 'Digitalmiig\Colegiomiig\Controllers\PoblacionesController@create');
 
-Route::get('/editar-poblacion/{id}', 'Digitalmiig\Colegiomiig\Controllers\PoblacionesController@edit');
 
-Route::post('/update-mercado/{id}', 'Digitalmiig\Colegiomiig\Controllers\PoblacionesController@update');
+
+
+
+
 
 Route::get('/eliminar-poblacion/{id}', 'Digitalmiig\Colegiomiig\Controllers\PoblacionesController@destroy');
 
@@ -784,12 +774,10 @@ Route::post('/crearproducto', 'Digitalmiig\Colegiomiig\Controllers\ColegiosContr
 
 
 
-Route::get('/editar-colegiorp/{id}', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@edicion');
 
 
 
 
-Route::post('/update-colegiojr/{id}', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@updatejr');
 
 
 
