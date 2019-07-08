@@ -99,6 +99,11 @@ Gestión de usuarios Libros & Libros
 
                                             <td class="text-center">
                                                <a href="editar-colegio/{{$colegio->id}}" class="btn btn-primary">Editar</a>
+                                               <script language="JavaScript">
+                                                function confirmar ( mensaje ) {
+                                                return confirm( mensaje );}
+                                               </script>
+                                              <a href="/formatear-colegio/{{$colegio->id}}" onclick="return confirmar('¿Está seguro que desea eliminar los registros para este colegio?')" data-toggle="tooltip" data-placement="right" title="Formatear Colegio" type="button" class="btn btn-danger"><i class="fa fa-camera"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

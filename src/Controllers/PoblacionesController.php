@@ -109,7 +109,7 @@ class PoblacionesController extends Controller
         foreach($ano as $anoes){
         $res = Proventa::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();  
         }
-        return Redirect('colegios-region');
+        return Redirect('lista-colegios');
     }
 
     /**

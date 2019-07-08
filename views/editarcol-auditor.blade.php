@@ -32,43 +32,43 @@ Gestión de usuarios Libros & Libros
 
                                     <!-- Normal Form Content -->
                                     {{ Form::open(array('method' => 'POST', 'id' => 'defaultForm', 'url' => array('/update-colegiojr',$colegios->id))) }}
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 hidden-xs hidden-sm hidden-md hidden-lg">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group col-lg-6">
                                             <label for="example-nf-email">Nombre colegio</label>
-                                            {{Form::text('nombre', $colegios->nombres, array('class' => 'form-control','placeholder'=>''))}}
+                                            {{Form::text('nombre', $colegios->nombres, array('class' => 'form-control','placeholder'=>'', 'disabled'=>'true'))}}
                                         </div>
                                         <div class="form-group col-lg-6 ">
                                             <label for="example-nf-password">Codigo MIIG</label>
-                                            {{Form::text('codigo', $colegios->codigo, array('class' => 'form-control','placeholder'=>''))}}
+                                            {{Form::text('codigo', $colegios->codigo, array('class' => 'form-control','placeholder'=>'', 'disabled'=>'true'))}}
                                         </div>
                                     </div>
 
-                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 hidden-xs hidden-sm hidden-md hidden-lg">
+                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                          <div class="form-group col-lg-6">
                                             <label for="example-nf-email">Jornada</label>
                                             {{Form::label('jornada', 'Jornada' )}}
                                               {{ Form::select('jornada', [$colegios->jornada => $colegios->jornada,
                                               'Diurna' => 'Diurna',
                                               'Tarde' => 'Tarde',
-                                              'Unica' => 'Unica'], null, array('class' => 'form-control')) }}
+                                              'Unica' => 'Unica'], null, array('class' => 'form-control', 'disabled'=>'true')) }}
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Razón social</label>
-                                            {{Form::text('r_social', $colegios->r_social, array('class' => 'form-control','placeholder'=>''))}}
+                                            {{Form::text('r_social', $colegios->r_social, array('class' => 'form-control','placeholder'=>'', 'disabled'=>'true'))}}
                                         </div>
                                        </div>
 
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 hidden-xs hidden-sm hidden-md hidden-lg">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                          <div class="form-group col-lg-6">
                                             <label for="example-nf-email">Número NIT</label>
-                                            {{Form::text('nit', $colegios->nit, array('class' => 'form-control','placeholder'=>''))}}
+                                            {{Form::text('nit', $colegios->nit, array('class' => 'form-control','placeholder'=>'', 'disabled'=>'true'))}}
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Tipo Adopción</label>
                                              {{Form::label('adopcion', 'Adopción' )}}
                                              {{ Form::select('adopcion', [$colegios->adopcion => $colegios->adopcion,
                                              'Completa' => 'Completa',
-                                             'Limitada' => 'Limitada'], null, array('class' => 'form-control')) }}
+                                             'Limitada' => 'Limitada'], null, array('class' => 'form-control', 'disabled'=>'true')) }}
                                         </div>
                                       </div>
                                          <div class="form-group col-lg-12 hidden-xs hidden-sm hidden-md hidden-lg">

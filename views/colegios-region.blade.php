@@ -16,15 +16,11 @@ Gestión de usuarios Libros & Libros
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
                                 
-                                <li>
-                                    <a href="/asistente-representantes"><i class="fa fa-users"></i> Representantes</a>
-                                </li>
+                               
                                 <li class="active">
                                     <a href="/colegios-region"><i class="fa fa-building"></i> Colegios</a>
                                 </li>
-                                 <li>
-                                    <a href="/asistente-ciudades"><i class="fa fa-map"></i> Agencias</a>
-                                </li>
+          
                             </ul>
                         </div>
 
@@ -117,17 +113,13 @@ echo $date;
 
                                             <td class="text-center">
                                               @if (DB::table('esseg')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->exists())
-                                              <a href="/proyeccionventasadopcion/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Hooray!" class="btn btn-warning">Crear Adopcion</a>
+                                              <a href="/proyeccionventasadopcion/{{$colegio->id}}" data-toggle="tooltip" data-placement="left" title="Generar Adopciòn" class="btn btn-warning"><i class="fa fa-book"></i></a>
                                               @else
-                                              <a href="/proyeccionventas/{{$colegio->id}}"  data-toggle="tooltip" data-placement="left" title="Generar Meta" class="btn btn-success"><i class="fa fa-camera"></i></a>
+                                              <a href="/proyeccionventas/{{$colegio->id}}"  data-toggle="tooltip" data-placement="left" title="Generar Meta" class="btn btn-success"><i class="fa fa-book"></i></a>
                                               @endif
-                                              <a href="/editar-colegiorp/{{$colegio->id}}" data-toggle="tooltip" data-placement="top" title="Actualizar Datos"  class="btn btn-success"><i class="fa fa-camera"></i></a>
-                                              <a href="/poblacion-registrada/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Crear Mercado" type="button" class="btn btn-info"><i class="fa fa-camera"></i></a>
-                                               <script language="JavaScript">
-                                                function confirmar ( mensaje ) {
-                                                return confirm( mensaje );}
-                                               </script>
-                                              <a href="/formatear-colegio/{{$colegio->id}}" onclick="return confirmar('¿Está seguro que desea eliminar los registros para este colegio?')" data-toggle="tooltip" data-placement="right" title="Formatear Colegio" type="button" class="btn btn-danger"><i class="fa fa-camera"></i></a>
+                                              <a href="/editar-colegiorp/{{$colegio->id}}" data-toggle="tooltip" data-placement="top" title="Actualizar Datos"  class="btn btn-success"><i class="fa fa-clipboard"></i></a>
+                                              <a href="/poblacion-registrada/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Crear Mercado" type="button" class="btn btn-info"><i class="fa fa-table"></i></a>
+                                            
                                             </td>
                                         </tr>
                                         @endforeach
