@@ -23,7 +23,7 @@ Gestión de usuarios Libros & Libros
                                     <a href="{{ URL::to('exportadoresseg/xls') }}"><i class="fa fa-file-excel-o"></i> Descargar xls</a>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::to('exportadoressego/xlsx') }}"><i class="fa fa-file-excel-o"></i> Descargar xlsx</a>
+                                    <a href="{{ URL::to('exportadoresseg/xlsx') }}"><i class="fa fa-file-excel-o"></i> Descargar xlsx</a>
                                 </li>
                                 <li>
                                     <a href="{{ URL::to('exportadoresseg/csv') }}"><i class="fa fa-file-excel-o"></i> Descargar CSV</a>
