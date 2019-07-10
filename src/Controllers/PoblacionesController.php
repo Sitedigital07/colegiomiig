@@ -5,6 +5,10 @@ namespace Digitalmiig\Colegiomiig\Controllers;
 use Illuminate\Routing\Controller;
 use Digitalmiig\Colegiomiig\Dato;
 use Digitalmiig\Colegiomiig\Proventa;
+use Digitalmiig\Colegiomiig\Esseg;
+use Digitalmiig\Colegiomiig\Campo;
+use Digitalmiig\Usuariomiig\Fecha;
+use Digitalmiig\Usuariomiig\Fechameta;
 use Input;
 use DB;
 
@@ -108,6 +112,10 @@ class PoblacionesController extends Controller
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();
         foreach($ano as $anoes){
         $res = Proventa::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();  
+        $resuno = Esseg::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();  
+        $resdos = Campo::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();  
+        $restres = Fecha::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
+        $rescuatro = Fechameta::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();   
         }
         return Redirect('lista-colegios');
     }

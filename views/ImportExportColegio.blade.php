@@ -35,7 +35,7 @@ Gestión de usuarios Libros & Libros
 
 
 
-  <div class="container">
+  <div class="container hidden-lg">
     <form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ URL::to('importadorcolegio') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
       <input type="file" name="import_file" />
       <input type="hidden" name="_token" value="{{ csrf_token() }}">

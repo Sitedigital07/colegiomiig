@@ -66,9 +66,9 @@ Gestión de usuarios Libros & Libros
                                 <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Estado</th>
-                                            <th class="text-center">Código</th>
-                                            <th class="text-center">Nombre</th>
+                                            <th>ID</th>
+                                            <th class="text-center">DANE</th>
+                                            <th class="text-center">Colegio</th>
                                             <th>Ciudad</th>
                                             <th>Representante</th>
                                        
@@ -86,24 +86,11 @@ echo $date;
                              
                                       @foreach($colegios as $colegio)
                                         <tr>
-                                        @if(DB::table('proyeccion')->where('colegio_id','=',$colegio->id)->where('ano','=',$ano->ano)->count() == 0)
-                                          <td>
-                                                <span class="label label-info">Sin registro</span>
-                                          </td>
-                                          @elseif(DB::table('proyeccion')->where('colegio_id','=',$colegio->id)->where('ano','=',$ano->ano)->max('date_com') > $date)
-                                           <td>
-                                                <span class="label label-warning">En proceso</span>
-                                          </td>
-                                           @elseif(DB::table('proyeccion')->where('colegio_id','=',$colegio->id)->where('ano','=',$ano->ano)->max('date_com') < $date)
-                                           <td>
-                                                <span class="label label-danger">Fecha excedida</span>
-                                          </td>
-
-                                        @endif 
-
-                                            <td class="text-center">{{$colegio->codigo}}</td>
-                                            <td class="text-center">{{$colegio->nombres}}</td>
-                                            <td>{{$colegio->r_social}}</td>
+                                       
+                                           <td> {{$colegio->id}}</td>
+                                          <td class="text-center">{{$colegio->codigo}}</td>
+                                           <td class="text-center">{{$colegio->nombres}}</td>
+                                           <td>{{$colegio->n_ciudad}}</td>
                                             @foreach($representantes as $representantesa)
                                             @if($representantesa->id == $colegio->representante_id)
                                             <td>{{$representantesa->nombre}} {{$representantesa->apellido}}</td>
@@ -112,13 +99,16 @@ echo $date;
                                             
 
                                             <td class="text-center">
-                                              @if (DB::table('esseg')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->exists())
+                                              @if (DB::table('cierre')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->where('cierre','=',1)->exists())
                                               <a href="/proyeccionventasadopcion/{{$colegio->id}}" data-toggle="tooltip" data-placement="left" title="Generar Adopciòn" class="btn btn-warning"><i class="fa fa-book"></i></a>
                                               @else
                                               <a href="/proyeccionventas/{{$colegio->id}}"  data-toggle="tooltip" data-placement="left" title="Generar Meta" class="btn btn-success"><i class="fa fa-book"></i></a>
                                               @endif
                                               <a href="/editar-colegiorp/{{$colegio->id}}" data-toggle="tooltip" data-placement="top" title="Actualizar Datos"  class="btn btn-success"><i class="fa fa-clipboard"></i></a>
-                                              <a href="/poblacion-registrada/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Crear Mercado" type="button" class="btn btn-info"><i class="fa fa-table"></i></a>
+                                              <a href="/poblacion-registrada/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Crear Mercado" type="button" class="btn btn-info"><i class="fa fa-table"></i>
+                                              </a>
+                                              <a href="/colegio-descuento/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Descuento Colegio" type="button" class="btn btn-info"><i class="fa fa-dollar"></i>
+                                              </a>
                                             
                                             </td>
                                         </tr>

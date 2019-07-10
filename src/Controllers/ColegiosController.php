@@ -14,6 +14,7 @@ use Digitalmiig\Colegiomiig\Config;
 use Digitalmiig\Colegiomiig\Campo;
 use Digitalmiig\Colegiomiig\Proventa;
 use Digitalmiig\Colegiomiig\Esseg;
+use Digitalmiig\Colegiomiig\Cierre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,12 +33,28 @@ class ColegiosController extends Controller
         
         ->join('ciudades', 'ciudades.ids', '=', 'colegios.ciudad_id')
          ->leftjoin('users', 'users.id', '=', 'colegios.auditor')
-             ->select('colegios.estadoaud','colegios.codigo','colegios.nombres','ciudades.n_ciudad','colegios.emailcol','users.name','colegios.id')
+         ->select('colegios.estadoaud','colegios.codigo','colegios.nombres','ciudades.n_ciudad','colegios.emailcol','users.name','colegios.id')
 
         ->get();
         
         return view('colegiomiig::allcolegios')->with('colegios', $colegios);
     }
+
+
+       public function colegiosnac()
+    {
+
+        $colegios = DB::table('colegios')
+        
+        ->join('ciudades', 'ciudades.ids', '=', 'colegios.ciudad_id')
+         ->leftjoin('users', 'users.id', '=', 'colegios.auditor')
+         ->select('colegios.estadoaud','colegios.codigo','colegios.nombres','ciudades.n_ciudad','colegios.emailcol','users.name','colegios.id')
+
+        ->get();
+        
+        return view('colegiomiig::allcolegiosnac')->with('colegios', $colegios);
+    }
+
 
 
    public function region()
@@ -46,7 +63,9 @@ class ColegiosController extends Controller
          $roles = DB::table('ciudades')->where('asistente', '=', Auth::user()->id)->pluck('ids');
          $ano = DB::table('configuracion')->where('id', '=', 1)->get();
          $colegios = DB::table('colegios')
-                    ->where('representante_id','=',Auth::user()->representante_id)->get();
+                    ->where('representante_id','=',Auth::user()->representante_id)
+                     ->join('ciudades', 'ciudades.ids', '=', 'colegios.ciudad_id')
+                    ->get();
          $fechas = DB::table('proyeccion')->get();
          $representantes = DB::table('representantes')->get();
 
@@ -272,11 +291,25 @@ public function actucolegio($id)
     {
         $colegio = Input::get('colegio');
         $input = Input::all();
-        $user = Proventa::find($id);
-        $user->cierre = Input::get('cierre');
-        $user->save();
-    return Redirect('/proyeccionventas/'.$colegio)->with('status', 'ok_update');
+        $cierre = Cierre::find($id);
+        $cierre->cierre = Input::get('cierre');
+        $cierre->ano = Input::get('ano');
+        $cierre->colegio_id = Input::get('colegio');
+        $cierre->save();
+    return Redirect('/proyeccionventasnac/'.$colegio)->with('status', 'ok_update');
     }
+
+public function cierrecolegio()
+    {
+        $colegio = Input::get('colegio');
+        $cierre = new Cierre;
+        $cierre->cierre = Input::get('cierre');
+        $cierre->ano = Input::get('ano');
+        $cierre->colegio_id = Input::get('colegio');
+        $cierre->save();
+    return Redirect('/proyeccionventasnac/'.$colegio)->with('status', 'ok_update');
+    }
+
 
 
     public function updatejr(Request $request, $id)

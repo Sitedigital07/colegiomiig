@@ -16,14 +16,9 @@ Gestión de usuarios Libros & Libros
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
                                 <li class="active">
-                                    <a href="/lista-colegios"><i class="fa fa-building"></i> Colegios</a>
+                                    <a href="/colegios-lista"><i class="fa fa-building"></i> Colegios</a>
                                 </li>
-                                <li>
-                                    <a href="/crear-colegio"><i class="fa fa-plus-circle"></i> Crear colegio</a>
-                                </li>
-                                <li>
-                                    <a href="/excel-colegios"><i class="fa fa-download"></i> Importar Exportar</a>
-                                </li>
+                            
                             </ul>
                         </div>
 
@@ -89,12 +84,10 @@ Gestión de usuarios Libros & Libros
                                              <td>{{$colegio->name}}</td>
 
                                             <td class="text-center">
-                                               <a href="editar-colegio/{{$colegio->id}}" class="btn btn-primary"><i class="fa fa-eraser"></i></a>
-                                               <script language="JavaScript">
-                                                function confirmar ( mensaje ) {
-                                                return confirm( mensaje );}
-                                               </script>
-                                              <a href="/formatear-colegio/{{$colegio->id}}" onclick="return confirmar('¿Está seguro que desea eliminar los registros para este colegio?')" data-toggle="tooltip" data-placement="right" title="Formatear Colegio" type="button" class="btn btn-danger"><i class="hi hi-trash"></i></a>
+                                              <a href="/proyeccionventasadopcionnac/{{$colegio->id}}" data-toggle="tooltip" data-placement="left" title="Generar Adopciòn" class="btn btn-warning"><i class="fa fa-book"></i></a>
+                                              <a href="/proyeccionventasnac/{{$colegio->id}}"  data-toggle="tooltip" data-placement="left" title="Generar Meta" class="btn btn-success"><i class="fa fa-book"></i></a>
+                                               <a href="/colegio-descuentoaud/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Descuento Colegio" type="button" class="btn btn-info"><i class="fa fa-dollar"></i>
+                                              </a>
                                             </td>
                                         </tr>
                                         @endforeach
