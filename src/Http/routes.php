@@ -7,12 +7,9 @@ Route::group(['middleware' => ['auditor']], function (){
 Route::post('/crearciudad', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@create');
 
 Route::get('/editar-ciudad/{id}', function ($id) {
-    $ciudades = DB::table('ciudades')
-    ->join('regiones', 'ciudades.region_id', '=', 'regiones.id')
-    ->join('users', 'ciudades.asistente', '=', 'users.id')
-    ->where('ciudades.ids', $id)->get();
-    $region = DB::table('regiones')->get();
-    return view('colegiomiig::editar-ciudad')->with('ciudades', $ciudades)->with('region', $region);
+    $ciudades = DB::table('ciudades')->where('ids', $id)->get();
+    $ciudad = DB::table('registros')->get();
+    return view('colegiomiig::editar-ciudad')->with('ciudades', $ciudades)->with('ciudad', $ciudad);
 });
 
 
@@ -1364,7 +1361,7 @@ Route::get('/memo/ajax-subcat',function(){
 Route::get('/mema/ajax-subcat',function(){
 
         $cat_id = Input::get('cat_id');
-        $subcategories = Digitalmiig\Usuariomiig\Representante::where('agencia', '=', $cat_id)->get();
+        $subcategories = DB::table('users')->where('ciudadid', '=', $cat_id)->get();
         return Response::json($subcategories);
 });
 

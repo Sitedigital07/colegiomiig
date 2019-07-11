@@ -41,30 +41,7 @@ Gestión de usuarios Libros & Libros
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-select">Región</label>
-                                            <div class="col-md-9">
-                                                <select class="form-control" name="regional" data-live-search="true" id="regional">
-                                                   
-                                                    <option value="{{$ciudades->region_id}}">{{$ciudades->region}}</option>
-                                                        @foreach($region as $region)
-                                                      <option value="{{$region->id}}">{{$region->region}}</option>
-                                                        @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                           <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-select">Asistente</label>
-                                            <div class="col-md-9">
-                                                <select class="form-control" name="asistente" data-live-search="true" id="asistente">
-                                               
-                                                    <option value="{{$ciudades->asistente}}">{{$ciudades->name}}</option>
-                                                      <option value=""></option>
-                                                 
-                                                </select>
-                                            </div>
-                                        </div>
+                  
 
                                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                      

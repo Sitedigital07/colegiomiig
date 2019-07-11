@@ -104,9 +104,9 @@ Gestión de usuarios Libros & Libros
                                          <div class="form-group col-lg-12">
                                             <label for="example-nf-password">Representante</label>
                                             <select class="form-control" name="representante" id="representante">
-                                             <option value="{{$colegios->representante_id}}">{{$respaldo->nombre}}</option>
+                                             <option value="{{$colegios->representante_id}}">{{$respaldo->name}}</option>
                                                 @foreach($representantes as $representantes)
-                                               <option value="{{$representantes->representante_id}}">{{$representantes->nombre}}</option>
+                                               <option value="{{$representantes->representante_id}}">{{$representantes->name}}</option>
                                                 @endforeach
                                              <option value=""></option>
                                             </select> 

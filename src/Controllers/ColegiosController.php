@@ -193,7 +193,7 @@ public function regionciudad($id)
 
         $respaldo = DB::table('colegios')
         ->join('ciudades', 'ciudades.ids', '=', 'colegios.ciudad_id')    
-        ->join('representantes', 'representantes.id', '=', 'colegios.representante_id')   
+        ->join('users', 'users.id', '=', 'colegios.representante_id')   
         ->join('regiones', 'regiones.id', '=', 'colegios.region_id')    
         ->where('colegios.id', '=', $id)
         ->get();

@@ -59,31 +59,9 @@ Gestión de usuarios Libros & Libros
                                             </div>
                                         </div>
 
-                                           <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-select">Región</label>
-                                            <div class="col-md-9">
-                                                <select class="form-control" name="regional" data-live-search="true" id="regional">
-                                                    <option value="" disabled selected>Seleccione región</option>
-                                                        @foreach($region as $region)
-                                                      <option value="{{$region->id}}">{{$region->region}}</option>
-                                                        @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                           <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-select">Asistente</label>
-                                            <div class="col-md-9">
-                                                <select class="form-control" name="asistente" data-live-search="true" id="asistente">
-                                                    <option value="" disabled selected>Seleccione asistente</option>
-                                                   
-                                                      <option value=""></option>
-                                                 
-                                                </select>
-                                            </div>
-                                        </div>
                                         
-                                       
+
+                                    <input type="hidden" name="regional" id="input" class="form-control" value="{{Request::segment(2)}}" required="required" pattern="" title="">                                       
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
@@ -156,5 +134,5 @@ $(document).ready(function() {
 });
 
 </script>
-
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 @stop

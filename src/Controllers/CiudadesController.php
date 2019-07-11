@@ -35,7 +35,6 @@ class CiudadesController extends Controller
         $ciudades = new Ciudad;
         $ciudades->n_ciudad = Input::get('ciudad');
         $ciudades->region_id = Input::get('regional');
-        $ciudades->asistente = Input::get('asistente');
         $ciudades->save();
 
         return Redirect('lista-ciudades/'.$ciudades->region_id)->with('status', 'ok_create');
@@ -88,7 +87,6 @@ class CiudadesController extends Controller
         $input = Input::all();
         $ciudads = Input::get('ciudad');
         $regions = Input::get('region_id');
-        
         Ciudad::where('ids',$id)->update(array(
                          'n_ciudad'=>$ciudads,
                          
@@ -107,11 +105,12 @@ class CiudadesController extends Controller
     public function destroy($id)
     {
 
-
+        $ciudad = DB::table('ciudades')->where('ids', '=', $id)->get();
+        foreach($ciudad as $ciudades){
         $users = Ciudad::where('ids', '=', $id)->delete();
-      
-        return Redirect('/sectores')->with('status', 'ok_delete');
         
+        return Redirect('lista-ciudades/'.$ciudades->region_id)->with('status', 'ok_delete');
+        }
     }
 
 
