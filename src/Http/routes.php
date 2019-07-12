@@ -749,7 +749,7 @@ Route::get('proyeccionventasadopcionnac/{id}', function ($id) {
     $identificadores = DB::table('campos')->where('colegio_id', '=', $id)->select('id')->orderBy('id', 'DESC')->first();
      foreach($ano as $anoes){
     
-        $fecha = DB::table('fecha_adopcion')->where('ano','=', $anoes->ano)->where('colegio_id','=',$id)->get();
+        $fecha = DB::table('fecha_adopcion')->where('ano','=', $anoes->ano)->where('colegio_id','=',$id)->orderby('created_at','DESC')->take(1)->get();
 
         $matematicas = DB::table('titulo')
         ->join('campos','titulo.id','=','campos.pr_titulo_mat')

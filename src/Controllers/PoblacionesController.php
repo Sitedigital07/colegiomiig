@@ -9,6 +9,7 @@ use Digitalmiig\Colegiomiig\Esseg;
 use Digitalmiig\Colegiomiig\Campo;
 use Digitalmiig\Usuariomiig\Fecha;
 use Digitalmiig\Usuariomiig\Fechameta;
+use Digitalmiig\Usuariomiig\Descuento;
 use Input;
 use DB;
 
@@ -112,10 +113,13 @@ class PoblacionesController extends Controller
         $ano = DB::table('configuracion')->where('id', '=', 1)->get();
         foreach($ano as $anoes){
         $res = Proventa::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();  
-        $resuno = Esseg::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();  
-        $resdos = Campo::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();  
+        $resdos = Campo::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
+        $resuno = Esseg::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
+        $resunoa = Essegcon::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();   
         $restres = Fecha::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
         $rescuatro = Fechameta::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();   
+        $rescuatroa = Cierre::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
+        $rescuatroav = Descuneto::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();    
         }
         return Redirect('lista-colegios');
     }

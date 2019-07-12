@@ -80,9 +80,8 @@ Gestión de usuarios Libros & Libros
                                             <label for="example-nf-password">Tipo Adopción</label>
                                             {{Form::label('adopcion', 'Adopción' )}}
                                             {{ Form::select('adopcion', ['' => 'Seleccione Adopción',
-                                            'Completa' => 'Completa',
-                                            'Limitada' => 'Limitada',
-                                            'Especial' => 'Especial'], null, array('class' => 'form-control')) }}
+                                            '1' => 'Completo',
+                                            '2' => 'Especial'], null, array('class' => 'form-control')) }}
                                         </div>
                                       </div>
                                         

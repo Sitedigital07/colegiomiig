@@ -117,6 +117,7 @@ Gestión de usuarios Libros & Libros
         @endif
         @if(Auth::user()->rol_id == 3)
         @else
+        <a href="/editar-descuento/{{$descuentos->id}}" class="btn btn-primary"><i class="fa fa-eraser"></i></a>
         <script language="JavaScript">
         function confirmar ( mensaje ) {
         return confirm( mensaje );}

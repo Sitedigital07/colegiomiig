@@ -51,14 +51,12 @@ class ColegiosController extends Controller
     {
 
         $colegios = DB::table('colegios')
-        
         ->join('ciudades', 'ciudades.ids', '=', 'colegios.ciudad_id')
          ->leftjoin('users', 'users.id', '=', 'colegios.auditor')
          ->select('colegios.estadoaud','colegios.codigo','colegios.nombres','ciudades.n_ciudad','colegios.emailcol','users.name','colegios.id')
-
         ->get();
-        
-        return view('colegiomiig::allcolegiosnac')->with('colegios', $colegios);
+         $ano = DB::table('configuracion')->where('id', '=', 1)->get();
+        return view('colegiomiig::allcolegiosnac')->with('colegios', $colegios)->with('ano', $ano);
     }
 
 
