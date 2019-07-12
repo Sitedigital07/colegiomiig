@@ -88,15 +88,12 @@ echo $date;
                                         <tr>
                                        
                                            <td> {{$colegio->id}}</td>
-                                          <td class="text-center">{{$colegio->codigo}}</td>
+                                           <td class="text-center">{{$colegio->codigo}}</td>
                                            <td class="text-center">{{$colegio->nombres}}</td>
                                            <td>{{$colegio->n_ciudad}}</td>
-                                            @foreach($representantes as $representantesa)
-                                            @if($representantesa->id == $colegio->representante_id)
-                                            <td>{{$representantesa->nombre}} {{$representantesa->apellido}}</td>
-                                            @endif
-                                             @endforeach
-                                            
+                                       
+                                            <td>{{$colegio->name}} {{$colegio->last_name}}</td>
+                                               
 
                                             <td class="text-center">
                                               @if (DB::table('cierre')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->where('cierre','=',1)->exists())

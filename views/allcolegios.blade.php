@@ -73,7 +73,7 @@ Gestión de usuarios Libros & Libros
                                             <th class="text-center">DANE</th>
                                             <th class="text-center">Colegio</th>
                                             <th>Ciudad</th>
-                                            <th>Auditor</th>
+                                            <th>Representante</th>
                                             <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
@@ -86,7 +86,7 @@ Gestión de usuarios Libros & Libros
                                             <td>{{$colegio->n_ciudad}}</td>
                                             
                                              
-                                             <td>{{$colegio->name}}</td>
+                                             <td>{{$colegio->name}} {{$colegio->last_name}}</td>
 
                                             <td class="text-center">
                                                <a href="editar-colegio/{{$colegio->id}}" class="btn btn-primary"><i class="fa fa-eraser"></i></a>

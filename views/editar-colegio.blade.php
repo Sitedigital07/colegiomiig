@@ -369,29 +369,6 @@ $(document).ready(function() {
                 }
             },
 
-
-     codigo: {
-                validators: {
-                    notEmpty: {
-                        message: 'El campo código MIIG es requerido'
-                    },
-                     regexp: {
-                        regexp: /^[-a-zA-Z0-9ñ_\.]+$/,
-                        message: 'No son validos los datos ingresados'
-                    },
-                    stringLength: {
-                        min: 2,
-                        max: 20,
-                        message: 'El campo código MIIG debe contener un minimo de 2 y un maximo de 20 Caracteres'
-                    },
-                    remote: {
-                        type: 'GET',
-                        url: '/validacioncodigo',
-                        message: 'Este código MIIG ya se encuentra registrado',
-                        delay: 10
-                    }
-                }
-            },
   jornada: {
                 message: 'The username is not valid',
                 validators: {

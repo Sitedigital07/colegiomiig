@@ -35,11 +35,11 @@ Gestión de usuarios Libros & Libros
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group col-lg-6">
                                             <label for="example-nf-email">Nombre colegio</label>
-                                            {{Form::text('nombre', $colegios->nombres, array('class' => 'form-control','placeholder'=>'', 'disabled'=>'true'))}}
+                                            {{Form::text('nombre', $colegios->nombres, array('class' => 'form-control','placeholder'=>'', 'readonly'=>'readonly'))}}
                                         </div>
                                         <div class="form-group col-lg-6 ">
                                             <label for="example-nf-password">Codigo MIIG</label>
-                                            {{Form::text('codigo', $colegios->codigo, array('class' => 'form-control','placeholder'=>'', 'disabled'=>'true'))}}
+                                            {{Form::text('codigo', $colegios->codigo, array('class' => 'form-control','placeholder'=>'', 'readonly'=>'readonly'))}}
                                         </div>
                                     </div>
 
@@ -50,25 +50,25 @@ Gestión de usuarios Libros & Libros
                                               {{ Form::select('jornada', [$colegios->jornada => $colegios->jornada,
                                               'Diurna' => 'Diurna',
                                               'Tarde' => 'Tarde',
-                                              'Unica' => 'Unica'], null, array('class' => 'form-control', 'disabled'=>'true')) }}
+                                              'Unica' => 'Unica'], null, array('class' => 'form-control', 'readonly'=>'readonly')) }}
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Razón social</label>
-                                            {{Form::text('r_social', $colegios->r_social, array('class' => 'form-control','placeholder'=>'', 'disabled'=>'true'))}}
+                                            {{Form::text('r_social', $colegios->r_social, array('class' => 'form-control','placeholder'=>'', 'readonly'=>'readonly'))}}
                                         </div>
                                        </div>
 
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                          <div class="form-group col-lg-6">
                                             <label for="example-nf-email">Número NIT</label>
-                                            {{Form::text('nit', $colegios->nit, array('class' => 'form-control','placeholder'=>'', 'disabled'=>'true'))}}
+                                            {{Form::text('nit', $colegios->nit, array('class' => 'form-control','placeholder'=>'', 'readonly'=>'readonly'))}}
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="example-nf-password">Tipo Adopción</label>
                                              {{Form::label('adopcion', 'Adopción' )}}
                                              {{ Form::select('adopcion', [$colegios->adopcion => $colegios->adopcion,
                                              'Completa' => 'Completa',
-                                             'Limitada' => 'Limitada'], null, array('class' => 'form-control', 'disabled'=>'true')) }}
+                                             'Limitada' => 'Limitada'], null, array('class' => 'form-control', 'readonly'=>'readonly')) }}
                                         </div>
                                       </div>
                                          <div class="form-group col-lg-12 hidden-xs hidden-sm hidden-md hidden-lg">

@@ -63,7 +63,11 @@ Gestión de usuarios Libros & Libros
     
       <div class="form-group">
         <label for="">Ingrese descuento</label>
+        @if(Auth::user()->rol_id == 5)
         <input type="number" name="descuento" class="form-control" id="" placeholder="Ingrese descuento" max="22">
+        @elseif(Auth::user()->rol_id == 3)
+        <input type="number" name="descuento" class="form-control" id="" placeholder="Ingrese descuento" max="22">
+        @endif
       </div>
       <input type="hidden" name="colegio_id" id="input" class="form-control" value="{{Request::segment(2)}}" required="required" pattern="" title="">
       <input type="hidden" name="rol_id" id="input" class="form-control" value="{{Auth::user()->name}}" required="required" pattern="" title="">

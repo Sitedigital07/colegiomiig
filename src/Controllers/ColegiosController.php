@@ -30,11 +30,17 @@ class ColegiosController extends Controller
     {
 
         $colegios = DB::table('colegios')
-        
         ->join('ciudades', 'ciudades.ids', '=', 'colegios.ciudad_id')
-         ->leftjoin('users', 'users.id', '=', 'colegios.auditor')
-         ->select('colegios.estadoaud','colegios.codigo','colegios.nombres','ciudades.n_ciudad','colegios.emailcol','users.name','colegios.id')
-
+        ->join('users', 'users.id', '=', 'colegios.representante_id')
+        ->select(
+                  'colegios.id',
+                  'colegios.codigo',
+                  'colegios.nombres',
+                  'ciudades.n_ciudad',
+                  'users.name',
+                  'users.last_name'
+                
+          )
         ->get();
         
         return view('colegiomiig::allcolegios')->with('colegios', $colegios);
@@ -60,11 +66,21 @@ class ColegiosController extends Controller
    public function region()
     {
 
-         $roles = DB::table('ciudades')->where('asistente', '=', Auth::user()->id)->pluck('ids');
+         
          $ano = DB::table('configuracion')->where('id', '=', 1)->get();
          $colegios = DB::table('colegios')
-                    ->where('representante_id','=',Auth::user()->representante_id)
                      ->join('ciudades', 'ciudades.ids', '=', 'colegios.ciudad_id')
+                     ->join('users', 'users.id', '=', 'colegios.representante_id')
+                     ->select(
+                  'colegios.id',
+                  'colegios.codigo',
+                  'colegios.nombres',
+                  'ciudades.n_ciudad',
+                  'users.name',
+                  'users.last_name'
+                
+          )
+                     ->where('colegios.representante_id','=',Auth::user()->id)
                     ->get();
          $fechas = DB::table('proyeccion')->get();
          $representantes = DB::table('representantes')->get();
@@ -364,7 +380,7 @@ public function cierrecolegio()
         $user->estadoaud = Input::get('estadoaud');
         $user->auditor = Input::get('auditor');
         $user->save();
-    return Redirect('colegios/auditores/'.$user->ciudad_id)->with('status', 'ok_update');
+    return Redirect('/colegios-region')->with('status', 'ok_update');
     }
 
 
@@ -383,7 +399,7 @@ public function cierrecolegio()
 
      public function colegioauditores($id)
     {
-        $roles = DB::table('ciudades')->where('asistente', '=', Auth::user()->id)->pluck('ids');
+
          $ano = DB::table('configuracion')->where('id', '=', 1)->get();
          $colegios = DB::table('colegios')
                     ->where('representante_id','=',Auth::user()->representante_id)->get();
