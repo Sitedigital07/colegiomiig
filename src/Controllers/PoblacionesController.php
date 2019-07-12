@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 use Digitalmiig\Colegiomiig\Dato;
 use Digitalmiig\Colegiomiig\Proventa;
 use Digitalmiig\Colegiomiig\Esseg;
+use Digitalmiig\Colegiomiig\Cierre;
 use Digitalmiig\Colegiomiig\Campo;
 use Digitalmiig\Usuariomiig\Fecha;
 use Digitalmiig\Usuariomiig\Fechameta;
@@ -115,11 +116,10 @@ class PoblacionesController extends Controller
         $res = Proventa::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();  
         $resdos = Campo::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
         $resuno = Esseg::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
-        $resunoa = Essegcon::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();   
         $restres = Fecha::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
         $rescuatro = Fechameta::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();   
         $rescuatroa = Cierre::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
-        $rescuatroav = Descuneto::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();    
+        $rescuatroav = Descuento::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();    
         }
         return Redirect('lista-colegios');
     }
