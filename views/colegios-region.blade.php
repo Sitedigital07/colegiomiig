@@ -60,7 +60,7 @@ Gestión de usuarios Libros & Libros
                             <div class="block-title">
                                 <h2><strong>Colegios</strong> registrados</h2>
                             </div>
-                            <p><a href="https://datatables.net/" target="_blank">DataTables</a> is a plug-in for the Jquery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table. It is integrated with template's design and it offers many features such as on-the-fly filtering and variable length pagination.</p>
+                           
 
                             <div class="table-responsive">
                                 <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
@@ -78,11 +78,6 @@ Gestión de usuarios Libros & Libros
                                     <tbody>
                                       {{DB::table('proyeccion')->where('colegio_id','=',5)->count()}}
 
-                                                                                 <?php
-date_default_timezone_set('America/Los_Angeles');
-$date = date('Y-m-d');
-echo $date;
-?>
                              
                                       @foreach($colegios as $colegio)
                                         <tr>

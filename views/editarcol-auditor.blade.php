@@ -1,4 +1,4 @@
-@extends ('adminsite.auditor')
+@extends ('adminsite.asistente')
 
 
 
@@ -23,9 +23,7 @@ Gestión de usuarios Libros & Libros
  <div class="block">
                                     <!-- Normal Form Title -->
                                     <div class="block-title">
-                                        <div class="block-options pull-right">
-                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
-                                        </div>
+                                     
                                         <h2><strong>Editar</strong> Colegio</h2>
                                     </div>
                                     <!-- END Normal Form Title -->
@@ -38,7 +36,7 @@ Gestión de usuarios Libros & Libros
                                             {{Form::text('nombre', $colegios->nombres, array('class' => 'form-control','placeholder'=>'', 'readonly'=>'readonly'))}}
                                         </div>
                                         <div class="form-group col-lg-6 ">
-                                            <label for="example-nf-password">Codigo MIIG</label>
+                                            <label for="example-nf-password">Código DANE</label>
                                             {{Form::text('codigo', $colegios->codigo, array('class' => 'form-control','placeholder'=>'', 'readonly'=>'readonly'))}}
                                         </div>
                                     </div>
@@ -46,7 +44,6 @@ Gestión de usuarios Libros & Libros
                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                          <div class="form-group col-lg-6">
                                             <label for="example-nf-email">Jornada</label>
-                                            {{Form::label('jornada', 'Jornada' )}}
                                               {{ Form::select('jornada', [$colegios->jornada => $colegios->jornada,
                                               'Diurna' => 'Diurna',
                                               'Tarde' => 'Tarde',
@@ -64,11 +61,10 @@ Gestión de usuarios Libros & Libros
                                             {{Form::text('nit', $colegios->nit, array('class' => 'form-control','placeholder'=>'', 'readonly'=>'readonly'))}}
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <label for="example-nf-password">Tipo Adopción</label>
-                                             {{Form::label('adopcion', 'Adopción' )}}
+                                            <label for="example-nf-password">Tipo de Portafolio</label>
                                              {{ Form::select('adopcion', [$colegios->adopcion => $colegios->adopcion,
-                                             'Completa' => 'Completa',
-                                             'Limitada' => 'Limitada'], null, array('class' => 'form-control', 'readonly'=>'readonly')) }}
+                                             '1' => 'Completa',
+                                             '2' => 'Limitada'], null, array('class' => 'form-control', 'readonly'=>'readonly')) }}
                                         </div>
                                       </div>
                                          <div class="form-group col-lg-12 hidden-xs hidden-sm hidden-md hidden-lg">
@@ -329,7 +325,7 @@ Gestión de usuarios Libros & Libros
 
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group col-lg-6">
-                                            <label for="example-nf-password">Email de contácto</label>
+                                            <label for="example-nf-password">Email de contacto</label>
                                              {{Form::text('emaildefine', $colegios->emaildefine, array('class' => 'form-control','placeholder'=>''))}}
                                         </div>
 
@@ -357,27 +353,14 @@ Gestión de usuarios Libros & Libros
                                             {{Form::textarea('nota', $colegios->nota, array('class' => 'form-control','placeholder'=>''))}}
                                         </div> 
                                          </div>
-                                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-      <br><br>    
-      <hr style="border:1px solid #27ae60" width="100%" size="10"/>        
-<li class="text-primary"><b>ESTADO DE AUDITORÍA</b></li>
-<hr style="border:1px solid #27ae60" width="100%" size="10"/>
-       </div>      
+                                        
 
-
-                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                         <div class="form-group col-lg-12">
-                                          <label for="example-nf-email">Estado Auditoria</label>
-                                            {{ Form::select('estadoaud', [$colegios->estadoaud => $colegios->estadoaud,
-                                            'No Auditado' => 'No Auditado',
-                                            'Auditado' => 'Auditado'], null, array('class' => 'form-control')) }}  
-                                        </div>
-       </div>
+                         
        <input type="hidden" name="auditor" value="{{Auth::user()->id}}">
 
                                         <div class="form-group form-actions">
-                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-user"></i> Editar</button>
-                                            <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-user"></i> Editar Datos</button>
+                                            <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Limpiar Datos</button>
                                         </div>
                                        {{ Form::close() }}
                                     <!-- END Normal Form Content -->

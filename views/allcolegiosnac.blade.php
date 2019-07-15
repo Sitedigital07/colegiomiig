@@ -1,4 +1,4 @@
-@extends ('adminsite.presentacion')
+@extends ('adminsite.representante')
 
 <!-- Define el titulo de la Página -->    
 @section('title')

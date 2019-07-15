@@ -1,3 +1,4 @@
+
 @extends ('adminsite.asistente')
 
 <!-- Define el titulo de la Página -->    
@@ -55,7 +56,7 @@ Gestión de usuarios Libros & Libros
    <!-- Datatables Content -->
    <div class="block full">
     <div class="block-title">
-     <h2><strong>Descuentos</strong> Registrados</h2>
+     <h2><strong>Crear</strong> Descuento</h2>
     </div>
     
     {{ Form::open(array('method' => 'POST', 'id' => 'defaultForm', 'url' => array('/creardescuento'))) }}
@@ -70,16 +71,16 @@ Gestión de usuarios Libros & Libros
         @endif
       </div>
       <input type="hidden" name="colegio_id" id="input" class="form-control" value="{{Request::segment(2)}}" required="required" pattern="" title="">
-      <input type="hidden" name="rol_id" id="input" class="form-control" value="{{Auth::user()->name}}" required="required" pattern="" title="">
+      <input type="hidden" name="rol_id" id="input" class="form-control" value="{{Auth::user()->name}} {{Auth::user()->last_name}}" required="required" pattern="" title="">
       @foreach($ano as $ano)
       <input type="hidden" name="ano" id="input" class="form-control" value="{{$ano->ano}}" required="required" pattern="" title="">
 
 
       @if (DB::table('descuento')->where('ano', '=',$ano->ano)->where('colegio_id', '=', Request::segment(2))->exists())
 
-      <button type="submit" class="btn btn-primary" disabled="">Submit</button>
+      <button type="submit" class="btn btn-primary" disabled="">Aceptar</button>
       @else
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Aceptar</button>
       @endif
             @endforeach
     {{ Form::close() }}
@@ -93,7 +94,7 @@ Gestión de usuarios Libros & Libros
         <th class="text-center">Descuento</th>
         <th class="text-center">Rol</th>
         <th class="text-center">Año</th>
-        <th class="text-center">Año</th>
+
         <th class="text-center">Acciones</th>
        </tr>
       </thead>
@@ -107,7 +108,7 @@ Gestión de usuarios Libros & Libros
         <td class="text-center">{{$descuentos->descuento}} %</td>
         <td class="text-center">{{$descuentos->rol_id}}</td>
         <td class="text-center">{{$descuentos->ano}}</td>
-        <td class="text-center">{{$descuentos->ano}}</td>
+
         <td class="text-center">
           
         @if (DB::table('descuento')->where('ano', '=', $ano->ano)->where('colegio_id', '=', Request::segment(2))->exists())
@@ -117,7 +118,7 @@ Gestión de usuarios Libros & Libros
         @endif
         @if(Auth::user()->rol_id == 3)
         @else
-        <a href="/editar-descuento/{{$descuentos->id}}" class="btn btn-primary"><i class="fa fa-eraser"></i></a>
+        <a href="/editar-descuento/{{$descuentos->id}}" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Editar descuento"><i class="fa fa-eraser"></i></a>
         <script language="JavaScript">
         function confirmar ( mensaje ) {
         return confirm( mensaje );}

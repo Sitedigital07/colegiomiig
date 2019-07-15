@@ -1,4 +1,4 @@
-@extends ('adminsite.presentacion')
+@extends ('adminsite.asistente')
 
 <!-- Define el titulo de la Página -->    
 @section('title')
@@ -23,9 +23,7 @@ Gestión de usuarios Libros & Libros
                                 <div class="block">
                                     <!-- Basic Form Elements Title -->
                                     <div class="block-title">
-                                        <div class="block-options pull-right">
-                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
-                                        </div>
+                                    
                                         <h2><strong>Editar</strong> descuento</h2>
                                     </div>
                                     <!-- END Form Elements Title -->
@@ -55,7 +53,7 @@ Gestión de usuarios Libros & Libros
                                       @endif
                                        
                                       <input type="hidden" name="colegio_id" id="input" class="form-control" value="{{$descuentos->colegio_id}}" required="required" pattern="" title="">
-                                      <input type="hidden" name="rol_id" id="input" class="form-control" value="{{Auth::user()->name}}" required="required" pattern="" title="">
+                                      <input type="hidden" name="rol_id" id="input" class="form-control" value="{{Auth::user()->name}} {{Auth::user()->last_name}}" required="required" pattern="" title="">
                                       <input type="hidden" name="ano" id="input" class="form-control" value="{{$descuentos->ano}}" required="required" pattern="" title="">
 
                                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
