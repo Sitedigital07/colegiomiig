@@ -70,8 +70,8 @@ Excel::create('Filename', function($excel) {
     $excel->sheet('Sheetname', function($sheet) {
 
       
-       $colegios = Essegcon::all();
-       $sheet->fromArray($colegios);
+       $esseg = Essegcon::all();
+       $sheet->fromArray($esseg);
 
     });
 
