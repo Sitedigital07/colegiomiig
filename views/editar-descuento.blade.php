@@ -32,6 +32,8 @@ Gestión de usuarios Libros & Libros
                                     <!-- Basic Form Elements Content -->
                                     @if(Auth::user()->rol_id == 3)
                                     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/editardescuentoaud',$descuentos->id))) }}
+                                    @elseif(Auth::user()->rol_id == 4)
+                                    {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/editardescuentoreg',$descuentos->id))) }}
                                     @else
                                     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/editardescuento',$descuentos->id))) }}
                                     @endif 
@@ -41,6 +43,13 @@ Gestión de usuarios Libros & Libros
                                        <label class="col-md-3 control-label" for="example-text-input">Descuento:</label>
                                        <div class="col-md-9">
                                        <input type="number" name="descuento" class="form-control" id="" value="{{$descuentos->descuento}}" placeholder="Ingrese descuento" max="30">
+                                       </div>
+                                      </div>
+                                      @elseif(Auth::user()->rol_id == 4)
+                                      <div class="form-group">
+                                       <label class="col-md-3 control-label" for="example-text-input">Descuento:</label>
+                                       <div class="col-md-9">
+                                       <input type="number" name="descuento" class="form-control" id="" value="{{$descuentos->descuento}}" placeholder="Ingrese descuento" max="25">
                                        </div>
                                       </div>
                                       @else

@@ -16,7 +16,7 @@ Gestión de usuarios Libros & Libros
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
                                 <li class="active">
-                                    <a href="/colegios-lista"><i class="fa fa-building"></i> Colegios</a>
+                                    <a href="/informe/vendedorreg"><i class="fa fa-building"></i> Colegios</a>
                                 </li>
                             
                             </ul>
@@ -84,16 +84,12 @@ Gestión de usuarios Libros & Libros
                                              <td>{{$colegio->name}}</td>
 
                                             <td class="text-center">
-                                              @foreach($ano as $anos)
-                                               @if (DB::table('cierre')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $anos->ano)->where('cierre','=',1)->exists())
-                                              <a href="/proyeccionventasadopcionnac/{{$colegio->id}}" data-toggle="tooltip" data-placement="left" title="Revisar Adopción" class="btn btn-warning"><i class="fa fa-book"></i></a>
+                                      
                                         
-                                               <a href="/colegio-descuentoaud/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Descuento Colegio" type="button" class="btn btn-info"><i class="fa fa-dollar"></i>
+                                               <a href="/colegio-descuentoreg/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Descuento Colegio" type="button" class="btn btn-info"><i class="fa fa-dollar"></i>
                                               </a>
-                                              @else
-                                              <a href="/proyeccionventasnac/{{$colegio->id}}"  data-toggle="tooltip" data-placement="left" title="Revisar Meta" class="btn btn-success"><i class="fa fa-book"></i></a>
-                                              @endif
-                                              @endforeach
+                                            
+                                        
                                             </td>
                                         </tr>
                                         @endforeach

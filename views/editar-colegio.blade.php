@@ -332,7 +332,7 @@ Gestión de usuarios Libros & Libros
         $.get('/mema/ajax-subcat?cat_id=' + cat_id, function(data){
             $('#representante').empty();
             $.each(data, function(index, subcatObj){
-              $('#representante').append('<option value="'+subcatObj.id+'">'+subcatObj.nombre+' '+subcatObj.apellido+'</option>');
+              $('#representante').append('<option value="'+subcatObj.id+'">'+subcatObj.name+' '+subcatObj.last_name+'</option>');
             });
         });
       });
@@ -362,7 +362,7 @@ $(document).ready(function() {
                         message: 'El campo colegio debe contener un minimo de 2 y un maximo de 200 Caracteres'
                     },
                     regexp: {
-                        regexp: /^[- a-zA-Z0-9ñ_\.]+$/,
+                        regexp: /^[- a-zA-Z0-9_\.ñáéíóú]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     }
                 }

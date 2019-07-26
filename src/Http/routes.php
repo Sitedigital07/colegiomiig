@@ -485,17 +485,34 @@ Route::get('/gerentereg', function () {
     return view('colegiomiig::gerentereg')->with('colegios', $colegios)->with('representantes', $representantes);
 });
 
+Route::get('/editar-descuentoreg/{id}', function ($id) {
+    $descuentos = DB::table('descuento')->where('id', '=', $id)->get();
+    return view('colegiomiig::editar-descuento')->with('descuentos', $descuentos);
+});
+
+
+Route::post('/editardescuentoreg/{id}', 'Digitalmiig\Usuariomiig\Controllers\RepresentantesController@editardescuento');
+
+Route::get('/colegio-descuentoreg/{id}', function ($id) {
+    $descuentos = DB::table('descuento')->where('colegio_id', '=', $id)->get();
+    $ano = DB::table('configuracion')->where('id','=',1)->get();
+    $anos = DB::table('configuracion')->where('id','=',1)->get();
+    return view('colegiomiig::descuento')->with('descuentos', $descuentos)->with('ano', $ano)->with('anos', $anos);
+});
 
 
 
 Route::get('/informe/vendedorreg', function () {
-    $colegios = DB::table('colegios')
-    ->where('region_id','=',Auth::user()->regionid)
-    ->get();
-    $representantes = DB::table('representantes')
-    ->where('region_id','=',Auth::user()->regionid)
-    ->get();
-    return view('colegiomiig::informe-vendedorreg')->with('colegios', $colegios)->with('representantes', $representantes);
+     $colegios = DB::table('colegios')
+     ->join('ciudades', 'ciudades.ids', '=', 'colegios.ciudad_id')
+     ->leftjoin('users', 'users.id', '=', 'colegios.auditor')
+     ->join('regiones', 'regiones.id', '=', 'colegios.region_id')
+     ->where('colegios.region_id','=',Auth::user()->regionid)
+     ->select('colegios.estadoaud','colegios.codigo','colegios.nombres','ciudades.n_ciudad','colegios.emailcol','users.name','colegios.id')
+     ->get();
+     $ano = DB::table('configuracion')->where('id', '=', 1)->get();
+     return view('colegiomiig::allcolegiosreg')->with('colegios', $colegios)->with('ano', $ano);
+
 });
 
 Route::post('informe/versusreg', function(){
@@ -705,6 +722,8 @@ Route::get('/editar-descuentoaud/{id}', function ($id) {
     $descuentos = DB::table('descuento')->where('id', '=', $id)->get();
     return view('colegiomiig::editar-descuento')->with('descuentos', $descuentos);
 });
+
+
 
 Route::get('/eliminar-descuentoaud/{id}', 'Digitalmiig\Usuariomiig\Controllers\RepresentantesController@eliminardescuento');
 Route::post('/creardescuentoaud', 'Digitalmiig\Usuariomiig\Controllers\RepresentantesController@createdescuento');

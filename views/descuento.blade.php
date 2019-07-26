@@ -16,10 +16,15 @@ Gestión de usuarios Libros & Libros
 
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
-                                
-                               
+                          
+
                                 <li class="active">
+                                  @if(Auth::user()->rol_id == 4)
+                                  
+                                    <a href="/informe/vendedorreg"><i class="fa fa-building"></i> Colegios</a>
+                                    @else
                                     <a href="/colegios-region"><i class="fa fa-building"></i> Colegios</a>
+                                    @endif
                                 </li>
           
                             </ul>
@@ -118,12 +123,15 @@ Gestión de usuarios Libros & Libros
         @endif
         @if(Auth::user()->rol_id == 3)
         @else
-        <a href="/editar-descuento/{{$descuentos->id}}" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Editar descuento"><i class="fa fa-eraser"></i></a>
+        <a href="/editar-descuentoreg/{{$descuentos->id}}" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Editar descuento"><i class="fa fa-eraser"></i></a>
+         @if(Auth::user()->rol_id == 4)
+         @else
         <script language="JavaScript">
         function confirmar ( mensaje ) {
         return confirm( mensaje );}
         </script>
         <a href="/eliminar-descuento/{{$descuentos->id}}" onclick="return confirmar('¿Está seguro que desea eliminar los registros para este colegio?')" data-toggle="tooltip" data-placement="right" title="Eliminar descuento" type="button" class="btn btn-danger"><i class="hi hi-trash"></i></a>
+        @endif
         @endif
         @else
         <a href="#" class="btn btn-primary" disabled><i class="fa fa-eraser"></i></a>

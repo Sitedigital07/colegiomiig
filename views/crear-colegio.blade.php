@@ -321,7 +321,7 @@ $(document).ready(function() {
                         message: 'El campo colegio debe contener un minimo de 2 y un maximo de 200 Caracteres'
                     },
                     regexp: {
-                        regexp: /^[- a-zA-Z0-9ñ_\.]+$/,
+                        regexp: /^[- a-zA-Z0-9_\.ñáéíóú]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     }
                 }
