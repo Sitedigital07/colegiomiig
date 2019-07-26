@@ -203,16 +203,6 @@ Gestión de usuarios Libros & Libros
                                             </div>
                                         </div>
 
-                                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                         <div class="form-group col-lg-12">
-                                          <label for="example-nf-email">Estado Auditoria</label>
-                                            {{ Form::select('estadoaud', [
-                                            'No-auditado' => 'No-auditado',
-                                            'Auditado' => 'Auditado',
-                                            'En-proceso' => 'En-proceso'], null, array('class' => 'form-control')) }}  
-                                        </div>
-       </div>
-
                                         <div class="form-group form-actions">
                                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Crear Colegio</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
@@ -383,23 +373,6 @@ $(document).ready(function() {
                 }
             },
 
-    nit: {
-                message: 'The username is not valid',
-                validators: {
-                    notEmpty: {
-                        message: 'El campo NIT es requerido'
-                    },
-                    stringLength: {
-                        min: 2,
-                        max: 150,
-                        message: 'El campo nit debe contener un minimo de 2 y un maximo de 15 Caracteres'
-                    },
-                    regexp: {
-                        regexp: /^[- 0-9ñ_\.]+$/,
-                        message: 'El campo nit solo admite caracteres numericos'
-                    }
-                }
-            },
 
       adopcion: {
                 message: 'The username is not valid',
