@@ -34,7 +34,7 @@ Gestión de usuarios Libros & Libros
 
 
   <div class="container">
-    <form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ URL::to('importadoresseg') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ URL::to('importador-esseg') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
       <input type="file" name="import_file" />
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
       <br>

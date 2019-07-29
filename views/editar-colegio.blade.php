@@ -103,9 +103,9 @@ Gestión de usuarios Libros & Libros
                                          <div class="form-group col-lg-12">
                                             <label for="example-nf-password">Representante</label>
                                             <select class="form-control" name="representante" id="representante">
-                                             <option value="{{$colegios->representante_id}}">{{$respaldo->name}}</option>
+                                             <option value="{{$colegios->representante_id}}">{{$respaldo->name}} {{$respaldo->last_name}}</option>
                                                 @foreach($representantes as $representantes)
-                                               <option value="{{$representantes->representante_id}}">{{$representantes->name}}</option>
+                                               <option value="{{$representantes->representante_id}}">{{$representantes->name}} {{$representantes->last_name}}</option>
                                                 @endforeach
                                              <option value=""></option>
                                             </select> 
@@ -362,7 +362,7 @@ $(document).ready(function() {
                         message: 'El campo colegio debe contener un minimo de 2 y un maximo de 200 Caracteres'
                     },
                     regexp: {
-                        regexp: /^[- a-zA-Z0-9_\.ñáéíóú]+$/,
+                        regexp: /^[- a-zA-Z0-9_\.ñáéíóú,()/]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     }
                 }
@@ -400,23 +400,6 @@ $(document).ready(function() {
                 }
             },
 
-    nit: {
-                message: 'The username is not valid',
-                validators: {
-                    notEmpty: {
-                        message: 'El campo NIT es requerido'
-                    },
-                    stringLength: {
-                        min: 2,
-                        max: 150,
-                        message: 'El campo nit debe contener un minimo de 2 y un maximo de 15 Caracteres'
-                    },
-                    regexp: {
-                        regexp: /^[- 0-9ñ_\.]+$/,
-                        message: 'El campo nit solo admite caracteres numericos'
-                    }
-                }
-            },
 
       adopcion: {
                 message: 'The username is not valid',
