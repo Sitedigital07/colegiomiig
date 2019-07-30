@@ -1140,6 +1140,7 @@ Route::get('grado-oncenac/{id}', function ($id) {
 
 
 Route::get('grado-primeroadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1148,11 +1149,12 @@ Route::get('grado-primeroadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'proventas.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradoprimeroadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradoprimeroadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 
 Route::get('grado-segundoadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1161,11 +1163,12 @@ Route::get('grado-segundoadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'proventas.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradosegundoadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradosegundoadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 
 Route::get('grado-terceroadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1174,11 +1177,12 @@ Route::get('grado-terceroadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'proventas.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradoterceroadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradoterceroadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 
 Route::get('grado-cuartoadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1187,11 +1191,12 @@ Route::get('grado-cuartoadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'proventas.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradocuartoadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradocuartoadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 
 Route::get('grado-quintoadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1200,10 +1205,11 @@ Route::get('grado-quintoadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'campos.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradoquintoadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradoquintoadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 Route::get('grado-sextoadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1212,10 +1218,11 @@ Route::get('grado-sextoadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'proventas.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradosextoadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradosextoadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 Route::get('grado-septimoadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1224,10 +1231,11 @@ Route::get('grado-septimoadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'proventas.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradoseptimoadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradoseptimoadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 Route::get('grado-octavoadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1236,10 +1244,11 @@ Route::get('grado-octavoadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'proventas.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradooctavoadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradooctavoadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 Route::get('grado-novenoadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1248,10 +1257,11 @@ Route::get('grado-novenoadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'proventas.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradonovenoadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradonovenoadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 Route::get('grado-decimoadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1260,10 +1270,11 @@ Route::get('grado-decimoadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'proventas.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradodecimoadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradodecimoadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 Route::get('grado-onceadopcionnac/{id}', function ($id) {
+    $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();
     $region = Digitalmiig\Colegiomiig\Colegio::find($id);
@@ -1272,7 +1283,7 @@ Route::get('grado-onceadopcionnac/{id}', function ($id) {
         ->join('titulo', 'titulo.id', '=', 'proventas.pr_titulo_mat')
         ->where('colegio_id', '=', $id)->get();
                          
-    return view('usuariomiig::gradoonceadopcion', compact('titulo','titulof','region','date','proventas'));
+    return view('usuariomiig::gradoonceadopcion', compact('titulo','titulof','region','date','proventas','colegios'));
 });
 
 
