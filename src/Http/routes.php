@@ -1377,7 +1377,7 @@ Route::get('/memo/ajax-subcat',function(){
         return Response::json($subcategories);
 });
 
-Route::get('/mema/ajax-subcat',function(){
+Route::get('/mema/ajax-subcatder',function(){
 
         $cat_id = Input::get('cat_id');
         $subcategories = DB::table('users')->where('ciudadid', '=', $cat_id)->get();
