@@ -1814,145 +1814,138 @@ public function editargrado($id)
  public function editargradoasi($id)
     {
 
-       $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+        $date = DB::table('configuracion')->where('id', '=', 1)->get();   
+        $datef = DB::table('configuracion')->where('id', '=', 1)->get();   
+        return view('usuariomiig::editargradoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('date', $date)->with('datef', $datef)->with('ano', $ano);
     }
 
      public function editargradosegundoasi($id)
     {
-        $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradosegundoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+  
+        return view('usuariomiig::editargradosegundoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
       public function editargradoterceroasi($id)
     {
-        $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradoterceroasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+        return view('usuariomiig::editargradoterceroasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
       public function editargradocuartoasi($id)
     {
-        $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradocuartoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+        return view('usuariomiig::editargradocuartoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
       public function editargradoquintoasi($id)
     {
-        $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradoquintoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+        return view('usuariomiig::editargradoquintoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
       public function editargradosextoasi($id)
     {
-        $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradosextoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+        return view('usuariomiig::editargradosextoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
       public function editargradoseptimoasi($id)
     {
-        $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradoseptimoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+        return view('usuariomiig::editargradoseptimoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
       public function editargradooctavoasi($id)
     {
-        $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradooctavoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+        return view('usuariomiig::editargradooctavoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
       public function editargradonovenoasi($id)
     {
-        $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradonovenoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+        return view('usuariomiig::editargradonovenoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
       public function editargradodecimoasi($id)
     {
-       $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradodecimoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+        return view('usuariomiig::editargradodecimoasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
       public function editargradoonceasi($id)
     {
-       $school = DB::table('campos')->where('id', '=', $id)->get();
-       foreach($school as $school){    
-        $colegios = DB::table('colegios')->where('id', "=", $school->colegio_id)->get();
-       }
-       $titulo = DB::table('titulo')->get();
-       $proventas = DB::table('campos')->where('id', '=', $id)->get();
-       $titulowebf = DB::table('titulo')->get();
-       $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
-       return view('usuariomiig::editargradoonceasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
+        $proventas = DB::table('campos')->where('id', '=', $id)->get();
+        $titulowebf = DB::table('titulo')->get();
+        $titulof = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $titulo = DB::table('colegios')
+        ->join('titulo','colegios.adopcion', '=', 'titulo.portafolio')->get();
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();  
+        return view('usuariomiig::editargradoonceasi')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('titulof', $titulof)->with('ano', $ano);
     }
 
 
