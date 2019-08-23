@@ -144,7 +144,7 @@ public function regionciudad($id)
         $user->telefono_ofc = Input::get('telefono_ofc');
         $user->producto = Input::get('producto');
         $user->relacion = Input::get('relacion');
-        $user->esseg = Input::get('esseg');
+        $user->essegcol = Input::get('esseg');
         $user->venta_d = Input::get('venta_d');
         $user->interme = Input::get('interme');
         $user->c_aliados = Input::get('c_aliados');
@@ -292,7 +292,7 @@ public function regionciudad($id)
         $user->telefono_ofc = Input::get('telefono_ofc');
         $user->producto = Input::get('producto');
         $user->relacion = Input::get('relacion');
-        $user->esseg = Input::get('esseg');
+        $user->essegcol = Input::get('esseg');
         $user->venta_d = Input::get('venta_d');
         $user->interme = Input::get('interme');
         $user->c_aliados = Input::get('c_aliados');
@@ -371,7 +371,7 @@ public function cierrecolegio()
         $user->telefonoceldefine = Input::get('telefonoceldefine');
         $user->nota = Input::get('nota');
         $user->relacion = Input::get('relacion');
-        $user->esseg = Input::get('esseg');
+        $user->essegcol = Input::get('esseg');
         $user->venta_d = Input::get('venta_d');
         $user->interme = Input::get('interme');
         $user->c_aliados = Input::get('c_aliados');
