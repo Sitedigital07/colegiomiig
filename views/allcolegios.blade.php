@@ -94,7 +94,7 @@ Gestión de usuarios Libros & Libros
                                                 function confirmar ( mensaje ) {
                                                 return confirm( mensaje );}
                                                </script>
-                                              <a href="/formatear-colegio/{{$colegio->id}}" onclick="return confirmar('¿Está seguro que desea eliminar los registros para este colegio?')" data-toggle="tooltip" data-placement="right" title="Formatear Colegio" type="button" class="btn btn-danger"><i class="hi hi-trash"></i></a>
+                                              <a href="/formatear-colegio/{{$colegio->id}}" onclick="return confirmar('¿Está seguro que desea eliminar los registros para este colegio?')" data-toggle="tooltip" data-placement="right" title="Formatear Colegio" type="button" class="btn btn-danger"><i class="gi gi-cleaning"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach
