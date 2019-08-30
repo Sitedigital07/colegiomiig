@@ -278,7 +278,7 @@ Gestión de usuarios Libros & Libros
 
         var cat_id = e.target.value;
 
-        $.get('/memar/ajax-subcater?cat_id=' + cat_id, function(data){
+        $.get('/mema/ajax-subcatder?cat_id=' + cat_id, function(data){
             $('#representante').empty();
             $.each(data, function(index, subcatObj){
               $('#representante').append('<option value="'+subcatObj.id+'">'+subcatObj.name+' '+subcatObj.last_name+'</option>');
