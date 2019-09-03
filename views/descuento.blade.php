@@ -69,11 +69,15 @@ Gestión de usuarios Libros & Libros
     
       <div class="form-group">
         <label for="">Ingrese descuento</label>
+        @foreach($valores as $valores)
         @if(Auth::user()->rol_id == 5)
-        <input type="number" name="descuento" class="form-control" id="" placeholder="Ingrese descuento" max="22">
+        <input type="number" name="descuento" class="form-control" id="" placeholder="Ingrese descuento" max="{{$valores->descuento_representante}}">
         @elseif(Auth::user()->rol_id == 3)
-        <input type="number" name="descuento" class="form-control" id="" placeholder="Ingrese descuento" max="22">
+        <input type="number" name="descuento" class="form-control" id="" placeholder="Ingrese descuento" max="{{$valores->descuento_nacional}}">
+         @elseif(Auth::user()->rol_id == 4)
+        <input type="number" name="descuento" class="form-control" id="" placeholder="Ingrese descuento" max="{{$valores->descuento_regional}}">
         @endif
+        @endforeach
       </div>
       <input type="hidden" name="colegio_id" id="input" class="form-control" value="{{Request::segment(2)}}" required="required" pattern="" title="">
       <input type="hidden" name="rol_id" id="input" class="form-control" value="{{Auth::user()->name}} {{Auth::user()->last_name}}" required="required" pattern="" title="">
@@ -117,22 +121,25 @@ Gestión de usuarios Libros & Libros
         <td class="text-center">
           
         @if (DB::table('descuento')->where('ano', '=', $ano->ano)->where('colegio_id', '=', Request::segment(2))->exists())
-        @if(Auth::user()->rol_id == 3)
-        <a href="/editar-descuentoaud/{{$descuentos->id}}" class="btn btn-primary"><i class="fa fa-eraser"></i></a>
-        @else
+
+        @if(Auth::user()->rol_id == 5)
+        <a href="/editar-descuentorep/{{$descuentos->id}}" class="btn btn-primary"><i class="fa fa-eraser"></i></a>
+        @elseif(Auth::user()->rol_id == 3)
+         <a href="/editar-descuentoaud/{{$descuentos->id}}" class="btn btn-primary"><i class="fa fa-eraser"></i></a>
+          @elseif(Auth::user()->rol_id == 4)
+         <a href="/editar-descuentoreg/{{$descuentos->id}}" class="btn btn-primary"><i class="fa fa-eraser"></i></a>
         @endif
-        @if(Auth::user()->rol_id == 3)
-        @else
-        <a href="/editar-descuentoreg/{{$descuentos->id}}" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Editar descuento"><i class="fa fa-eraser"></i></a>
-         @if(Auth::user()->rol_id == 4)
-         @else
+       
+       
+       
         <script language="JavaScript">
         function confirmar ( mensaje ) {
         return confirm( mensaje );}
         </script>
+        @if(Auth::user()->rol_id == 3 OR Auth::user()->rol_id == 4)
+        @else
         <a href="/eliminar-descuento/{{$descuentos->id}}" onclick="return confirmar('¿Está seguro que desea eliminar los registros para este colegio?')" data-toggle="tooltip" data-placement="right" title="Eliminar descuento" type="button" class="btn btn-danger"><i class="hi hi-trash"></i></a>
-        @endif
-        @endif
+          @endif
         @else
         <a href="#" class="btn btn-primary" disabled><i class="fa fa-eraser"></i></a>
         

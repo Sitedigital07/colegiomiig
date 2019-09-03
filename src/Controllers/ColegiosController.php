@@ -15,6 +15,7 @@ use Digitalmiig\Colegiomiig\Campo;
 use Digitalmiig\Colegiomiig\Proventa;
 use Digitalmiig\Colegiomiig\Esseg;
 use Digitalmiig\Colegiomiig\Cierre;
+use Digitalmiig\Colegiomiig\Descuento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,6 +58,43 @@ class ColegiosController extends Controller
         ->get();
          $ano = DB::table('configuracion')->where('id', '=', 1)->get();
         return view('colegiomiig::allcolegiosnac')->with('colegios', $colegios)->with('ano', $ano);
+    }
+
+
+public function editardescuentowebsite($id)
+    {
+        $input = Input::all();
+        $descuento = Descuento::find($id);
+        $descuento->descuento_nacional = Input::get('nacional');
+        $descuento->descuento_regional = Input::get('regional');
+        $descuento->descuento_representante = Input::get('representante');
+        $descuento->save();
+        return Redirect('carga-descuento')->with('status', 'ok_update');
+    
+    }
+
+   public function listacolegiosnac($id)
+    {
+
+        $colegios = DB::table('colegios')
+        ->join('ciudades', 'ciudades.ids', '=', 'colegios.ciudad_id')
+         ->leftjoin('users', 'users.id', '=', 'colegios.auditor')
+         ->where('colegios.representante_id','=',$id)
+         ->select('colegios.estadoaud','colegios.codigo','colegios.nombres','ciudades.n_ciudad','colegios.emailcol','users.name','colegios.id')
+
+        ->get();
+         $ano = DB::table('configuracion')->where('id', '=', 1)->get();
+        return view('colegiomiig::allcolegiosnac')->with('colegios', $colegios)->with('ano', $ano);
+    }
+
+
+           public function representantesnac()
+    {
+
+        $representantes = DB::table('users')->where('rol_id','=',5)->where('regionid','=',Auth::user()->regionid)
+        ->get();
+         $ano = DB::table('configuracion')->where('id', '=', 1)->get();
+        return view('colegiomiig::allrepresentantesnac')->with('representantes', $representantes)->with('ano', $ano);
     }
 
 
@@ -839,6 +877,9 @@ public function createproventawebadopcion()
         $campos->pr_artistica = Input::get('pr_artistica');
         $campos->pr_titulo_art = Input::get('pr_titulo_art');
         $campos->pr_ingles = Input::get('pr_ingles');
+        
+
+
         $campos->pr_poblacion_mat = Input::get('pr_poblacion_mat');
         if(Input::get('pr_vender_mat') == ''){
         $campos->pr_vender_mat = 0;}
@@ -847,6 +888,8 @@ public function createproventawebadopcion()
         }
         $campos->pr_muestra_mat = Input::get('pr_muestra_mat');
         $campos->pr_metas_mat = Input::get('pr_metas_mat');
+        
+
         $campos->pr_poblacion_esp = Input::get('pr_poblacion_esp');
         if(Input::get('pr_vender_esp') == ''){
         $campos->pr_vender_esp = 0;}
@@ -855,6 +898,8 @@ public function createproventawebadopcion()
         }
         $campos->pr_muestra_esp = Input::get('pr_muestra_esp');
         $campos->pr_metas_esp = Input::get('pr_metas_esp');
+        
+
         $campos->pr_poblacion_cie = Input::get('pr_poblacion_cie');
         if(Input::get('pr_vender_cie') == ''){
         $campos->pr_vender_cie = 0;}
@@ -863,6 +908,8 @@ public function createproventawebadopcion()
         }
         $campos->pr_muestra_cie = Input::get('pr_muestra_cie');
         $campos->pr_metas_cie = Input::get('pr_metas_cie');
+       
+
         $campos->pr_poblacion_com = Input::get('pr_poblacion_com');
         if(Input::get('pr_vender_com') == ''){
         $campos->pr_vender_com = 0;}
@@ -871,6 +918,8 @@ public function createproventawebadopcion()
         }
         $campos->pr_muestra_com = Input::get('pr_muestra_com');
         $campos->pr_metas_com = Input::get('pr_metas_com');
+        
+
         $campos->pr_poblacion_int = Input::get('pr_poblacion_int');
         if(Input::get('pr_vender_int') == ''){
         $campos->pr_vender_int = 0;}
@@ -879,6 +928,8 @@ public function createproventawebadopcion()
         }
         $campos->pr_muestra_int = Input::get('pr_muestra_int');
         $campos->pr_metas_int = Input::get('pr_metas_int');
+        
+
         $campos->pr_poblacion_art = Input::get('pr_poblacion_art');
         if(Input::get('pr_vender_art') == ''){
         $campos->pr_vender_art = 0;}
@@ -887,6 +938,8 @@ public function createproventawebadopcion()
         }
         $campos->pr_muestra_art = Input::get('pr_muestra_art');
         $campos->pr_metas_art = Input::get('pr_metas_art');
+       
+        
         $campos->pr_poblacion_ing = Input::get('pr_poblacion_ing');
         if(Input::get('pr_vender_ing') == ''){
         $campos->pr_vender_ing = 0;}

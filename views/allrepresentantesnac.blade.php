@@ -69,35 +69,26 @@ Gestión de usuarios Libros & Libros
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th class="text-center">DANE</th>
-                                            <th class="text-center">Colegio</th>
-                                            <th>Ciudad</th>
-                                            <th>Auditor</th>
+                                            <th class="text-center">Nombres</th>
+                                            <th class="text-center">Apellidos</th>
+                                            <th class="text-center">Email</th>
+                                            <th class="text-center">Fecha creación</th>
                                             <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	@foreach($colegios as $colegio)
+                                    	@foreach($representantes as $representante)
                                         <tr>
-                                            <td class="text-center">{{$colegio->id}}</td>
-                                            <td class="text-center">{{$colegio->codigo}}</td>
-                                            <td class="text-center">{{$colegio->nombres}}</td>
-                                            <td>{{$colegio->n_ciudad}}</td>
+                                            <td class="text-center">{{$representante->id}}</td>
+                                            <td class="text-center">{{$representante->name}}</td>
+                                            <td class="text-center">{{$representante->last_name}}</td>
+                                            <td class="text-center">{{$representante->email}}</td>
                                             
                                              
-                                             <td>{{$colegio->name}}</td>
+                                             <td class="text-center">{{$representante->created_at}}</td>
 
                                             <td class="text-center">
-                                              @foreach($ano as $anos)
-                                               @if (DB::table('cierre')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $anos->ano)->where('cierre','=',1)->exists())
-                                              <a href="/proyeccionventasadopcionnac/{{$colegio->id}}" data-toggle="tooltip" data-placement="left" title="Revisar Adopción" class="btn btn-warning"><i class="fa fa-book"></i></a>
-                                        
-                                               <a href="/colegio-descuentoaud/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Descuento Colegio" type="button" class="btn btn-info"><i class="fa fa-dollar"></i>
-                                              </a>
-                                              @else
-                                              <a href="/proyeccionventasnac/{{$colegio->id}}"  data-toggle="tooltip" data-placement="left" title="Revisar Meta" class="btn btn-success"><i class="fa fa-book"></i></a>
-                                              @endif
-                                              @endforeach
+                                          <a href="/lista-colegiosnac/{{$representante->id}}" data-toggle="tooltip" data-placement="left" title="Ver Colegios" class="btn btn-warning"><i class="fa fa-book"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

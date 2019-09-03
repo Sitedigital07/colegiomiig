@@ -37,29 +37,30 @@ Gestión de usuarios Libros & Libros
                                     @else
                                     {{ Form::open(array('method' => 'POST','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/editardescuento',$descuentos->id))) }}
                                     @endif 
-                                     
+                                     @foreach($valores as $valores)
                                      @if(Auth::user()->rol_id == 3)
                                       <div class="form-group">
                                        <label class="col-md-3 control-label" for="example-text-input">Descuento:</label>
                                        <div class="col-md-9">
-                                       <input type="number" name="descuento" class="form-control" id="" value="{{$descuentos->descuento}}" placeholder="Ingrese descuento" max="30">
+                                       <input type="number" name="descuento" class="form-control" id="" value="{{$descuentos->descuento}}" placeholder="Ingrese descuento" max="{{$valores->descuento_nacional}}">
                                        </div>
                                       </div>
                                       @elseif(Auth::user()->rol_id == 4)
                                       <div class="form-group">
                                        <label class="col-md-3 control-label" for="example-text-input">Descuento:</label>
                                        <div class="col-md-9">
-                                       <input type="number" name="descuento" class="form-control" id="" value="{{$descuentos->descuento}}" placeholder="Ingrese descuento" max="25">
+                                       <input type="number" name="descuento" class="form-control" id="" value="{{$descuentos->descuento}}" placeholder="Ingrese descuento" max="{{$valores->descuento_regional}}">
                                        </div>
                                       </div>
-                                      @else
+                                      @elseif(Auth::user()->rol_id == 5)
                                       <div class="form-group">
                                        <label class="col-md-3 control-label" for="example-text-input">Descuento:</label>
                                        <div class="col-md-9">
-                                       <input type="number" name="descuento" class="form-control" id="" value="{{$descuentos->descuento}}" placeholder="Ingrese descuento" max="22">
+                                       <input type="number" name="descuento" class="form-control" id="" value="{{$descuentos->descuento}}" placeholder="Ingrese descuento" max="{{$valores->descuento_representante}}">
                                        </div>
                                       </div>
                                       @endif
+                                      @endforeach
                                        
                                       <input type="hidden" name="colegio_id" id="input" class="form-control" value="{{$descuentos->colegio_id}}" required="required" pattern="" title="">
                                       <input type="hidden" name="rol_id" id="input" class="form-control" value="{{Auth::user()->name}} {{Auth::user()->last_name}}" required="required" pattern="" title="">

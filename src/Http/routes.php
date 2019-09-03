@@ -487,7 +487,8 @@ Route::get('/gerentereg', function () {
 
 Route::get('/editar-descuentoreg/{id}', function ($id) {
     $descuentos = DB::table('descuento')->where('id', '=', $id)->get();
-    return view('colegiomiig::editar-descuento')->with('descuentos', $descuentos);
+    $valores = DB::table('descuentos')->where('id', '=', 1)->get();
+    return view('colegiomiig::editar-descuento')->with('descuentos', $descuentos)->with('valores', $valores);
 });
 
 
@@ -497,7 +498,9 @@ Route::get('/colegio-descuentoreg/{id}', function ($id) {
     $descuentos = DB::table('descuento')->where('colegio_id', '=', $id)->get();
     $ano = DB::table('configuracion')->where('id','=',1)->get();
     $anos = DB::table('configuracion')->where('id','=',1)->get();
-    return view('colegiomiig::descuento')->with('descuentos', $descuentos)->with('ano', $ano)->with('anos', $anos);
+     $valores = DB::table('descuentos')->where('id', '=', 1)->get();
+
+    return view('colegiomiig::descuento')->with('descuentos', $descuentos)->with('ano', $ano)->with('anos', $anos)->with('valores', $valores);
 });
 
 
@@ -715,12 +718,14 @@ Route::get('/colegio-descuentoaud/{id}', function ($id) {
     $descuentos = DB::table('descuento')->where('colegio_id', '=', $id)->get();
     $ano = DB::table('configuracion')->where('id','=',1)->get();
     $anos = DB::table('configuracion')->where('id','=',1)->get();
-    return view('colegiomiig::descuento')->with('descuentos', $descuentos)->with('ano', $ano)->with('anos', $anos);
+     $valores = DB::table('descuentos')->where('id', '=', 1)->get();
+    return view('colegiomiig::descuento')->with('descuentos', $descuentos)->with('ano', $ano)->with('anos', $anos)->with('valores', $valores);
 });
 
 Route::get('/editar-descuentoaud/{id}', function ($id) {
     $descuentos = DB::table('descuento')->where('id', '=', $id)->get();
-    return view('colegiomiig::editar-descuento')->with('descuentos', $descuentos);
+     $valores = DB::table('descuentos')->where('id', '=', 1)->get();
+    return view('colegiomiig::editar-descuento')->with('descuentos', $descuentos)->with('valores', $valores);
 });
 
 
@@ -739,6 +744,9 @@ Route::post('actualizarcierrecolegio/{id}', 'Digitalmiig\Colegiomiig\Controllers
 
 
 Route::get('/colegios-lista', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@colegiosnac');
+
+Route::get('/representantes-lista', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@representantesnac');
+Route::get('/lista-colegiosnac/{id}', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@listacolegiosnac');
 
 Route::get('proyeccionventasadopcionnac/{id}', function ($id) {
 
