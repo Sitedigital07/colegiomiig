@@ -749,6 +749,7 @@ public function createsseg()
         $user->esseg = Input::get('esseg');
         $user->ano = Input::get('ano');
         $user->colegio_id = Input::get('colegio');
+        $user->representante_id = Auth::user()->id;
         $user->save();
 
 
@@ -763,6 +764,7 @@ public function updateesseg($id)
         $user->esseg = Input::get('esseg');
         $user->ano = Input::get('ano');
         $user->colegio_id = Input::get('colegio');
+        $user->representante_id = Auth::user()->id;
         $user->save();
 
 
