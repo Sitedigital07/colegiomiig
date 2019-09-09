@@ -576,11 +576,15 @@ public function createproventaweb()
     {
 
 
-
-
-        $user = new Proventa;
+        $mema = Input::get('pr_titulo_mat')+Input::get('pr_vender_mat')+Input::get('pr_titulo_esp')+Input::get('pr_vender_esp')+Input::get('pr_titulo_cie')+Input::get('pr_vender_cie')+Input::get('pr_titulo_com')+Input::get('pr_vender_com')+Input::get('pr_titulo_int')+Input::get('pr_vender_int')+Input::get('pr_titulo_ing')+Input::get('pr_vender_ing')+Input::get('pr_titulo_art')+Input::get('pr_vender_art');
+       
+       if($mema == 0){
+          return Redirect('/proyeccionventas/'.Input::get('colegio'))->with('status', 'ok_danger');
+       }
+      else{
+        $user = new Proventa; 
         
-        if(Input::get('pr_titulo_mat') == '0'){
+                  if(Input::get('pr_titulo_mat') == '0'){
         $user->pr_valor_mat = 0;
         }
         else{
@@ -661,82 +665,141 @@ public function createproventaweb()
         }
 
         $user->colegio_id = Input::get('colegio');
+        $user->ciudad_id = Auth::user()->ciudadid;
         $user->grado_id = Input::get('subcategory');
         $user->region_id = Input::get('region');
         $user->representante_id = Input::get('representante');
         $user->ano = Input::get('ano');
-        $user->pr_matematicas = Input::get('pr_matematicas');
-        $user->pr_titulo_mat = Input::get('pr_titulo_mat');
-        $user->pr_espanol = Input::get('pr_espanol');
-        $user->pr_titulo_esp = Input::get('pr_titulo_esp');
-        $user->pr_ciencias = Input::get('pr_ciencias');
-        $user->pr_titulo_cie = Input::get('pr_titulo_cie');
-        $user->pr_comprension = Input::get('pr_comprension');
-        $user->pr_titulo_com = Input::get('pr_titulo_com');
-        $user->pr_interes = Input::get('pr_interes');
-        $user->pr_titulo_int = Input::get('pr_titulo_int');
-        $user->pr_artistica = Input::get('pr_artistica');
-        $user->pr_titulo_art = Input::get('pr_titulo_art');
-        $user->pr_ingles = Input::get('pr_ingles');
-        $user->pr_poblacion_mat = Input::get('pr_poblacion_mat');
-        if(Input::get('pr_vender_mat') == ''){
-        $user->pr_vender_mat = 0;}
-        else{
-        $user->pr_vender_mat = Input::get('pr_vender_mat');
+       
+
+        if(Input::get('pr_vender_mat') == '' OR Input::get('pr_titulo_mat') == ''){
+          $user->pr_titulo_mat = 0;
+          $user->pr_vender_mat = 0;
+          $user->pr_matematicas = 0;
+          $user->pr_muestra_mat = 0;
+          $user->pr_poblacion_mat = 0;
+          $user->pr_metas_ing = 0;
         }
-        $user->pr_muestra_mat = Input::get('pr_muestra_mat');
-        $user->pr_metas_mat = Input::get('pr_metas_mat');
-        $user->pr_poblacion_esp = Input::get('pr_poblacion_esp');
-        if(Input::get('pr_vender_esp') == ''){
-        $user->pr_vender_esp = 0;}
         else{
-        $user->pr_vender_esp = Input::get('pr_vender_esp');
+          $user->pr_titulo_mat = Input::get('pr_titulo_mat');
+          $user->pr_vender_mat = Input::get('pr_vender_mat');
+          $user->pr_matematicas = Input::get('pr_matematicas');
+          $user->pr_muestra_mat = Input::get('pr_muestra_mat');
+          $user->pr_poblacion_mat = Input::get('pr_poblacion_mat');
+          $user->pr_metas_mat = Input::get('pr_metas_mat');
+
         }
-        $user->pr_muestra_esp = Input::get('pr_muestra_esp');
-        $user->pr_metas_esp = Input::get('pr_metas_esp');
-        $user->pr_poblacion_cie = Input::get('pr_poblacion_cie');
-        if(Input::get('pr_vender_cie') == ''){
-        $user->pr_vender_cie = 0;}
+
+        if(Input::get('pr_vender_esp') == '' OR Input::get('pr_titulo_esp') == ''){
+          $user->pr_titulo_esp = 0;
+          $user->pr_vender_esp = 0;
+          $user->pr_espanol = 0;
+          $user->pr_muestra_esp = 0;
+          $user->pr_poblacion_esp = 0;
+          $user->pr_metas_esp = 0;
+        }
         else{
-        $user->pr_vender_cie = Input::get('pr_vender_cie');
+          $user->pr_espanol = Input::get('pr_espanol');
+          $user->pr_titulo_esp = Input::get('pr_titulo_esp');
+          $user->pr_vender_esp = Input::get('pr_vender_esp');
+          $user->pr_muestra_esp = Input::get('pr_muestra_esp');
+          $user->pr_poblacion_esp = Input::get('pr_poblacion_esp');
+          $user->pr_metas_esp = Input::get('pr_metas_esp');
         }
-        $user->pr_muestra_cie = Input::get('pr_muestra_cie');
-        $user->pr_metas_cie = Input::get('pr_metas_cie');
-        $user->pr_poblacion_com = Input::get('pr_poblacion_com');
-        if(Input::get('pr_vender_com') == ''){
-        $user->pr_vender_com = 0;}
+
+
+        if(Input::get('pr_vender_cie') == '' OR Input::get('pr_titulo_cie') == ''){
+          $user->pr_titulo_cie = 0;
+          $user->pr_vender_cie = 0;
+          $user->pr_ciencias = 0;
+          $user->pr_muestra_cie = 0;
+          $user->pr_poblacion_cie = 0;
+          $user->pr_metas_cie = 0;
+        }
         else{
-        $user->pr_vender_com = Input::get('pr_vender_com');
+          $user->pr_ciencias = Input::get('pr_ciencias');
+          $user->pr_titulo_cie = Input::get('pr_titulo_cie');
+          $user->pr_vender_cie = Input::get('pr_vender_cie');
+          $user->pr_muestra_cie = Input::get('pr_muestra_cie');
+          $user->pr_poblacion_cie = Input::get('pr_poblacion_cie');
+          $user->pr_metas_cie = Input::get('pr_metas_cie');
         }
-        $user->pr_muestra_com = Input::get('pr_muestra_com');
-        $user->pr_metas_com = Input::get('pr_metas_com');
-        $user->pr_poblacion_int = Input::get('pr_poblacion_int');
-        if(Input::get('pr_vender_int') == ''){
-        $user->pr_vender_int = 0;}
+
+        if(Input::get('pr_vender_com') == '' OR Input::get('pr_titulo_com') == ''){
+          $user->pr_titulo_com = 0;
+          $user->pr_vender_com = 0;
+          $user->pr_comprension = 0;
+          $user->pr_muestra_com = 0;
+          $user->pr_poblacion_com = 0;
+            $user->pr_metas_com = 0;
+        }
         else{
-        $user->pr_vender_int = Input::get('pr_vender_int');
+          $user->pr_comprension = Input::get('pr_comprension');
+          $user->pr_titulo_com = Input::get('pr_titulo_com');
+          $user->pr_vender_com = Input::get('pr_vender_com');
+          $user->pr_muestra_com = Input::get('pr_muestra_com');
+          $user->pr_poblacion_com = Input::get('pr_poblacion_com');
+            $user->pr_metas_com = Input::get('pr_metas_com');
         }
-        $user->pr_muestra_int = Input::get('pr_muestra_int');
-        $user->pr_metas_int = Input::get('pr_metas_int');
-        $user->pr_poblacion_art = Input::get('pr_poblacion_art');
-        if(Input::get('pr_vender_art') == ''){
-        $user->pr_vender_art = 0;}
+
+        if(Input::get('pr_vender_int') == '' OR Input::get('pr_titulo_int') == ''){
+          $user->pr_titulo_int = 0;
+          $user->pr_vender_int = 0;
+          $user->pr_interes = 0;
+          $user->pr_muestra_int = 0;
+          $user->pr_poblacion_int = 0;
+            $user->pr_metas_int = 0;
+        }
         else{
-        $user->pr_vender_art = Input::get('pr_vender_art');
+          $user->pr_interes = Input::get('pr_interes');
+          $user->pr_titulo_int = Input::get('pr_titulo_int');
+          $user->pr_vender_int = Input::get('pr_vender_int');
+          $user->pr_muestra_int = Input::get('pr_muestra_int');
+          $user->pr_poblacion_int = Input::get('pr_poblacion_int');
+            $user->pr_metas_int = Input::get('pr_metas_int');
         }
-        $user->pr_muestra_art = Input::get('pr_muestra_art');
-        $user->pr_metas_art = Input::get('pr_metas_art');
-        $user->pr_poblacion_ing = Input::get('pr_poblacion_ing');
-        if(Input::get('pr_vender_ing') == ''){
-        $user->pr_vender_ing = 0;}
+
+
+        if(Input::get('pr_vender_art') == '' OR Input::get('pr_titulo_art') == ''){
+          $user->pr_titulo_art = 0;
+          $user->pr_vender_art = 0;
+          $user->pr_artistica = 0;
+          $user->pr_muestra_art = 0;
+          $user->pr_poblacion_art = 0;
+          $user->pr_metas_art = 0;
+        }
         else{
-        $user->pr_vender_ing = Input::get('pr_vender_ing');
+          $user->pr_artistica = Input::get('pr_artistica');
+          $user->pr_titulo_art = Input::get('pr_titulo_art');
+          $user->pr_vender_art = Input::get('pr_vender_art');
+          $user->pr_muestra_art = Input::get('pr_muestra_art');
+          $user->pr_poblacion_art = Input::get('pr_poblacion_art');
+          $user->pr_metas_art = Input::get('pr_metas_art');
         }
-        $user->pr_muestra_ing = Input::get('pr_muestra_ing');
-        $user->pr_metas_ing = Input::get('pr_metas_ing');
+       
+        if(Input::get('pr_vender_ing') == '' OR Input::get('pr_titulo_ing') == ''){
+          $user->pr_titulo_ing = 0;
+          $user->pr_vender_ing = 0;
+          $user->pr_ingles = 0;
+          $user->pr_muestra_ing = 0;
+          $user->pr_poblacion_ing = 0;
+          $user->pr_metas_ing = 0;
+        }
+        else{
+          $user->pr_ingles = Input::get('pr_ingles');
+          $user->pr_titulo_ing = Input::get('pr_titulo_ing');
+          $user->pr_vender_ing = Input::get('pr_vender_ing');
+          $user->pr_muestra_ing = Input::get('pr_muestra_ing');
+          $user->pr_poblacion_ing = Input::get('pr_poblacion_ing');
+          $user->pr_metas_ing = Input::get('pr_metas_ing');
+        }
+       
+  
         $user->metadopcion = 0;
         $user->save();
 
+        }
+ 
 
 
           return Redirect('/proyeccionventas/'.$user->colegio_id)->with('status', 'ok_create');
@@ -778,183 +841,234 @@ public function updateesseg($id)
 public function createproventawebadopcion()
     {
       
-        $campos = new Campo;
-          
-          if(Input::get('pr_titulo_mat') == '0'){
-        $campos->pr_valor_mat = 0;
+
+      $mema = Input::get('pr_titulo_mat')+Input::get('pr_vender_mat')+Input::get('pr_titulo_esp')+Input::get('pr_vender_esp')+Input::get('pr_titulo_cie')+Input::get('pr_vender_cie')+Input::get('pr_titulo_com')+Input::get('pr_vender_com')+Input::get('pr_titulo_int')+Input::get('pr_vender_int')+Input::get('pr_titulo_ing')+Input::get('pr_vender_ing')+Input::get('pr_titulo_art')+Input::get('pr_vender_art');
+       
+       if($mema == 0){
+          return Redirect('/proyeccionventas/'.Input::get('colegio'))->with('status', 'ok_danger');
+       }
+      else{
+        $user = new Campo;
+
+
+                  if(Input::get('pr_titulo_mat') == '0'){
+        $user->pr_valor_mat = 0;
         }
         else{
         $matema = Input::get('pr_titulo_mat');
         $valormat = DB::table('titulo')->where('id','=',$matema)->get();
         foreach($valormat as $valormat){
-        $campos->pr_valor_mat = $valormat->precio;
+        $user->pr_valor_mat = $valormat->precio;
         }
         }
 
 
         if(Input::get('pr_titulo_esp') == '0'){
-        $campos->pr_valor_esp = 0;
+        $user->pr_valor_esp = 0;
         }
         else{
         $espano = Input::get('pr_titulo_esp');
         $valoresp = DB::table('titulo')->where('id','=',$espano)->get();
         foreach($valoresp as $valoresp){
-        $campos->pr_valor_esp = $valoresp->precio;
+        $user->pr_valor_esp = $valoresp->precio;
         }
         }
 
         if(Input::get('pr_titulo_cie') == '0'){
-        $campos->pr_valor_cie = 0;
+        $user->pr_valor_cie = 0;
         }
         else{
         $ciencias = Input::get('pr_titulo_cie');
         $valorcie = DB::table('titulo')->where('id','=',$ciencias)->get();
         foreach($valorcie as $valorcie){
-        $campos->pr_valor_cie = $valorcie->precio;
+        $user->pr_valor_cie = $valorcie->precio;
         }
         }
 
 
         if(Input::get('pr_titulo_com') == '0'){
-        $campos->pr_valor_com = 0;
+        $user->pr_valor_com = 0;
         }
         else{
         $comprension = Input::get('pr_titulo_com');
         $valorcom = DB::table('titulo')->where('id','=',$comprension)->get();
         foreach($valorcom as $valorcom){
-        $campos->pr_valor_com = $valorcom->precio;
+        $user->pr_valor_com = $valorcom->precio;
         }
         }
 
 
         if(Input::get('pr_titulo_int') == '0'){
-        $campos->pr_valor_int = 0;
+        $user->pr_valor_int = 0;
         }
         else{
         $interes = Input::get('pr_titulo_int');
         $valorint = DB::table('titulo')->where('id','=',$interes)->get();
         foreach($valorint as $valorint){
-        $campos->pr_valor_int = $valorint->precio;
+        $user->pr_valor_int = $valorint->precio;
         }
         }
 
         if(Input::get('pr_titulo_ing') == '0'){
-        $campos->pr_valor_ing = 0;
+        $user->pr_valor_ing = 0;
         }
         else{
         $ingles = Input::get('pr_titulo_ing');
         $valoring = DB::table('titulo')->where('id','=',$ingles)->get();
         foreach($valoring as $valoring){
-        $campos->pr_valor_ing = $valoring->precio;
+        $user->pr_valor_ing = $valoring->precio;
         }
         }
 
         if(Input::get('pr_titulo_art') == '0'){
-        $campos->pr_valor_art = 0;
+        $user->pr_valor_art = 0;
         }
         else{
         $artistica = Input::get('pr_titulo_art');
         $valorart = DB::table('titulo')->where('id','=',$artistica)->get();
         foreach($valorart as $valorart){
-        $campos->pr_valor_art = $valorart->precio;
+        $user->pr_valor_art = $valorart->precio;
         }
         }
 
-
-        $campos->colegio_id = Input::get('colegio');
-        $campos->grado_id = Input::get('subcategory');
-        $campos->region_id = Input::get('region');
-        $campos->representante_id = Input::get('representante');
-        $campos->ano = Input::get('ano');
-        $campos->pr_matematicas = Input::get('pr_matematicas');
-        $campos->pr_titulo_mat = Input::get('pr_titulo_mat');
-        $campos->pr_espanol = Input::get('pr_espanol');
-        $campos->pr_titulo_esp = Input::get('pr_titulo_esp');
-        $campos->pr_ciencias = Input::get('pr_ciencias');
-        $campos->pr_titulo_cie = Input::get('pr_titulo_cie');
-        $campos->pr_comprension = Input::get('pr_comprension');
-        $campos->pr_titulo_com = Input::get('pr_titulo_com');
-        $campos->pr_interes = Input::get('pr_interes');
-        $campos->pr_titulo_int = Input::get('pr_titulo_int');
-        $campos->pr_artistica = Input::get('pr_artistica');
-        $campos->pr_titulo_art = Input::get('pr_titulo_art');
-        $campos->pr_ingles = Input::get('pr_ingles');
-        
-
-
-        $campos->pr_poblacion_mat = Input::get('pr_poblacion_mat');
-        if(Input::get('pr_vender_mat') == ''){
-        $campos->pr_vender_mat = 0;}
-        else{
-        $campos->pr_vender_mat = Input::get('pr_vender_mat');
-        }
-        $campos->pr_muestra_mat = Input::get('pr_muestra_mat');
-        $campos->pr_metas_mat = Input::get('pr_metas_mat');
-        
-
-        $campos->pr_poblacion_esp = Input::get('pr_poblacion_esp');
-        if(Input::get('pr_vender_esp') == ''){
-        $campos->pr_vender_esp = 0;}
-        else{
-        $campos->pr_vender_esp = Input::get('pr_vender_esp');
-        }
-        $campos->pr_muestra_esp = Input::get('pr_muestra_esp');
-        $campos->pr_metas_esp = Input::get('pr_metas_esp');
-        
-
-        $campos->pr_poblacion_cie = Input::get('pr_poblacion_cie');
-        if(Input::get('pr_vender_cie') == ''){
-        $campos->pr_vender_cie = 0;}
-        else{
-        $campos->pr_vender_cie = Input::get('pr_vender_cie');
-        }
-        $campos->pr_muestra_cie = Input::get('pr_muestra_cie');
-        $campos->pr_metas_cie = Input::get('pr_metas_cie');
+        $user->colegio_id = Input::get('colegio');
+        $user->ciudad_id = Auth::user()->ciudadid;
+        $user->grado_id = Input::get('subcategory');
+        $user->region_id = Input::get('region');
+        $user->representante_id = Input::get('representante');
+        $user->ano = Input::get('ano');
        
 
-        $campos->pr_poblacion_com = Input::get('pr_poblacion_com');
-        if(Input::get('pr_vender_com') == ''){
-        $campos->pr_vender_com = 0;}
-        else{
-        $campos->pr_vender_com = Input::get('pr_vender_com');
+        if(Input::get('pr_vender_mat') == '' OR Input::get('pr_titulo_mat') == ''){
+          $user->pr_titulo_mat = 0;
+          $user->pr_vender_mat = 0;
+          $user->pr_matematicas = 0;
+          $user->pr_muestra_mat = 0;
+          $user->pr_poblacion_mat = 0;
+          $user->pr_metas_ing = 0;
         }
-        $campos->pr_muestra_com = Input::get('pr_muestra_com');
-        $campos->pr_metas_com = Input::get('pr_metas_com');
-        
+        else{
+          $user->pr_titulo_mat = Input::get('pr_titulo_mat');
+          $user->pr_vender_mat = Input::get('pr_vender_mat');
+          $user->pr_matematicas = Input::get('pr_matematicas');
+          $user->pr_muestra_mat = Input::get('pr_muestra_mat');
+          $user->pr_poblacion_mat = Input::get('pr_poblacion_mat');
+          $user->pr_metas_mat = Input::get('pr_metas_mat');
 
-        $campos->pr_poblacion_int = Input::get('pr_poblacion_int');
-        if(Input::get('pr_vender_int') == ''){
-        $campos->pr_vender_int = 0;}
-        else{
-        $campos->pr_vender_int = Input::get('pr_vender_int');
         }
-        $campos->pr_muestra_int = Input::get('pr_muestra_int');
-        $campos->pr_metas_int = Input::get('pr_metas_int');
-        
 
-        $campos->pr_poblacion_art = Input::get('pr_poblacion_art');
-        if(Input::get('pr_vender_art') == ''){
-        $campos->pr_vender_art = 0;}
-        else{
-        $campos->pr_vender_art = Input::get('pr_vender_art');
+        if(Input::get('pr_vender_esp') == '' OR Input::get('pr_titulo_esp') == ''){
+          $user->pr_titulo_esp = 0;
+          $user->pr_vender_esp = 0;
+          $user->pr_espanol = 0;
+          $user->pr_muestra_esp = 0;
+          $user->pr_poblacion_esp = 0;
+          $user->pr_metas_esp = 0;
         }
-        $campos->pr_muestra_art = Input::get('pr_muestra_art');
-        $campos->pr_metas_art = Input::get('pr_metas_art');
+        else{
+          $user->pr_espanol = Input::get('pr_espanol');
+          $user->pr_titulo_esp = Input::get('pr_titulo_esp');
+          $user->pr_vender_esp = Input::get('pr_vender_esp');
+          $user->pr_muestra_esp = Input::get('pr_muestra_esp');
+          $user->pr_poblacion_esp = Input::get('pr_poblacion_esp');
+          $user->pr_metas_esp = Input::get('pr_metas_esp');
+        }
+
+
+        if(Input::get('pr_vender_cie') == '' OR Input::get('pr_titulo_cie') == ''){
+          $user->pr_titulo_cie = 0;
+          $user->pr_vender_cie = 0;
+          $user->pr_ciencias = 0;
+          $user->pr_muestra_cie = 0;
+          $user->pr_poblacion_cie = 0;
+          $user->pr_metas_cie = 0;
+        }
+        else{
+          $user->pr_ciencias = Input::get('pr_ciencias');
+          $user->pr_titulo_cie = Input::get('pr_titulo_cie');
+          $user->pr_vender_cie = Input::get('pr_vender_cie');
+          $user->pr_muestra_cie = Input::get('pr_muestra_cie');
+          $user->pr_poblacion_cie = Input::get('pr_poblacion_cie');
+          $user->pr_metas_cie = Input::get('pr_metas_cie');
+        }
+
+        if(Input::get('pr_vender_com') == '' OR Input::get('pr_titulo_com') == ''){
+          $user->pr_titulo_com = 0;
+          $user->pr_vender_com = 0;
+          $user->pr_comprension = 0;
+          $user->pr_muestra_com = 0;
+          $user->pr_poblacion_com = 0;
+            $user->pr_metas_com = 0;
+        }
+        else{
+          $user->pr_comprension = Input::get('pr_comprension');
+          $user->pr_titulo_com = Input::get('pr_titulo_com');
+          $user->pr_vender_com = Input::get('pr_vender_com');
+          $user->pr_muestra_com = Input::get('pr_muestra_com');
+          $user->pr_poblacion_com = Input::get('pr_poblacion_com');
+            $user->pr_metas_com = Input::get('pr_metas_com');
+        }
+
+        if(Input::get('pr_vender_int') == '' OR Input::get('pr_titulo_int') == ''){
+          $user->pr_titulo_int = 0;
+          $user->pr_vender_int = 0;
+          $user->pr_interes = 0;
+          $user->pr_muestra_int = 0;
+          $user->pr_poblacion_int = 0;
+            $user->pr_metas_int = 0;
+        }
+        else{
+          $user->pr_interes = Input::get('pr_interes');
+          $user->pr_titulo_int = Input::get('pr_titulo_int');
+          $user->pr_vender_int = Input::get('pr_vender_int');
+          $user->pr_muestra_int = Input::get('pr_muestra_int');
+          $user->pr_poblacion_int = Input::get('pr_poblacion_int');
+            $user->pr_metas_int = Input::get('pr_metas_int');
+        }
+
+
+        if(Input::get('pr_vender_art') == '' OR Input::get('pr_titulo_art') == ''){
+          $user->pr_titulo_art = 0;
+          $user->pr_vender_art = 0;
+          $user->pr_artistica = 0;
+          $user->pr_muestra_art = 0;
+          $user->pr_poblacion_art = 0;
+          $user->pr_metas_art = 0;
+        }
+        else{
+          $user->pr_artistica = Input::get('pr_artistica');
+          $user->pr_titulo_art = Input::get('pr_titulo_art');
+          $user->pr_vender_art = Input::get('pr_vender_art');
+          $user->pr_muestra_art = Input::get('pr_muestra_art');
+          $user->pr_poblacion_art = Input::get('pr_poblacion_art');
+          $user->pr_metas_art = Input::get('pr_metas_art');
+        }
        
-        
-        $campos->pr_poblacion_ing = Input::get('pr_poblacion_ing');
-        if(Input::get('pr_vender_ing') == ''){
-        $campos->pr_vender_ing = 0;}
-        else{
-        $campos->pr_vender_ing = Input::get('pr_vender_ing');
+        if(Input::get('pr_vender_ing') == '' OR Input::get('pr_titulo_ing') == ''){
+          $user->pr_titulo_ing = 0;
+          $user->pr_vender_ing = 0;
+          $user->pr_ingles = 0;
+          $user->pr_muestra_ing = 0;
+          $user->pr_poblacion_ing = 0;
+          $user->pr_metas_ing = 0;
         }
-        $campos->pr_muestra_ing = Input::get('pr_muestra_ing');
-        $campos->pr_metas_ing = Input::get('pr_metas_ing');
-        $campos->metadopcion = 0;
-        $campos->save();
+        else{
+          $user->pr_ingles = Input::get('pr_ingles');
+          $user->pr_titulo_ing = Input::get('pr_titulo_ing');
+          $user->pr_vender_ing = Input::get('pr_vender_ing');
+          $user->pr_muestra_ing = Input::get('pr_muestra_ing');
+          $user->pr_poblacion_ing = Input::get('pr_poblacion_ing');
+          $user->pr_metas_ing = Input::get('pr_metas_ing');
+        }
+       
+  
+        $user->metadopcion = 0;
+        $user->save();
 
+        }
+        
 
-          return Redirect('/proyeccionventasadopcion/'.$campos->colegio_id)->with('status', 'ok_create');
+          return Redirect('/proyeccionventasadopcion/'.$user->colegio_id)->with('status', 'ok_create');
     }
 
 
@@ -1080,82 +1194,142 @@ public function editarproventaweb($id)
         $user->pr_valor_art = $valorart->precio;
         }
         }
+
         $user->colegio_id = Input::get('colegio');
+        $user->ciudad_id = Auth::user()->ciudadid;
         $user->grado_id = Input::get('subcategory');
         $user->region_id = Input::get('region');
         $user->representante_id = Input::get('representante');
         $user->ano = Input::get('ano');
-        $user->pr_matematicas = Input::get('pr_matematicas');
-        $user->pr_titulo_mat = Input::get('pr_titulo_mat');
-        $user->pr_espanol = Input::get('pr_espanol');
-        $user->pr_titulo_esp = Input::get('pr_titulo_esp');
-        $user->pr_ciencias = Input::get('pr_ciencias');
-        $user->pr_titulo_cie = Input::get('pr_titulo_cie');
-        $user->pr_comprension = Input::get('pr_comprension');
-        $user->pr_titulo_com = Input::get('pr_titulo_com');
-        $user->pr_interes = Input::get('pr_interes');
-        $user->pr_titulo_int = Input::get('pr_titulo_int');
-        $user->pr_artistica = Input::get('pr_artistica');
-        $user->pr_titulo_art = Input::get('pr_titulo_art');
-        $user->pr_ingles = Input::get('pr_ingles');
-        $user->pr_poblacion_mat = Input::get('pr_poblacion_mat');
-        if(Input::get('pr_vender_mat') == ''){
-        $user->pr_vender_mat = 0;}
-        else{
-        $user->pr_vender_mat = Input::get('pr_vender_mat');
+       
+
+        if(Input::get('pr_vender_mat') == '' OR Input::get('pr_titulo_mat') == ''){
+          $user->pr_titulo_mat = 0;
+          $user->pr_vender_mat = 0;
+          $user->pr_matematicas = 0;
+          $user->pr_muestra_mat = 0;
+          $user->pr_poblacion_mat = 0;
+          $user->pr_metas_ing = 0;
         }
-        $user->pr_muestra_mat = Input::get('pr_muestra_mat');
-        $user->pr_metas_mat = Input::get('pr_metas_mat');
-        $user->pr_poblacion_esp = Input::get('pr_poblacion_esp');
-        if(Input::get('pr_vender_esp') == ''){
-        $user->pr_vender_esp = 0;}
         else{
-        $user->pr_vender_esp = Input::get('pr_vender_esp');
+          $user->pr_titulo_mat = Input::get('pr_titulo_mat');
+          $user->pr_vender_mat = Input::get('pr_vender_mat');
+          $user->pr_matematicas = Input::get('pr_matematicas');
+          $user->pr_muestra_mat = Input::get('pr_muestra_mat');
+          $user->pr_poblacion_mat = Input::get('pr_poblacion_mat');
+          $user->pr_metas_mat = Input::get('pr_metas_mat');
+
         }
-        $user->pr_muestra_esp = Input::get('pr_muestra_esp');
-        $user->pr_metas_esp = Input::get('pr_metas_esp');
-        $user->pr_poblacion_cie = Input::get('pr_poblacion_cie');
-        if(Input::get('pr_vender_cie') == ''){
-        $user->pr_vender_cie = 0;}
+
+        if(Input::get('pr_vender_esp') == '' OR Input::get('pr_titulo_esp') == ''){
+          $user->pr_titulo_esp = 0;
+          $user->pr_vender_esp = 0;
+          $user->pr_espanol = 0;
+          $user->pr_muestra_esp = 0;
+          $user->pr_poblacion_esp = 0;
+          $user->pr_metas_esp = 0;
+        }
         else{
-        $user->pr_vender_cie = Input::get('pr_vender_cie');
+          $user->pr_espanol = Input::get('pr_espanol');
+          $user->pr_titulo_esp = Input::get('pr_titulo_esp');
+          $user->pr_vender_esp = Input::get('pr_vender_esp');
+          $user->pr_muestra_esp = Input::get('pr_muestra_esp');
+          $user->pr_poblacion_esp = Input::get('pr_poblacion_esp');
+          $user->pr_metas_esp = Input::get('pr_metas_esp');
         }
-        $user->pr_muestra_cie = Input::get('pr_muestra_cie');
-        $user->pr_metas_cie = Input::get('pr_metas_cie');
-        $user->pr_poblacion_com = Input::get('pr_poblacion_com');
-        if(Input::get('pr_vender_com') == ''){
-        $user->pr_vender_com = 0;}
+
+
+        if(Input::get('pr_vender_cie') == '' OR Input::get('pr_titulo_cie') == ''){
+          $user->pr_titulo_cie = 0;
+          $user->pr_vender_cie = 0;
+          $user->pr_ciencias = 0;
+          $user->pr_muestra_cie = 0;
+          $user->pr_poblacion_cie = 0;
+          $user->pr_metas_cie = 0;
+        }
         else{
-        $user->pr_vender_com = Input::get('pr_vender_com');
+          $user->pr_ciencias = Input::get('pr_ciencias');
+          $user->pr_titulo_cie = Input::get('pr_titulo_cie');
+          $user->pr_vender_cie = Input::get('pr_vender_cie');
+          $user->pr_muestra_cie = Input::get('pr_muestra_cie');
+          $user->pr_poblacion_cie = Input::get('pr_poblacion_cie');
+          $user->pr_metas_cie = Input::get('pr_metas_cie');
         }
-        $user->pr_muestra_com = Input::get('pr_muestra_com');
-        $user->pr_metas_com = Input::get('pr_metas_com');
-        $user->pr_poblacion_int = Input::get('pr_poblacion_int');
-        if(Input::get('pr_vender_int') == ''){
-        $user->pr_vender_int = 0;}
+
+        if(Input::get('pr_vender_com') == '' OR Input::get('pr_titulo_com') == ''){
+          $user->pr_titulo_com = 0;
+          $user->pr_vender_com = 0;
+          $user->pr_comprension = 0;
+          $user->pr_muestra_com = 0;
+          $user->pr_poblacion_com = 0;
+            $user->pr_metas_com = 0;
+        }
         else{
-        $user->pr_vender_int = Input::get('pr_vender_int');
+          $user->pr_comprension = Input::get('pr_comprension');
+          $user->pr_titulo_com = Input::get('pr_titulo_com');
+          $user->pr_vender_com = Input::get('pr_vender_com');
+          $user->pr_muestra_com = Input::get('pr_muestra_com');
+          $user->pr_poblacion_com = Input::get('pr_poblacion_com');
+            $user->pr_metas_com = Input::get('pr_metas_com');
         }
-        $user->pr_muestra_int = Input::get('pr_muestra_int');
-        $user->pr_metas_int = Input::get('pr_metas_int');
-        $user->pr_poblacion_art = Input::get('pr_poblacion_art');
-        if(Input::get('pr_vender_art') == ''){
-        $user->pr_vender_art = 0;}
+
+        if(Input::get('pr_vender_int') == '' OR Input::get('pr_titulo_int') == ''){
+          $user->pr_titulo_int = 0;
+          $user->pr_vender_int = 0;
+          $user->pr_interes = 0;
+          $user->pr_muestra_int = 0;
+          $user->pr_poblacion_int = 0;
+            $user->pr_metas_int = 0;
+        }
         else{
-        $user->pr_vender_art = Input::get('pr_vender_art');
+          $user->pr_interes = Input::get('pr_interes');
+          $user->pr_titulo_int = Input::get('pr_titulo_int');
+          $user->pr_vender_int = Input::get('pr_vender_int');
+          $user->pr_muestra_int = Input::get('pr_muestra_int');
+          $user->pr_poblacion_int = Input::get('pr_poblacion_int');
+            $user->pr_metas_int = Input::get('pr_metas_int');
         }
-        $user->pr_muestra_art = Input::get('pr_muestra_art');
-        $user->pr_metas_art = Input::get('pr_metas_art');
-        $user->pr_poblacion_ing = Input::get('pr_poblacion_ing');
-        if(Input::get('pr_vender_ing') == ''){
-        $user->pr_vender_ing = 0;}
+
+
+        if(Input::get('pr_vender_art') == '' OR Input::get('pr_titulo_art') == ''){
+          $user->pr_titulo_art = 0;
+          $user->pr_vender_art = 0;
+          $user->pr_artistica = 0;
+          $user->pr_muestra_art = 0;
+          $user->pr_poblacion_art = 0;
+          $user->pr_metas_art = 0;
+        }
         else{
-        $user->pr_vender_ing = Input::get('pr_vender_ing');
+          $user->pr_artistica = Input::get('pr_artistica');
+          $user->pr_titulo_art = Input::get('pr_titulo_art');
+          $user->pr_vender_art = Input::get('pr_vender_art');
+          $user->pr_muestra_art = Input::get('pr_muestra_art');
+          $user->pr_poblacion_art = Input::get('pr_poblacion_art');
+          $user->pr_metas_art = Input::get('pr_metas_art');
         }
-        $user->pr_muestra_ing = Input::get('pr_muestra_ing');
-        $user->pr_metas_ing = Input::get('pr_metas_ing');
+       
+        if(Input::get('pr_vender_ing') == '' OR Input::get('pr_titulo_ing') == ''){
+          $user->pr_titulo_ing = 0;
+          $user->pr_vender_ing = 0;
+          $user->pr_ingles = 0;
+          $user->pr_muestra_ing = 0;
+          $user->pr_poblacion_ing = 0;
+          $user->pr_metas_ing = 0;
+        }
+        else{
+          $user->pr_ingles = Input::get('pr_ingles');
+          $user->pr_titulo_ing = Input::get('pr_titulo_ing');
+          $user->pr_vender_ing = Input::get('pr_vender_ing');
+          $user->pr_muestra_ing = Input::get('pr_muestra_ing');
+          $user->pr_poblacion_ing = Input::get('pr_poblacion_ing');
+          $user->pr_metas_ing = Input::get('pr_metas_ing');
+        }
+       
+  
         $user->metadopcion = 0;
         $user->save();
+
+ 
          return Redirect('proyeccionventas/'.$user->colegio_id)->with('status', 'ok_create');
 
     }
@@ -1372,7 +1546,6 @@ public function editarproventawebadopcion($id)
        
         $input = Input::all();
         $user = Campo::find($id);
-        $user = Campo::find($id);
         if(Input::get('pr_titulo_mat') == '0'){
         $user->pr_valor_mat = 0;
         }
@@ -1452,82 +1625,141 @@ public function editarproventawebadopcion($id)
         $user->pr_valor_art = $valorart->precio;
         }
         }
+
         $user->colegio_id = Input::get('colegio');
+        $user->ciudad_id = Auth::user()->ciudadid;
         $user->grado_id = Input::get('subcategory');
         $user->region_id = Input::get('region');
         $user->representante_id = Input::get('representante');
         $user->ano = Input::get('ano');
-        $user->pr_matematicas = Input::get('pr_matematicas');
-        $user->pr_titulo_mat = Input::get('pr_titulo_mat');
-        $user->pr_espanol = Input::get('pr_espanol');
-        $user->pr_titulo_esp = Input::get('pr_titulo_esp');
-        $user->pr_ciencias = Input::get('pr_ciencias');
-        $user->pr_titulo_cie = Input::get('pr_titulo_cie');
-        $user->pr_comprension = Input::get('pr_comprension');
-        $user->pr_titulo_com = Input::get('pr_titulo_com');
-        $user->pr_interes = Input::get('pr_interes');
-        $user->pr_titulo_int = Input::get('pr_titulo_int');
-        $user->pr_artistica = Input::get('pr_artistica');
-        $user->pr_titulo_art = Input::get('pr_titulo_art');
-        $user->pr_ingles = Input::get('pr_ingles');
-        $user->pr_poblacion_mat = Input::get('pr_poblacion_mat');
-        if(Input::get('pr_vender_mat') == ''){
-        $user->pr_vender_mat = 0;}
-        else{
-        $user->pr_vender_mat = Input::get('pr_vender_mat');
+       
+
+        if(Input::get('pr_vender_mat') == '' OR Input::get('pr_titulo_mat') == ''){
+          $user->pr_titulo_mat = 0;
+          $user->pr_vender_mat = 0;
+          $user->pr_matematicas = 0;
+          $user->pr_muestra_mat = 0;
+          $user->pr_poblacion_mat = 0;
+          $user->pr_metas_ing = 0;
         }
-        $user->pr_muestra_mat = Input::get('pr_muestra_mat');
-        $user->pr_metas_mat = Input::get('pr_metas_mat');
-        $user->pr_poblacion_esp = Input::get('pr_poblacion_esp');
-        if(Input::get('pr_vender_esp') == ''){
-        $user->pr_vender_esp = 0;}
         else{
-        $user->pr_vender_esp = Input::get('pr_vender_esp');
+          $user->pr_titulo_mat = Input::get('pr_titulo_mat');
+          $user->pr_vender_mat = Input::get('pr_vender_mat');
+          $user->pr_matematicas = Input::get('pr_matematicas');
+          $user->pr_muestra_mat = Input::get('pr_muestra_mat');
+          $user->pr_poblacion_mat = Input::get('pr_poblacion_mat');
+          $user->pr_metas_mat = Input::get('pr_metas_mat');
+
         }
-        $user->pr_muestra_esp = Input::get('pr_muestra_esp');
-        $user->pr_metas_esp = Input::get('pr_metas_esp');
-        $user->pr_poblacion_cie = Input::get('pr_poblacion_cie');
-        if(Input::get('pr_vender_cie') == ''){
-        $user->pr_vender_cie = 0;}
+
+        if(Input::get('pr_vender_esp') == '' OR Input::get('pr_titulo_esp') == ''){
+          $user->pr_titulo_esp = 0;
+          $user->pr_vender_esp = 0;
+          $user->pr_espanol = 0;
+          $user->pr_muestra_esp = 0;
+          $user->pr_poblacion_esp = 0;
+          $user->pr_metas_esp = 0;
+        }
         else{
-        $user->pr_vender_cie = Input::get('pr_vender_cie');
+          $user->pr_espanol = Input::get('pr_espanol');
+          $user->pr_titulo_esp = Input::get('pr_titulo_esp');
+          $user->pr_vender_esp = Input::get('pr_vender_esp');
+          $user->pr_muestra_esp = Input::get('pr_muestra_esp');
+          $user->pr_poblacion_esp = Input::get('pr_poblacion_esp');
+          $user->pr_metas_esp = Input::get('pr_metas_esp');
         }
-        $user->pr_muestra_cie = Input::get('pr_muestra_cie');
-        $user->pr_metas_cie = Input::get('pr_metas_cie');
-        $user->pr_poblacion_com = Input::get('pr_poblacion_com');
-        if(Input::get('pr_vender_com') == ''){
-        $user->pr_vender_com = 0;}
+
+
+        if(Input::get('pr_vender_cie') == '' OR Input::get('pr_titulo_cie') == ''){
+          $user->pr_titulo_cie = 0;
+          $user->pr_vender_cie = 0;
+          $user->pr_ciencias = 0;
+          $user->pr_muestra_cie = 0;
+          $user->pr_poblacion_cie = 0;
+          $user->pr_metas_cie = 0;
+        }
         else{
-        $user->pr_vender_com = Input::get('pr_vender_com');
+          $user->pr_ciencias = Input::get('pr_ciencias');
+          $user->pr_titulo_cie = Input::get('pr_titulo_cie');
+          $user->pr_vender_cie = Input::get('pr_vender_cie');
+          $user->pr_muestra_cie = Input::get('pr_muestra_cie');
+          $user->pr_poblacion_cie = Input::get('pr_poblacion_cie');
+          $user->pr_metas_cie = Input::get('pr_metas_cie');
         }
-        $user->pr_muestra_com = Input::get('pr_muestra_com');
-        $user->pr_metas_com = Input::get('pr_metas_com');
-        $user->pr_poblacion_int = Input::get('pr_poblacion_int');
-        if(Input::get('pr_vender_int') == ''){
-        $user->pr_vender_int = 0;}
+
+        if(Input::get('pr_vender_com') == '' OR Input::get('pr_titulo_com') == ''){
+          $user->pr_titulo_com = 0;
+          $user->pr_vender_com = 0;
+          $user->pr_comprension = 0;
+          $user->pr_muestra_com = 0;
+          $user->pr_poblacion_com = 0;
+            $user->pr_metas_com = 0;
+        }
         else{
-        $user->pr_vender_int = Input::get('pr_vender_int');
+          $user->pr_comprension = Input::get('pr_comprension');
+          $user->pr_titulo_com = Input::get('pr_titulo_com');
+          $user->pr_vender_com = Input::get('pr_vender_com');
+          $user->pr_muestra_com = Input::get('pr_muestra_com');
+          $user->pr_poblacion_com = Input::get('pr_poblacion_com');
+            $user->pr_metas_com = Input::get('pr_metas_com');
         }
-        $user->pr_muestra_int = Input::get('pr_muestra_int');
-        $user->pr_metas_int = Input::get('pr_metas_int');
-        $user->pr_poblacion_art = Input::get('pr_poblacion_art');
-        if(Input::get('pr_vender_art') == ''){
-        $user->pr_vender_art = 0;}
+
+        if(Input::get('pr_vender_int') == '' OR Input::get('pr_titulo_int') == ''){
+          $user->pr_titulo_int = 0;
+          $user->pr_vender_int = 0;
+          $user->pr_interes = 0;
+          $user->pr_muestra_int = 0;
+          $user->pr_poblacion_int = 0;
+            $user->pr_metas_int = 0;
+        }
         else{
-        $user->pr_vender_art = Input::get('pr_vender_art');
+          $user->pr_interes = Input::get('pr_interes');
+          $user->pr_titulo_int = Input::get('pr_titulo_int');
+          $user->pr_vender_int = Input::get('pr_vender_int');
+          $user->pr_muestra_int = Input::get('pr_muestra_int');
+          $user->pr_poblacion_int = Input::get('pr_poblacion_int');
+            $user->pr_metas_int = Input::get('pr_metas_int');
         }
-        $user->pr_muestra_art = Input::get('pr_muestra_art');
-        $user->pr_metas_art = Input::get('pr_metas_art');
-        $user->pr_poblacion_ing = Input::get('pr_poblacion_ing');
-        if(Input::get('pr_vender_ing') == ''){
-        $user->pr_vender_ing = 0;}
+
+
+        if(Input::get('pr_vender_art') == '' OR Input::get('pr_titulo_art') == ''){
+          $user->pr_titulo_art = 0;
+          $user->pr_vender_art = 0;
+          $user->pr_artistica = 0;
+          $user->pr_muestra_art = 0;
+          $user->pr_poblacion_art = 0;
+          $user->pr_metas_art = 0;
+        }
         else{
-        $user->pr_vender_ing = Input::get('pr_vender_ing');
+          $user->pr_artistica = Input::get('pr_artistica');
+          $user->pr_titulo_art = Input::get('pr_titulo_art');
+          $user->pr_vender_art = Input::get('pr_vender_art');
+          $user->pr_muestra_art = Input::get('pr_muestra_art');
+          $user->pr_poblacion_art = Input::get('pr_poblacion_art');
+          $user->pr_metas_art = Input::get('pr_metas_art');
         }
-        $user->pr_muestra_ing = Input::get('pr_muestra_ing');
-        $user->pr_metas_ing = Input::get('pr_metas_ing');
+       
+        if(Input::get('pr_vender_ing') == '' OR Input::get('pr_titulo_ing') == ''){
+          $user->pr_titulo_ing = 0;
+          $user->pr_vender_ing = 0;
+          $user->pr_ingles = 0;
+          $user->pr_muestra_ing = 0;
+          $user->pr_poblacion_ing = 0;
+          $user->pr_metas_ing = 0;
+        }
+        else{
+          $user->pr_ingles = Input::get('pr_ingles');
+          $user->pr_titulo_ing = Input::get('pr_titulo_ing');
+          $user->pr_vender_ing = Input::get('pr_vender_ing');
+          $user->pr_muestra_ing = Input::get('pr_muestra_ing');
+          $user->pr_poblacion_ing = Input::get('pr_poblacion_ing');
+          $user->pr_metas_ing = Input::get('pr_metas_ing');
+        }
+       
+  
         $user->metadopcion = 0;
         $user->save();
+
 
 
          return Redirect('proyeccionventasadopcion/'.$user->colegio_id)->with('status', 'ok_create');
