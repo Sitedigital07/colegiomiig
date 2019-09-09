@@ -95,11 +95,11 @@ Gestión de usuarios Libros & Libros
                                                
 
                                             <td class="text-center">
-                                              @if (DB::table('cierre')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $ano->ano)->where('cierre','=',1)->exists())
-                                              <a href="/proyeccionventasadopcion/{{$colegio->id}}" data-toggle="tooltip" data-placement="left" title="Generar Adopciòn" class="btn btn-warning"><i class="fa fa-book"></i></a>
-                                              @else
                                               <a href="/proyeccionventas/{{$colegio->id}}"  data-toggle="tooltip" data-placement="left" title="Generar Meta" class="btn btn-success"><i class="fa fa-book"></i></a>
-                                              @endif
+                                              <a href="/proyeccionventasadopcion/{{$colegio->id}}" data-toggle="tooltip" data-placement="left" title="Generar Adopciòn" class="btn btn-warning"><i class="fa fa-book"></i></a>
+                         
+                                              
+                                
                                               <a href="/editar-colegiorp/{{$colegio->id}}" data-toggle="tooltip" data-placement="top" title="Actualizar Datos"  class="btn btn-success"><i class="fa fa-clipboard"></i></a>
                                               <a href="/poblacion-registrada/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Crear Mercado" type="button" class="btn btn-info"><i class="fa fa-table"></i>
                                               </a>

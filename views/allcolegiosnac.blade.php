@@ -20,7 +20,11 @@ Gestión de usuarios Libros & Libros
                                 </li>
 
                                      <li class="active">
-                                    <a href="/representantes-lista"><i class="fa fa-building"></i> Representantes</a>
+                                    <a href="/representantes-lista"><i class="gi gi-group"></i> Representantes</a>
+                                </li>
+
+                                  <li class="active">
+                                    <a href="/informe/gerentes"><i class="gi gi-file"></i> Informe Gerentes</a>
                                 </li>
                             
                             </ul>
@@ -89,14 +93,15 @@ Gestión de usuarios Libros & Libros
 
                                             <td class="text-center">
                                               @foreach($ano as $anos)
-                                               @if (DB::table('cierre')->where('colegio_id', '=', $colegio->id)->where('ano', '=', $anos->ano)->where('cierre','=',1)->exists())
+                                            
+                                                <a href="/proyeccionventasnac/{{$colegio->id}}"  data-toggle="tooltip" data-placement="left" title="Revisar Meta" class="btn btn-success"><i class="fa fa-book"></i></a>
+
                                               <a href="/proyeccionventasadopcionnac/{{$colegio->id}}" data-toggle="tooltip" data-placement="left" title="Revisar Adopción" class="btn btn-warning"><i class="fa fa-book"></i></a>
                                         
                                                <a href="/colegio-descuentoaud/{{$colegio->id}}" data-toggle="tooltip" data-placement="right" title="Descuento Colegio" type="button" class="btn btn-info"><i class="fa fa-dollar"></i>
                                               </a>
-                                              @else
-                                              <a href="/proyeccionventasnac/{{$colegio->id}}"  data-toggle="tooltip" data-placement="left" title="Revisar Meta" class="btn btn-success"><i class="fa fa-book"></i></a>
-                                              @endif
+                                          
+                                            
                                               @endforeach
                                             </td>
                                         </tr>

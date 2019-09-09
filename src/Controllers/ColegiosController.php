@@ -826,6 +826,7 @@ public function updateesseg($id)
         $user = Esseg::find($id);
         $user->esseg = Input::get('esseg');
         $user->ano = Input::get('ano');
+        $user->ciudad_id = Input::get('ciudad');
         $user->colegio_id = Input::get('colegio');
         $user->representante_id = Auth::user()->id;
         $user->save();
