@@ -1033,7 +1033,7 @@ $query = DB::table('fecha_adopcion')
         ->get();
 
  
-         return view('informe', compact('informesweb','informesmat','informesesp','titulos','informeswebadop','representantes','ciudades','informes','informesadopcion','fechameta','fechaadopcion','proventas','esseg','essegcon','date','masa','informesadopcion','informestotales','informesadopciontotales','presupuestomet','presupuestoadop','colegiosman','dispapel','dispapelcam','date','date_futuretres','date_future','date_futuretres','date_futurecua','date_futurecinc'));
+         return view('colegiomiig::informe', compact('informesweb','informesmat','informesesp','titulos','informeswebadop','representantes','ciudades','informes','informesadopcion','fechameta','fechaadopcion','proventas','esseg','essegcon','date','masa','informesadopcion','informestotales','informesadopciontotales','presupuestomet','presupuestoadop','colegiosman','dispapel','dispapelcam','date','date_futuretres','date_future','date_futuretres','date_futurecua','date_futurecinc'));
 });
 
 

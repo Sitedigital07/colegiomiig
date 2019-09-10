@@ -846,7 +846,7 @@ public function createproventawebadopcion()
       $mema = Input::get('pr_titulo_mat')+Input::get('pr_vender_mat')+Input::get('pr_titulo_esp')+Input::get('pr_vender_esp')+Input::get('pr_titulo_cie')+Input::get('pr_vender_cie')+Input::get('pr_titulo_com')+Input::get('pr_vender_com')+Input::get('pr_titulo_int')+Input::get('pr_vender_int')+Input::get('pr_titulo_ing')+Input::get('pr_vender_ing')+Input::get('pr_titulo_art')+Input::get('pr_vender_art');
        
        if($mema == 0){
-          return Redirect('/proyeccionventas/'.Input::get('colegio'))->with('status', 'ok_danger');
+          return Redirect('/proyeccionventasadopcion/'.Input::get('colegio'))->with('status', 'ok_danger');
        }
       else{
         $user = new Campo;
@@ -1925,6 +1925,12 @@ public function editargrado($id)
        return view('usuariomiig::editargradoonce')->with('proventas', $proventas)->with('titulowebf', $titulowebf)->with('titulo', $titulo)->with('ano', $ano)->with('colegios', $colegios);
 
     }
+
+          public function eliminaresseg()
+  {
+    $esseg = DB::table('esseg_con')->delete();  
+return Redirect('/carga-esseg')->with('status', 'ok_delete');
+  }
 
 
 
