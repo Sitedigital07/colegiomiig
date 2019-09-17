@@ -668,7 +668,7 @@ public function createproventaweb()
         $user->ciudad_id = Auth::user()->ciudadid;
         $user->grado_id = Input::get('subcategory');
         $user->region_id = Input::get('region');
-        $user->representante_id = Input::get('representante');
+        $user->representante_id = Auth::user()->id;
         $user->ano = Input::get('ano');
        
 
@@ -811,6 +811,7 @@ public function createsseg()
         $user = new Esseg;
         $user->esseg = Input::get('esseg');
         $user->ano = Input::get('ano');
+        $user->ciudad_id = Input::get('ciudad');
         $user->colegio_id = Input::get('colegio');
         $user->representante_id = Auth::user()->id;
         $user->save();
@@ -936,7 +937,7 @@ public function createproventawebadopcion()
         $user->ciudad_id = Auth::user()->ciudadid;
         $user->grado_id = Input::get('subcategory');
         $user->region_id = Input::get('region');
-        $user->representante_id = Input::get('representante');
+        $user->representante_id = Auth::user()->id;
         $user->ano = Input::get('ano');
        
 
@@ -1200,7 +1201,7 @@ public function editarproventaweb($id)
         $user->ciudad_id = Auth::user()->ciudadid;
         $user->grado_id = Input::get('subcategory');
         $user->region_id = Input::get('region');
-        $user->representante_id = Input::get('representante');
+        $user->representante_id = Auth::user()->id;
         $user->ano = Input::get('ano');
        
 
@@ -1423,7 +1424,7 @@ public function editarproventawebadopcion($id)
         $user->colegio_id = Input::get('colegio');
         $user->grado_id = Input::get('subcategory');
         $user->region_id = Input::get('region');
-        $user->representante_id = Input::get('representante');
+        $user->representante_id = Auth::user()->id;
         $user->ano = Input::get('ano');
         $user->pr_matematicas = Input::get('pr_matematicas');
         $user->pr_titulo_mat = Input::get('pr_titulo_mat');
@@ -1510,7 +1511,7 @@ public function editarproventawebadopcion($id)
         $user->colegio_id = Input::get('colegio');
         $user->grado_id = Input::get('grado');
         $user->region_id = Input::get('region');
-        $user->representante_id = Input::get('representante');
+        $user->representante_id = Auth::user()->id;
         $user->ano = Input::get('ano');
         $user->pr_matematicas = Input::get('pr_matematicas');
         $user->pr_titulo_mat = Input::get('pr_titulo_mat');
@@ -1631,7 +1632,7 @@ public function editarproventawebadopcion($id)
         $user->ciudad_id = Auth::user()->ciudadid;
         $user->grado_id = Input::get('subcategory');
         $user->region_id = Input::get('region');
-        $user->representante_id = Input::get('representante');
+        $user->representante_id = Auth::user()->id;
         $user->ano = Input::get('ano');
        
 
