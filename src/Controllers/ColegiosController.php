@@ -15,6 +15,8 @@ use Digitalmiig\Colegiomiig\Campo;
 use Digitalmiig\Colegiomiig\Proventa;
 use Digitalmiig\Colegiomiig\Esseg;
 use Digitalmiig\Colegiomiig\Cierre;
+use Digitalmiig\Usuariomiig\Fecha;
+use Digitalmiig\Usuariomiig\Fechameta;
 use Digitalmiig\Colegiomiig\Descuento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +55,7 @@ class ColegiosController extends Controller
 
         $colegios = DB::table('colegios')
         ->join('ciudades', 'ciudades.ids', '=', 'colegios.ciudad_id')
-         ->leftjoin('users', 'users.id', '=', 'colegios.auditor')
+         ->leftjoin('users', 'users.id', '=', 'colegios.representante_id')
          ->select('colegios.estadoaud','colegios.codigo','colegios.nombres','ciudades.n_ciudad','colegios.emailcol','users.name','colegios.id')
         ->get();
          $ano = DB::table('configuracion')->where('id', '=', 1)->get();
@@ -291,6 +293,30 @@ public function regionciudad($id)
      */
     public function update(Request $request, $id)
     {
+
+      $camps = DB::table('colegios')->where('id','=',$id)->get();
+       foreach ($camps as $camps) {
+        $campssd = Input::get('representante');
+      }
+          if($camps->representante_id ==  $campssd){
+  
+          }
+          else{
+
+        $ano = DB::table('configuracion')->where('id', '=', 1)->get();
+        foreach($ano as $anoes){
+        $res = Proventa::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();  
+        $resdos = Campo::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
+        $resuno = Esseg::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
+        $restres = Fecha::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
+        $rescuatro = Fechameta::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();   
+        $rescuatroa = Cierre::where('colegio_id',$id)->where('ano',$anoes->ano)->delete();
+        $rescuatroav = DB::table('descuento')->where('colegio_id',$id)->where('ano',$anoes->ano)->delete();    
+          }
+          
+
+       }
+
         $input = Input::all();
         $user = Colegio::find($id);
         $user->nombres = Input::get('nombre');
@@ -1929,7 +1955,7 @@ public function editargrado($id)
 
           public function eliminaresseg()
   {
-    $esseg = DB::table('esseg_con')->delete();  
+    $esseg = DB::table('esseg_con')->truncate();  
 return Redirect('/carga-esseg')->with('status', 'ok_delete');
   }
 
