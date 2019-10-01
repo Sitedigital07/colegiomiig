@@ -98,7 +98,7 @@ Excel::create('Filename', function($excel) {
 			})->get();
 			if(!empty($data) && $data->count()){
 				foreach ($data as $key => $value) {
-					$insert[] = ['miig' => $value->miig, 'valor' => $value->valor,'ano' => $value->ano, 'colegio_id' => $value->colegio_id, 'ciudad_id' => $value->ciudad_id,'representante_id' => $value->representante_id, 'identificador' => $value->identificador,];
+					$insert[] = ['miig' => $value->miig, 'valor' => $value->valor, 'ano' => $value->ano, 'colegio_id' => $value->colegio_id, 'ciudad_id' => $value->ciudad_id, 'representante_id' => $value->representante_id, 'identificador' => $value->identificador,];
 				}
 				if(!empty($insert)){
 					DB::table('esseg_con')->insert($insert);

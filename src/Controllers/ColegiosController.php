@@ -367,7 +367,20 @@ public function regionciudad($id)
 
 public function actucolegio($id)
     {
-        $colegio = Input::get('colegio');
+      $indice = Input::get('indice');
+       $colegio = Input::get('colegio');
+       $anual = Input::get('ano');
+      if($indice == 0){
+        DB::table('proventas')->insert(array(
+        array('colegio_id' => $colegio,'ano' => $anual),
+));
+      }
+        else{
+
+        }
+
+
+       
         $input = Input::all();
         $cierre = Cierre::find($id);
         $cierre->cierre = Input::get('cierre');
