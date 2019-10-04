@@ -1213,6 +1213,7 @@ Route::get('editar-gradoweb-oncenac/{id}', 'Digitalmiig\Colegiomiig\Controllers\
 
 Route::get('proyeccionventasnac/{id}', function ($id) {
    
+    $colegios = DB::table('colegios')->where('id',"=",$id)->get();
     $proventas = DB::table('proventas')->where('colegio_id', '=', $id)->get();
     $proventasf = DB::table('proventas')->where('colegio_id', '=', $id)->get();
     $proventasprimero = DB::table('proventas')->where('colegio_id', '=', $id)->where('grado_id', '=', 1)->select('id')->orderBy('id', 'DESC')->first();   
@@ -1310,7 +1311,7 @@ Route::get('proyeccionventasnac/{id}', function ($id) {
         }
          
         $total = $cienciaswebsd+$matematicaswebsd+$espanolwebsd+$comprensionwebsd+$intereswebsd+$artisticawebsd+$ingleswebsd;
-    return view('usuariomiig::proyecciongradosnac', compact('proventas','proventasf','proventasprimero','proventassegundo','proventastercero','proventascuarto','proventasquinto','proventassexto','proventasseptimo','proventasoctavo','proventasnoveno','proventasdecimo','proventasonce','proventasonce','ano','identificador','anon','anoe','identificadores','total','esseg','anoweb','fecha','cierre'));
+    return view('usuariomiig::proyecciongradosnac', compact('proventas','proventasf','proventasprimero','proventassegundo','proventastercero','proventascuarto','proventasquinto','proventassexto','proventasseptimo','proventasoctavo','proventasnoveno','proventasdecimo','proventasonce','proventasonce','ano','identificador','anon','anoe','identificadores','total','esseg','anoweb','fecha','cierre','colegios'));
 
 });
 

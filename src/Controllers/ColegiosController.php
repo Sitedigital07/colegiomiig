@@ -370,10 +370,15 @@ public function actucolegio($id)
       $indice = Input::get('indice');
        $colegio = Input::get('colegio');
        $anual = Input::get('ano');
+       $ciudad = Input::get('ciudad');
+       $representante = Input::get('representante');
+       $region = Input::get('region');
+    
+
       if($indice == 0){
         DB::table('proventas')->insert(array(
-        array('colegio_id' => $colegio,'ano' => $anual),
-));
+      array('colegio_id' => $colegio,'ano' => $anual,'ciudad_id' => $ciudad,'region_id' => $region,'representante_id' => $representante),
+    ));
       }
         else{
 
@@ -391,8 +396,22 @@ public function actucolegio($id)
     }
 
 public function cierrecolegio()
-    {
+    {   
+        $indice = Input::get('indice');
         $colegio = Input::get('colegio');
+        $anual = Input::get('ano');
+        $ciudad = Input::get('ciudad');
+        $representante = Input::get('representante');
+        $region = Input::get('region');
+          if($indice == 0){
+        DB::table('proventas')->insert(array(
+      array('colegio_id' => $colegio,'ano' => $anual,'ciudad_id' => $ciudad,'region_id' => $region,'representante_id' => $representante),
+    ));
+      }
+        else{
+
+        }
+
         $cierre = new Cierre;
         $cierre->cierre = Input::get('cierre');
         $cierre->ano = Input::get('ano');
