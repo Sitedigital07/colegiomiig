@@ -92,8 +92,9 @@ Gestión de usuarios Libros & Libros
                                              <td>{{$colegio->name}}</td>
 
                                             <td class="text-center">
+                                           
                                               @foreach($ano as $anos)
-                                            
+                                                
                                                 <a href="/proyeccionventasnac/{{$colegio->id}}"  data-toggle="tooltip" data-placement="left" title="Revisar Meta" class="btn btn-success"><i class="fa fa-book"></i></a>
 
                                               <a href="/proyeccionventasadopcionnac/{{$colegio->id}}" data-toggle="tooltip" data-placement="left" title="Revisar Adopción" class="btn btn-warning"><i class="fa fa-book"></i></a>
