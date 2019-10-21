@@ -45,6 +45,8 @@ class ColegiosController extends Controller
                 
           )
         ->get();
+
+
         
         return view('colegiomiig::allcolegios')->with('colegios', $colegios);
     }

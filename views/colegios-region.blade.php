@@ -21,7 +21,7 @@ Gestión de usuarios Libros & Libros
                                     <a href="/colegios-region"><i class="fa fa-building"></i> Colegios</a>
                                 </li>
                                  <li class="active">
-                                    <a href="/informe/representantes"><i class="fa fa-laptop"></i> Informe Colegios</a>
+                                    <a href="/filtro-representante"><i class="fa fa-laptop"></i> Informe Colegios</a>
                                 </li>
           
    

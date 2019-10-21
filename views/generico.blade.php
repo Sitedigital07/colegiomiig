@@ -23,7 +23,74 @@
 	<div class="container-fluid">
 	
 	@foreach($colegios as $colegiosweb)
+
+
+
 		<h4 style="background:#e0e0e0;padding:15px;color:#989898">{{$colegiosweb->nombres}}</h4>
+
+		<table id="testTable" class="table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<td>Regional</td>
+					<td>Ciudad</td>
+					<td>Dane</td>
+					<td>Representante</td>
+					<td>Presupuesto Esseg</td>
+					<td>Consumo</td>
+					<td>Descuento</td>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr>
+				@foreach($regional as $regionals)
+				@if($regionals->id == $colegiosweb->region_id)
+				<th>{{$regionals->region}}</th>
+				@endif
+				@endforeach
+				@foreach($ciudades as $ciudadesw)
+				@if($ciudadesw->ids == $colegiosweb->ciudad_id)
+				<th>{{$ciudadesw->n_ciudad}}</th>
+				@endif
+				@endforeach
+				<th>{{$colegiosweb->codigo}}</th>
+				@foreach($representante as $representantes)
+				@if($representantes->id == $colegiosweb->representante_id)
+				<th>{{$representantes->name}} {{$representantes->last_name}}</th>
+				@endif
+				@endforeach
+
+				@if(DB::table('esseg')->where('colegio_id','=',$colegiosweb->id)->where('ano','=',$ano)->count() == 0)
+				<th>Sin esseg</th>
+				@else
+				@foreach($esseg as $essegs)
+				@if($essegs->colegio_id == $colegiosweb->id)
+			    <th>$ {{number_format($essegs->esseg,0,",",".")}}</th>
+			    @else
+			    @endif
+			    @endforeach
+			 	@endif
+			
+		
+				@foreach($essegcon as $essegcons)
+			    @if($essegcons->colegio_id == $colegiosweb->id)
+				<th>{{$essegcons->valor}}</th>
+				@else
+				@endif
+				@endforeach
+
+				@if(DB::table('descuento')->where('colegio_id','=',$colegiosweb->id)->where('ano','=',$ano)->count() == 0)
+				<th>Sin Descuento</th>
+				@else
+				@foreach($descuentos as $descuentos)
+				@if($descuentos->colegio_id == $colegiosweb->id)
+				<th>{{$descuentos->descuento}} %</th>
+				@endif
+				@endforeach
+				@endif
+			</tr> 
+			</tbody>
+		</table>
 
 		<table id="testTable" class="table table-bordered table-striped table-hover">
 			<thead>
@@ -32,24 +99,31 @@
 					<th style="background:#32ac63; color:#fff">T.Matemáticas</th>
 					<th>Venta</th>
 					<th>Muestras</th>
+					<th>Población</th>
 					<th style="background:#32ac63; color:#fff">T.Español</th>
 					<th>Venta</th>
 					<th>Muestras</th>
+					<th>Población</th>
 					<th style="background:#32ac63; color:#fff">T.Ciencias</th>
 					<th>Venta</th>
 					<th>Muestras</th>
+					<th>Población</th>
 					<th style="background:#32ac63; color:#fff">T.Comprensión</th>
 					<th>Venta</th>
 					<th>Muestras</th>
+					<th>Población</th>
 					<th style="background:#32ac63; color:#fff">T.Inglés</th>
 					<th>Venta</th>
 					<th>Muestras</th>
+					<th>Población</th>
 					<th style="background:#32ac63; color:#fff">T.Artes</th>
 					<th>Venta</th>
 					<th>Muestras</th>
+					<th>Población</th>
 					<th style="background:#32ac63; color:#fff">T.Interes</th>
 					<th>Venta</th>
 					<th>Muestras</th>
+					<th>Población</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -98,6 +172,11 @@
 					@else
 					<td>{{$generalweb->muestra_mat}}</td>
 					@endif
+					@if($generalweb->poblacion_mat == '')
+					<td  width="2">0</td>
+					@else
+					<td>{{$generalweb->poblacion_mat}}</td>
+					@endif
 					@if($generalweb->titulo_esp == 0)
 					<td width="150">No aplica</td>
 					@else
@@ -112,6 +191,11 @@
 					<td>0</td>
 					@else
 					<td>{{$generalweb->muestra_esp}}</td>
+					@endif
+					@if($generalweb->poblacion_esp == '')
+					<td  width="2">0</td>
+					@else
+					<td>{{$generalweb->poblacion_esp}}</td>
 					@endif
 					@if($generalweb->titulo_cie == 0)
 					<td width="150">No aplica</td>
@@ -128,6 +212,11 @@
 					@else
 					<td>{{$generalweb->muestra_cie}}</td>
 					@endif
+					@if($generalweb->poblacion_cie == '')
+					<td  width="2">0</td>
+					@else
+					<td>{{$generalweb->poblacion_cie}}</td>
+					@endif
 					@if($generalweb->titulo_com == 0)
 					<td width="150">No aplica</td>
 					@else
@@ -142,6 +231,11 @@
 					<td>0</td>
 					@else
 					<td>{{$generalweb->muestra_com}}</td>
+					@endif
+					@if($generalweb->poblacion_com == '')
+					<td  width="2">0</td>
+					@else
+					<td>{{$generalweb->poblacion_com}}</td>
 					@endif
 					@if($generalweb->titulo_ing == 0)
 					<td width="150">No aplica</td>
@@ -158,6 +252,11 @@
 					@else
 					<td>{{$generalweb->muestra_ing}}</td>
 					@endif
+					@if($generalweb->poblacion_ing == '')
+					<td  width="2">0</td>
+					@else
+					<td>{{$generalweb->poblacion_ing}}</td>
+					@endif
 					@if($generalweb->titulo_art == 0)
 					<td width="150">No aplica</td>
 					@else
@@ -172,6 +271,11 @@
 					<td>0</td>
 					@else
 					<td>{{$generalweb->muestra_art}}</td>
+					@endif
+					@if($generalweb->poblacion_art == '')
+					<td  width="2">0</td>
+					@else
+					<td>{{$generalweb->poblacion_art}}</td>
 					@endif
 					@if($generalweb->titulo_int == 0)
 					<td width="150">No aplica</td>
@@ -188,6 +292,11 @@
 					@else
 					<td>{{$generalweb->muestra_int}}</td>
 					@endif
+					@if($generalweb->poblacion_int == '')
+					<td  width="2">0</td>
+					@else
+					<td>{{$generalweb->poblacion_int}}</td>
+					@endif
 
 				</tr>
 		
@@ -195,6 +304,77 @@
 				@endif
 				@endforeach
 			</tbody>
+			<tfooter>
+				<tr>
+					<th>--</th>
+					<th>--</th>
+					@foreach($sumamat as $sumamats)
+					@if($sumamats->colegio_id == $colegiosweb->id)
+					<th>{{$sumamats->suma_mat}}</th>
+					<th>{{$sumamats->muestra_mat}}</th>
+					<th>{{$sumamats->poblacion_mat}}</th>
+					@else
+					@endif
+					@endforeach
+					<th>--</th>
+					@foreach($sumaesp as $sumaesps)
+					@if($sumaesps->colegio_id == $colegiosweb->id)
+					<th>{{$sumaesps->suma_esp}}</th>
+					<th>{{$sumaesps->muestra_esp}}</th>
+					<th>{{$sumaesps->poblacion_esp}}</th>
+					@else
+					@endif
+					@endforeach
+					<th>--</th>
+					@foreach($sumacie as $sumacies)
+					@if($sumacies->colegio_id == $colegiosweb->id)
+					<th>{{$sumacies->suma_cie}}</th>
+					<th>{{$sumacies->muestra_cie}}</th>
+					<th>{{$sumacies->poblacion_cie}}</th>
+					@else
+					@endif
+					@endforeach
+					<th>--</th>
+					@foreach($sumacom as $sumacoms)
+					@if($sumacoms->colegio_id == $colegiosweb->id)
+					<th>{{$sumacoms->suma_com}}</th>
+					<th>{{$sumacoms->muestra_com}}</th>
+					<th>{{$sumacoms->poblacion_com}}</th>
+					@else
+					@endif
+					@endforeach
+					<th>--</th>
+					@foreach($sumaing as $sumaings)
+					@if($sumaings->colegio_id == $colegiosweb->id)
+					<th>{{$sumaings->suma_ing}}</th>
+					<th>{{$sumaings->muestra_ing}}</th>
+					<th>{{$sumaings->poblacion_ing}}</th>
+					@else
+					@endif
+					@endforeach
+					<th>--</th>
+					@foreach($sumaart as $sumaarts)
+					@if($sumaarts->colegio_id == $colegiosweb->id)
+					<th>{{$sumaarts->suma_art}}</th>
+					<th>{{$sumaarts->muestra_art}}</th>
+					<th>{{$sumaarts->poblacion_art}}</th>
+					@else
+					@endif
+					@endforeach
+					<th>--</th>
+					@foreach($sumaint as $sumaints)
+					@if($sumaints->colegio_id == $colegiosweb->id)
+					<th>{{$sumaints->suma_int}}</th>
+					<th>{{$sumaints->muestra_int}}</th>
+					<th>{{$sumaints->poblacion_int}}</th>
+					@else
+					@endif
+					@endforeach
+		
+
+				</tr>
+
+			</tfooter>
 		</table>
 
 

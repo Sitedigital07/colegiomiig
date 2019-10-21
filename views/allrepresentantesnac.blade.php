@@ -14,13 +14,21 @@ Gestión de usuarios Libros & Libros
 
 
 <div class="content-header">
-                            <ul class="nav-horizontal text-center">
+                             <ul class="nav-horizontal text-center">
                                 <li class="active">
                                     <a href="/colegios-lista"><i class="fa fa-building"></i> Colegios</a>
                                 </li>
 
                                      <li class="active">
-                                    <a href="/representantes-lista"><i class="fa fa-building"></i> Representantes</a>
+                                    <a href="/representantes-lista"><i class="gi gi-group"></i> Representantes</a>
+                                </li>
+
+                                  <li class="active">
+                                    <a href="/filtro-gerentesnac"><i class="gi gi-file"></i> Informe Gerentes</a>
+                                </li>
+
+                                 <li class="active">
+                                    <a href="/informe/gerentes-matriz"><i class="gi gi-file"></i> Matriz</a>
                                 </li>
                             
                             </ul>

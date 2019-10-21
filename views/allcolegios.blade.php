@@ -24,6 +24,10 @@ Gestión de usuarios Libros & Libros
                                 <li>
                                     <a href="/excel-colegios"><i class="fa fa-download"></i> Importar Exportar</a>
                                 </li>
+                                
+                                   <li>
+                                    <a href="/informe/gerentes-matrizadm"><i class="fa fa-user-plus"></i> Matriz</a>
+                                </li>
                             </ul>
                         </div>
 

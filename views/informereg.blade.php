@@ -192,7 +192,7 @@
 
 
   <td>
-@foreach($verdeweb as $verdewebs)
+ @foreach($verdeweb as $verdewebs)
   @if($ciudades->ids == $verdewebs->ciudad_id)
     Verde:{{$verdewebs->fecha}}  
    @endif
@@ -249,13 +249,18 @@ Amarillo: {{$amarillowebs->fecha}}
 <td><b>{{number_format($informesadopciontotales->total_adop-$informestotales->total_met,0,",",".")}}</b></td>
 <td><b>${{number_format($informesadopciontotales->total_adopval-$informestotales->total_metval,0,",",".")}}</b></td>
 @endif
-<td><b>${{number_format(DB::table('esseg')->sum('esseg'),0,",",".")}}</b></td>
-<td><b>${{number_format(DB::table('esseg_con')->sum('valor'),0,",",".")}}</b></td>
-@foreach($presupuestomet as $presupuestometd)
-<td><b>{{number_format($presupuestometd->muestra_mat+$presupuestometd->muestra_esp+$presupuestometd->muestra_cie+$presupuestometd->muestra_com+$presupuestometd->muestra_int+$presupuestometd->muestra_ing+$presupuestometd->muestra_art,0,",",".")}}</b></td>
+
+@foreach($essegcol as $essegcol)
+<td><b>${{number_format($essegcol->esseg,0,",",".")}}</b></td>
 @endforeach
-@foreach($presupuestoadop as $presupuestoadops)
-<td><b>{{number_format($presupuestoadops->muestra_mat+$presupuestoadops->muestra_esp+$presupuestoadops->muestra_cie+$presupuestoadops->muestra_com+$presupuestoadops->muestra_int+$presupuestoadops->muestra_ing+$presupuestoadops->muestra_art,0,",",".")}}</b></td>
+@foreach($essegcolcon as $essegcolcon)
+<td><b>${{number_format($essegcolcon->valor,0,",",".")}}</b></td>
+@endforeach
+@foreach($presupuestomet as $presupuestomet)
+<td><b>{{number_format($presupuestomet->muestra_mat+$presupuestomet->muestra_cie+$presupuestomet->muestra_com+$presupuestomet->muestra_ing+$presupuestomet->muestra_int+$presupuestomet->muestra_art+$presupuestomet->muestra_esp,0,",",".")}}</b></td>
+@endforeach
+@foreach($presupuestocon as $presupuestocon)
+<td><b>{{number_format($presupuestocon->muestra_mat+$presupuestocon->muestra_cie+$presupuestocon->muestra_com+$presupuestocon->muestra_ing+$presupuestocon->muestra_int+$presupuestocon->muestra_art+$presupuestocon->muestra_esp,0,",",".")}}</b></td>
 @endforeach
 <td>
 
@@ -269,9 +274,3 @@ Amarillo: {{$amarillowebs->fecha}}
 
 
 </div>
-
-
-
-                 
-
-        

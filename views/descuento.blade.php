@@ -1,5 +1,4 @@
-
-@extends ('adminsite.asistente')
+@extends ('adminsite.representante')
 
 <!-- Define el titulo de la Página -->    
 @section('title')
@@ -16,20 +15,24 @@ Gestión de usuarios Libros & Libros
 
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
-                          
-
                                 <li class="active">
-                                  @if(Auth::user()->rol_id == 4)
-                                  
-                                    <a href="/informe/vendedorreg"><i class="fa fa-building"></i> Colegios</a>
-                                    @else
-                                    <a href="/colegios-region"><i class="fa fa-building"></i> Colegios</a>
-                                    @endif
+                                    <a href="/colegios-lista"><i class="fa fa-building"></i> Colegios</a>
                                 </li>
-          
+
+                                     <li class="active">
+                                    <a href="/representantes-lista"><i class="gi gi-group"></i> Representantes</a>
+                                </li>
+
+                                  <li class="active">
+                                    <a href="/informe/gerentes"><i class="gi gi-file"></i> Informe Gerentes</a>
+                                </li>
+
+                                 <li class="active">
+                                    <a href="/informe/gerentes-matriz"><i class="gi gi-file"></i> Matriz</a>
+                                </li>
+                            
                             </ul>
                         </div>
-
   
  <div class="container">
    <?php $status=Session::get('status');?>

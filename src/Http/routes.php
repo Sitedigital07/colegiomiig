@@ -4,6 +4,7 @@
 Route::post('/editarproventa/{id}', 'Digitalmiig\Colegiomiig\Controllers\ColegiosController@editarproventa');
 Route::group(['middleware' => ['auditor']], function (){
 
+
 Route::post('/crearciudad', 'Digitalmiig\Colegiomiig\Controllers\CiudadesController@create');
 
 Route::get('/editar-ciudad/{id}', function ($id) {
@@ -66,6 +67,220 @@ Route::post('importadorcolegio', 'Digitalmiig\Colegiomiig\Controllers\Exportador
 
 
 Route::group(['middleware' => ['auditor']], function (){
+
+
+Route::get('/informe/representantesadm', function () {
+
+$ciudad = Input::get('ciudad');
+$ano = Input::get('ano');
+
+
+
+$colegios = DB::table('colegios')
+->select(
+                  'colegios.id',
+                  'colegios.codigo',
+                  'colegios.nombres',
+                  'colegios.region_id',
+                  'colegios.ciudad_id',
+                  'colegios.representante_id'
+                
+          )
+->where('ciudad_id','=',$ciudad)
+->get();
+
+
+$descuentos = DB::table('descuento')
+->select(
+           'colegio_id',
+           'ano',
+           'descuento'
+)
+->get();
+
+
+
+$esseg = DB::table('esseg')
+->select(
+                  'id',
+                  'colegio_id',
+                  'esseg',
+                  'ano'            
+          )
+->where('ciudad_id','=',$ciudad)
+->where('ano','=',$ano)
+->get();
+
+
+
+$essegcon = DB::table('esseg_con')
+->select(
+                  'id',
+                  'colegio_id',
+                  'valor',
+                  'ano'             
+          )
+->where('ciudad_id','=',$ciudad)
+->where('ano','=',$ano)
+->get();
+
+
+
+$representante = DB::table('users')
+->select(
+                  'id','name','last_name'            
+          )
+->get();
+
+
+$regional = DB::table('regiones')
+->get();
+
+
+
+$ciudades = DB::table('ciudades')
+->get();
+
+
+
+$general = DB::table('campos')
+->select(DB::raw('pr_titulo_mat as titulo_mat'),
+ DB::raw('pr_vender_mat as vender_mat'),
+ DB::raw('pr_muestra_mat as muestra_mat'),
+ DB::raw('pr_poblacion_mat as poblacion_mat'),
+ DB::raw('pr_titulo_esp as titulo_esp'),
+ DB::raw('pr_vender_esp as vender_esp'),
+ DB::raw('pr_muestra_esp as muestra_esp'),
+ DB::raw('pr_poblacion_esp as poblacion_esp'),
+ DB::raw('pr_titulo_cie as titulo_cie'),
+ DB::raw('pr_vender_cie as vender_cie'),
+ DB::raw('pr_muestra_cie as muestra_cie'),
+ DB::raw('pr_poblacion_cie as poblacion_cie'),
+ DB::raw('pr_titulo_com as titulo_com'),
+ DB::raw('pr_vender_com as vender_com'),
+ DB::raw('pr_muestra_com as muestra_com'),
+ DB::raw('pr_poblacion_com as poblacion_com'),
+ DB::raw('pr_titulo_ing as titulo_ing'),
+ DB::raw('pr_vender_ing as vender_ing'),
+ DB::raw('pr_muestra_ing as muestra_ing'),
+ DB::raw('pr_poblacion_ing as poblacion_ing'),
+ DB::raw('pr_titulo_art as titulo_art'),
+ DB::raw('pr_vender_art as vender_art'),
+ DB::raw('pr_muestra_art as muestra_art'),
+ DB::raw('pr_poblacion_art as poblacion_art'),
+ DB::raw('pr_titulo_art as titulo_int'),
+ DB::raw('pr_vender_art as vender_int'),
+ DB::raw('pr_muestra_art as muestra_int'),
+ DB::raw('pr_poblacion_int as poblacion_int'),
+ DB::raw('colegio_id as colegio_id'),
+ DB::raw('ano as ano'),
+ DB::raw('grado_id as grado_id'))
+->where('ciudad_id','=',$ciudad)
+->where('ano','=',$ano)
+->get();
+
+$titulos = DB::table('titulo')->get();
+
+
+$sumamat = DB::table('campos')
+->select(DB::raw('sum(pr_vender_mat) as suma_mat'),
+DB::raw('sum(pr_muestra_mat) as muestra_mat'),
+DB::raw('sum(pr_poblacion_mat) as poblacion_mat'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+
+$sumaesp = DB::table('campos')
+->select(DB::raw('sum(pr_vender_esp) as suma_esp'),
+DB::raw('sum(pr_muestra_esp) as muestra_esp'),
+DB::raw('sum(pr_poblacion_esp) as poblacion_esp'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+
+$sumacie = DB::table('campos')
+->select(DB::raw('sum(pr_vender_cie) as suma_cie'),
+DB::raw('sum(pr_muestra_cie) as muestra_cie'),
+DB::raw('sum(pr_poblacion_cie) as poblacion_cie'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+
+
+$sumacom = DB::table('campos')
+->select(DB::raw('sum(pr_vender_com) as suma_com'),
+DB::raw('sum(pr_muestra_com) as muestra_com'),
+DB::raw('sum(pr_poblacion_com) as poblacion_com'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+
+$sumaing = DB::table('campos')
+->select(DB::raw('sum(pr_vender_ing) as suma_ing'),
+DB::raw('sum(pr_muestra_ing) as muestra_ing'),
+DB::raw('sum(pr_poblacion_ing) as poblacion_ing'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+$sumaart = DB::table('campos')
+->select(DB::raw('sum(pr_vender_art) as suma_art'),
+DB::raw('sum(pr_muestra_art) as muestra_art'),
+DB::raw('sum(pr_poblacion_art) as poblacion_art'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+
+$sumaint = DB::table('campos')
+->select(DB::raw('sum(pr_vender_int) as suma_int'),
+DB::raw('sum(pr_muestra_int) as muestra_int'),
+DB::raw('sum(pr_poblacion_int) as poblacion_int'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+if(DB::table('proventas')->where('ano','=',$ano)->first()){
+    return view('colegiomiig::generico')->with('general', $general)->with('colegios', $colegios)->with('titulos', $titulos)->with('sumamat', $sumamat)->with('sumaesp', $sumaesp)->with('sumacie', $sumacie)->with('sumacom', $sumacom)->with('sumaing', $sumaing)->with('sumaart', $sumaart)->with('sumaint', $sumaint)->with('esseg', $esseg)->with('essegcon', $essegcon)->with('representante', $representante)->with('regional', $regional)->with('ciudades', $ciudades)->with('ano', $ano)->with('descuentos', $descuentos);
+}
+    else{
+ return view('colegiomiig::respuesta-filtro');
+
+}
+
+});
+
+Route::get('/informe/gerentes-matrizadm', function () {
+
+$ciudades = DB::table('ciudades')->get();
+ return view('colegiomiig::filtro-informeadm')->with('ciudades', $ciudades);
+
+});
 
 Route::get('/informe/generalweb', function () {
     $colegios = DB::table('colegios')->get();
@@ -477,12 +692,473 @@ Route::post('informe/titulos', function(){
 });
 
 Route::group(['middleware' => ['gerentereg']], function (){
+
+
+Route::get('/informe/gerentesweb', function () {
+
+ $ano = Input::get('ano');
+
+ 
+
+        $ciudades = DB::table('ciudades')
+        ->where('region_id','=',Auth::user()->regionid)
+        ->get();
+
+
+
+        $diferenciameta = DB::table('proventas')
+         ->select(DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_art+pr_vender_ing) as totalven'),
+         DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_art*pr_valor_art+pr_vender_ing*pr_valor_ing) as totalval'),
+         DB::raw('ciudad_id as ciudad_id'),
+         DB::raw('ano as ano'))
+         ->where('ano','=',$ano)
+         ->groupBy('ciudad_id')
+         ->get();
+
+          $diferenciaadopcion = DB::table('campos')
+         ->select(DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_art+pr_vender_ing) as totalven'),
+         DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_art*pr_valor_art+pr_vender_ing*pr_valor_ing) as totalval'),
+         DB::raw('ciudad_id as ciudad_id'),
+         DB::raw('ano as ano'))
+         ->where('ano','=',$ano)
+         ->groupBy('ciudad_id')
+         ->get();
+
+
+
+
+
+
+
+    
+       $date = date("Y-m-d");
+        $date_future = strtotime('+15 day', strtotime($date));
+        $date_future = date('Y-m-d', $date_future);
+        $date_futuretres = strtotime('+15 day', strtotime($date));
+        $date_futuretres = date('Y-m-d', $date_futuretres);
+        $date_futurecua = strtotime('+29 day', strtotime($date));
+        $date_futurecua = date('Y-m-d', $date_futurecua);
+        $date_futurecinc = strtotime('+30 day', strtotime($date));
+        $date_futurecinc = date('Y-m-d', $date_futurecinc);
+
+
+
+        $informes = DB::table('proventas')
+        ->select(DB::raw('(pr_titulo_mat) as titulo_mat'),
+         DB::raw('sum(pr_vender_mat*pr_valor_mat) as vender_mat'), 
+         DB::raw('sum(pr_vender_esp*pr_valor_esp) as vender_esp'),
+         DB::raw('sum(pr_vender_cie*pr_valor_cie) as vender_cie'),
+         DB::raw('sum(pr_vender_com*pr_valor_com) as vender_com'),
+         DB::raw('sum(pr_vender_int*pr_valor_int) as vender_int'),
+         DB::raw('sum(pr_vender_ing*pr_valor_ing) as vender_ing'),
+         DB::raw('sum(pr_vender_art*pr_valor_art) as vender_art'),
+         DB::raw('sum(pr_vender_mat) as suma_mat'),
+         DB::raw('sum(pr_vender_esp) as suma_esp'),
+         DB::raw('sum(pr_vender_cie) as suma_cie'),
+         DB::raw('sum(pr_vender_com) as suma_com'),
+         DB::raw('sum(pr_vender_int) as suma_int'),
+         DB::raw('sum(pr_vender_ing) as suma_ing'),
+         DB::raw('sum(pr_vender_art) as suma_art'),
+         DB::raw('sum(pr_muestra_mat) as muestra_mat'),
+         DB::raw('sum(pr_muestra_esp) as muestra_esp'),
+         DB::raw('sum(pr_muestra_cie) as muestra_cie'),
+         DB::raw('sum(pr_muestra_com) as muestra_com'),
+         DB::raw('sum(pr_muestra_int) as muestra_int'),
+         DB::raw('sum(pr_muestra_ing) as muestra_ing'),
+         DB::raw('sum(pr_muestra_art) as muestra_art'),
+         DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_ing+pr_vender_art) as total_met'),
+         DB::raw('sum(pr_muestra_mat+pr_muestra_esp+pr_muestra_cie+pr_muestra_com+pr_muestra_int+pr_muestra_ing+pr_muestra_art) as total_muestramet'),
+         DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_metval'),
+         DB::raw('ciudad_id as ciudad_id'),
+         DB::raw('ano as ano'))
+        ->where('ano','=',$ano)
+        ->groupBy('ciudad_id')
+        ->get();
+
+        $rojo = DB::table("colegios")
+                ->join('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
+                ->where('colegios.ciudad_id',1)
+                ->where('fecha' ,'<', $date_future)->count();
+
+
+
+          $informestotales = DB::table('proventas')
+        ->select(DB::raw('(pr_titulo_mat) as titulo_mat'),
+         DB::raw('sum(pr_vender_mat*pr_valor_mat) as vender_mat'), 
+         DB::raw('sum(pr_vender_esp*pr_valor_esp) as vender_esp'),
+         DB::raw('sum(pr_vender_cie*pr_valor_cie) as vender_cie'),
+         DB::raw('sum(pr_vender_com*pr_valor_com) as vender_com'),
+         DB::raw('sum(pr_vender_int*pr_valor_int) as vender_int'),
+         DB::raw('sum(pr_vender_ing*pr_valor_ing) as vender_ing'),
+         DB::raw('sum(pr_vender_art*pr_valor_art) as vender_art'),
+         DB::raw('sum(pr_vender_mat) as suma_mat'),
+         DB::raw('sum(pr_vender_esp) as suma_esp'),
+         DB::raw('sum(pr_vender_cie) as suma_cie'),
+         DB::raw('sum(pr_vender_com) as suma_com'),
+         DB::raw('sum(pr_vender_int) as suma_int'),
+         DB::raw('sum(pr_vender_ing) as suma_ing'),
+         DB::raw('sum(pr_vender_art) as suma_art'),
+         DB::raw('sum(pr_muestra_mat) as muestra_mat'),
+         DB::raw('sum(pr_muestra_esp) as muestra_esp'),
+         DB::raw('sum(pr_muestra_cie) as muestra_cie'),
+         DB::raw('sum(pr_muestra_com) as muestra_com'),
+         DB::raw('sum(pr_muestra_int) as muestra_int'),
+         DB::raw('sum(pr_muestra_ing) as muestra_ing'),
+         DB::raw('sum(pr_muestra_art) as muestra_art'),
+         DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_ing+pr_vender_art) as total_met'),
+         DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_metval'),
+         DB::raw('ano as ano'),
+         DB::raw('region_id as region_id'))
+        ->where('region_id','=',Auth::user()->regionid)
+        ->where('ano','=',$ano)
+        ->get();
+ 
+   
+
+        $informesadopcion = DB::table('campos')
+        ->select(DB::raw('sum(pr_vender_mat*pr_valor_mat) as vender_mat'),
+         DB::raw('sum(pr_vender_esp*pr_valor_esp) as vender_esp'),
+         DB::raw('sum(pr_vender_cie*pr_valor_cie) as vender_cie'),
+         DB::raw('sum(pr_vender_com*pr_valor_com) as vender_com'),
+         DB::raw('sum(pr_vender_int*pr_valor_int) as vender_int'),
+         DB::raw('sum(pr_vender_ing*pr_valor_ing) as vender_ing'),
+         DB::raw('sum(pr_vender_art*pr_valor_art) as vender_art'),
+         DB::raw('sum(pr_vender_mat) as suma_mat'),
+         DB::raw('sum(pr_vender_esp) as suma_esp'),
+         DB::raw('sum(pr_vender_cie) as suma_cie'),
+         DB::raw('sum(pr_vender_com) as suma_com'),
+         DB::raw('sum(pr_vender_int) as suma_int'),
+         DB::raw('sum(pr_vender_ing) as suma_ing'),
+         DB::raw('sum(pr_vender_art) as suma_art'),
+         DB::raw('sum(pr_muestra_mat) as muestra_mat'),
+         DB::raw('sum(pr_muestra_esp) as muestra_esp'),
+         DB::raw('sum(pr_muestra_cie) as muestra_cie'),
+         DB::raw('sum(pr_muestra_com) as muestra_com'),
+         DB::raw('sum(pr_muestra_int) as muestra_int'),
+         DB::raw('sum(pr_muestra_ing) as muestra_ing'),
+         DB::raw('sum(pr_muestra_art) as muestra_art'),
+         DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_ing+pr_vender_art) as total_adop'),
+         DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_adopval'),
+         DB::raw('ciudad_id as ciudad_id'),
+         DB::raw('ano as ano'))
+        ->groupBy('ciudad_id')
+        ->where('ano','=',$ano)
+        ->get();
+
+
+        $muestrapre = DB::table('proventas')
+        ->join('users','users.id','=','proventas.representante_id')
+        ->select(
+         DB::raw('sum(pr_muestra_mat+pr_muestra_esp+pr_muestra_cie+pr_muestra_com+pr_muestra_int+pr_muestra_ing+pr_muestra_art) as muestra'),
+         DB::raw('ano as ano'),
+         DB::raw('region_id as region_id'))
+        ->where('region_id','=',Auth::user()->regionid)
+        ->where('ano','=',$ano)
+        ->get();
+
+           $muestracon = DB::table('campos')
+        ->join('users','users.id','=','campos.representante_id')
+        ->select(
+         DB::raw('sum(pr_muestra_mat+pr_muestra_esp+pr_muestra_cie+pr_muestra_com+pr_muestra_int+pr_muestra_ing+pr_muestra_art) as muestra_mat'),
+         DB::raw('ano as ano'),
+         DB::raw('region_id as region_id'))
+        ->where('region_id','=',Auth::user()->regionid)
+        ->where('ano','=',$ano)
+        ->get();
+
+
+
+
+
+          $presupuestomet = DB::table('proventas')
+            ->join('users','users.id','=','proventas.representante_id')
+        ->select(DB::raw('sum(pr_muestra_mat) as muestra_mat'),
+         DB::raw('sum(pr_muestra_esp) as muestra_esp'),
+         DB::raw('sum(pr_muestra_cie) as muestra_cie'),
+         DB::raw('sum(pr_muestra_com) as muestra_com'),
+         DB::raw('sum(pr_muestra_int) as muestra_int'),
+         DB::raw('sum(pr_muestra_ing) as muestra_ing'),
+         DB::raw('sum(pr_muestra_art) as muestra_art'),
+         DB::raw('colegio_id as colegio_id'),
+         DB::raw('ano as ano'),
+         DB::raw('ciudad_id as ciudad_id'))
+         ->where('ano','=',$ano)
+         ->where('region_id','=',Auth::user()->regionid)
+         ->groupBy('region_id')
+        ->get();
+
+
+                $presupuestocon = DB::table('campos')
+            ->join('users','users.id','=','campos.representante_id')
+        ->select(DB::raw('sum(pr_muestra_mat) as muestra_mat'),
+         DB::raw('sum(pr_muestra_esp) as muestra_esp'),
+         DB::raw('sum(pr_muestra_cie) as muestra_cie'),
+         DB::raw('sum(pr_muestra_com) as muestra_com'),
+         DB::raw('sum(pr_muestra_int) as muestra_int'),
+         DB::raw('sum(pr_muestra_ing) as muestra_ing'),
+         DB::raw('sum(pr_muestra_art) as muestra_art'),
+         DB::raw('colegio_id as colegio_id'),
+         DB::raw('ano as ano'),
+         DB::raw('ciudad_id as ciudad_id'))
+         ->where('ano','=',$ano)
+         ->where('region_id','=',Auth::user()->regionid)
+         ->groupBy('region_id')
+        ->get();
+
+  
+
+
+
+          $presupuestoadop = DB::table('campos')
+        ->select(DB::raw('sum(pr_muestra_mat) as muestra_mat'),
+         DB::raw('sum(pr_muestra_esp) as muestra_esp'),
+         DB::raw('sum(pr_muestra_cie) as muestra_cie'),
+         DB::raw('sum(pr_muestra_com) as muestra_com'),
+         DB::raw('sum(pr_muestra_int) as muestra_int'),
+         DB::raw('sum(pr_muestra_ing) as muestra_ing'),
+         DB::raw('sum(pr_muestra_art) as muestra_art'),
+         DB::raw('sum(pr_muestra_mat+pr_muestra_esp+pr_muestra_cie+pr_muestra_com+pr_muestra_int+pr_muestra_ing+pr_muestra_art) as total_adop'),
+         DB::raw('colegio_id as colegio_id'),
+         DB::raw('ano as ano'))
+         ->where('ano','=',$ano)
+         ->get();
+
+
+       
+        $esseg_con = DB::table('esseg_con')
+        ->select(DB::raw('sum(valor) as valor'),
+        DB::raw('ano as ano'),
+        DB::raw('ciudad_id as ciudad_id'))
+        ->where('ano','=',$ano)
+        ->groupBy('ciudad_id')
+        ->get();
+          
+
+
+          $informesadopciontotales = DB::table('campos')
+        ->select(DB::raw('sum(pr_vender_mat*pr_valor_mat) as vender_mat'),
+         DB::raw('sum(pr_vender_esp*pr_valor_esp) as vender_esp'),
+         DB::raw('sum(pr_vender_cie*pr_valor_cie) as vender_cie'),
+         DB::raw('sum(pr_vender_com*pr_valor_com) as vender_com'),
+         DB::raw('sum(pr_vender_int*pr_valor_int) as vender_int'),
+         DB::raw('sum(pr_vender_ing*pr_valor_ing) as vender_ing'),
+         DB::raw('sum(pr_vender_art*pr_valor_art) as vender_art'),
+         DB::raw('sum(pr_vender_mat) as suma_mat'),
+         DB::raw('sum(pr_vender_esp) as suma_esp'),
+         DB::raw('sum(pr_vender_cie) as suma_cie'),
+         DB::raw('sum(pr_vender_com) as suma_com'),
+         DB::raw('sum(pr_vender_int) as suma_int'),
+         DB::raw('sum(pr_vender_ing) as suma_ing'),
+         DB::raw('sum(pr_vender_art) as suma_art'),
+         DB::raw('sum(pr_muestra_mat) as muestra_mat'),
+         DB::raw('sum(pr_muestra_esp) as muestra_esp'),
+         DB::raw('sum(pr_muestra_cie) as muestra_cie'),
+         DB::raw('sum(pr_muestra_com) as muestra_com'),
+         DB::raw('sum(pr_muestra_int) as muestra_int'),
+         DB::raw('sum(pr_muestra_ing) as muestra_ing'),
+         DB::raw('sum(pr_muestra_art) as muestra_art'),
+         DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_ing+pr_vender_art) as total_adop'),
+         DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_adopval'),
+         DB::raw('representante_id as representante_id'),
+         DB::raw('ano as ano'),
+         DB::raw('region_id as region_id'))
+        ->where('region_id','=',Auth::user()->regionid)
+         ->where('ano','=',$ano)
+        ->get();
+
+
+
+        $date = date('Y-m-d');
+        //convertimos la fecha 1 a objeto Carbon
+$carbon1 = new \Carbon\Carbon($date);
+//convertimos la fecha 2 a objeto Carbon
+$carbon2 = new \Carbon\Carbon("2010-02-02 00:00:00");
+//de esta manera sacamos la diferencia en minutos
+$minutesDiff=$carbon1->diffInDays($carbon2);
+
+
+
+
+
+
+
+
+
+
+        $esseg = DB::table('esseg')
+        ->select(
+         DB::raw('sum(esseg) as total_esseg'),
+         DB::raw('ciudad_id as ciudad_id'),
+        DB::raw('ano as ano'))
+        ->where('ano','=',$ano)
+        ->groupBy('ciudad_id')
+
+        ->get();
+
+
+        $rojos= DB::table('colegios')
+        ->join('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
+        ->where('colegios.ciudad_id',2)->where('fecha' ,'<', '2019-10-15')
+        ->groupBy('fecha_adopcion.colegio_id')
+        ->orderBy('fecha_adopcion.fecha','desc')
+        ->get();
+
+
+
+     $rojo = DB::table('fecha_adopcion')
+      ->join('colegios','colegios.id','=','fecha_adopcion.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('colegio_id as colegio_id'),
+        DB::raw('ciudad_id as ciudad_id'),
+        DB::raw('ano as ano'))
+       ->where('fecha' ,'<', $date_futuretres)
+       ->where('ano','=',$ano)
+       ->groupBy('ciudad_id')
+       ->get();
+
+
+       $amarillo = DB::table('fecha_adopcion')
+      ->join('colegios','colegios.id','=','fecha_adopcion.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('colegio_id as colegio_id'),
+        DB::raw('ciudad_id as ciudad_id'),
+        DB::raw('ano as ano'))
+       ->whereBetween('fecha',[$date_futuretres, $date_futurecinc])
+       ->where('ano','=',$ano)
+       ->groupBy('ciudad_id')
+       ->get();
+
+
+
+        $verde = DB::table('fecha_adopcion')
+      ->join('colegios','colegios.id','=','fecha_adopcion.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('colegio_id as colegio_id'),
+        DB::raw('ciudad_id as ciudad_id'),
+        DB::raw('ano as ano'))
+       ->where('fecha' ,'>', $date_futurecinc)
+       ->where('ano','=',$ano)
+         ->groupBy('ciudad_id')
+       ->get();
+       
+
+          $essegcol = DB::table('esseg')
+        ->join('colegios','colegios.id','=','esseg.colegio_id')
+        ->select(DB::raw('sum(esseg.esseg) as esseg'))
+        ->where('ano','=',$ano)
+        ->where('region_id','=',Auth::user()->regionid)
+        ->get();
+
+           $essegcolcon = DB::table('esseg_con')
+        ->join('colegios','colegios.id','=','esseg_con.colegio_id')
+        ->select(DB::raw('sum(valor) as valor'))
+        ->where('ano','=',$ano)
+        ->where('region_id','=',Auth::user()->regionid)
+        ->get();
+
+
+
+
+
+      
+
+
+        $verdeweb = DB::table('colegios')
+      ->leftJoin('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
+      ->leftJoin('campos','colegios.id','=','campos.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('count(campos.colegio_id) as adopcion, campos.ciudad_id'),
+        DB::raw('colegios.ciudad_id as ciudad_id'),
+        DB::raw('fecha_adopcion.ano as ano'))
+       ->where('fecha' ,'<', '2019-10-15')
+       ->where('campos.ciudad_id' ,'>=', '1')
+       ->where('fecha_adopcion.ano','=',$ano)
+       ->groupBy('colegios.ciudad_id')
+       ->get();
+
+             $rojoweb = DB::table('colegios')
+      ->leftJoin('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
+      ->leftJoin('campos','colegios.id','=','campos.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('(campos.colegio_id) as adopcion, campos.ciudad_id'),
+        DB::raw('colegios.ciudad_id as ciudad_id'),
+        DB::raw('fecha_adopcion.ano as ano'))
+       ->where('fecha' ,'<', '2019-10-15')
+       ->whereNull('campos.ciudad_id')
+       ->where('fecha_adopcion.ano','=',$ano)
+       ->groupBy('colegios.ciudad_id')
+       ->get();
+
+          $amarilloweb = DB::table('colegios')
+      ->leftJoin('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
+      ->leftJoin('campos','colegios.id','=','campos.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('count(campos.colegio_id) as adopcion,  campos.ciudad_id'),
+        DB::raw('fecha_adopcion.colegio_id as colegio_id'),
+        DB::raw('colegios.ciudad_id as ciudad_id'),
+        DB::raw('fecha_adopcion.ano as ano'))
+       ->where('fecha' ,'>', '2019-10-15')
+       ->whereNull('campos.ciudad_id')
+       ->where('fecha_adopcion.ano','=',$ano)
+
+        ->groupBy('colegios.ciudad_id')
+       ->get();
+
+    
+
+         $rojowebs = DB::table('fecha_adopcion')
+      ->join('colegios','colegios.id','=','fecha_adopcion.colegio_id')
+      ->leftJoin('campos','colegios.id','=','campos.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('count(campos.colegio_id) as adopcion'),
+        DB::raw('fecha_adopcion.colegio_id as colegio_id'),
+        DB::raw('colegios.ciudad_id as ciudad_id'),
+        DB::raw('fecha_adopcion.ano as ano'))
+       ->where('fecha' ,'<', '2019-10-15')
+       ->where('fecha_adopcion.ano','=',$ano)
+        ->groupBy('colegios.id')
+       ->get();
+
+
+      
+
+
+
+
+
+
+
+ if(DB::table('proventas')->where('ano','=',$ano)->first()){
+         return view('colegiomiig::informereg', compact('informesweb','informesmat','informesesp','titulos','informeswebadop','representantes','ciudades','informes','informesadopcion','fechameta','fechaadopcion','proventas','esseg','essegcon','date','masa','informesadopcion','informestotales','informesadopciontotales','presupuestomet','presupuestoadop','colegiosman','dispapel','dispapelcam','date','date_futuretres','date_future','date_futuretres','date_futurecua','date_futurecinc','esseg_con','diferenciameta','diferenciaadopcion','rojo','verde','amarillo','verdeweb','amarilloweb','essegcol','essegcolcon','muestrapre','presupuestocon','rojoweb'));
+     }
+         else{
+ return view('colegiomiig::respuesta-filtro');
+
+}
+
+});
+
+
+
+
+
 Route::get('/gerentereg', function () {
-    $colegios = DB::table('colegios')
+    $ciudades = DB::table('ciudades')
     ->where('region_id', '=', Auth::user()->regionid)->get();
-    $representantes = DB::table('representantes')
-    ->where('region_id', '=', Auth::user()->regionid)->get();
-    return view('colegiomiig::gerentereg')->with('colegios', $colegios)->with('representantes', $representantes);
+    return view('colegiomiig::gerentereg')->with('ciudades', $ciudades);
+});
+
+Route::get('/filtro-gerentesreg', function () {
+
+ return view('colegiomiig::filtro-gerentereg');
+
 });
 
 Route::get('/editar-descuentoreg/{id}', function ($id) {
@@ -688,7 +1364,7 @@ Route::post('informe/general', function(){
          ->get();         
 
          
-      return view('colegiomiig::informes-region')->with('colegios', $colegios)->with('titulos', $titulos)->with('totales', $totales)->with('totalcolegios', $totalcolegios)->with('totallibros', $totallibros)->with('totalrepresentantes', $totalrepresentantes)->with('totalpesos', $totalpesos)->with('representantes', $representantes)->with('totalmercado', $totalmercado);
+      return view('colegiomiig::informes-region')->with('colegios', $colegios)->with('titulos', $titulos)->with('totales', $totales)->with('totalcolegios', $totalcolegios)->with('totallibros', $totallibros)->with('totalrepresentantes', $totalrepresentantes)->with('totalpesos',$totalpesos)->with('representantes', $representantes)->with('totalmercado', $totalmercado);
 
         
 });
@@ -714,61 +1390,250 @@ Route::get('/lista-colegios', 'Digitalmiig\Colegiomiig\Controllers\ColegiosContr
 
 Route::group(['middleware' => ['gerentenac']], function (){
 
+Route::get('/informe/representantesplata', function () {
+
+$ciudad = Input::get('ciudad');
+$ano = Input::get('ano');
+
+
+
+$colegios = DB::table('colegios')
+->select(
+                  'colegios.id',
+                  'colegios.codigo',
+                  'colegios.nombres',
+                  'colegios.region_id',
+                  'colegios.ciudad_id',
+                  'colegios.representante_id'
+                
+          )
+->where('ciudad_id','=',$ciudad)
+->get();
+
+
+
+$esseg = DB::table('esseg')
+->select(
+                  'id',
+                  'colegio_id',
+                  'esseg'             
+          )
+->where('ciudad_id','=',$ciudad)
+->where('ano','=',$ano)
+->get();
+
+
+
+$essegcon = DB::table('esseg_con')
+->select(
+                  'id',
+                  'colegio_id',
+                  'valor'             
+          )
+->where('ciudad_id','=',$ciudad)
+->where('ano','=',$ano)
+->get();
+
+
+
+$representante = DB::table('users')
+->select(
+                  'id','name','last_name'            
+          )
+->get();
+
+
+$regional = DB::table('regiones')
+->get();
+
+
+
+$ciudades = DB::table('ciudades')
+->get();
+
+
+
+$general = DB::table('campos')
+->select(DB::raw('pr_titulo_mat as titulo_mat'),
+ DB::raw('pr_vender_mat as vender_mat'),
+ DB::raw('pr_muestra_mat as muestra_mat'),
+ DB::raw('pr_poblacion_mat as poblacion_mat'),
+ DB::raw('pr_titulo_esp as titulo_esp'),
+ DB::raw('pr_vender_esp as vender_esp'),
+ DB::raw('pr_muestra_esp as muestra_esp'),
+ DB::raw('pr_poblacion_esp as poblacion_esp'),
+ DB::raw('pr_titulo_cie as titulo_cie'),
+ DB::raw('pr_vender_cie as vender_cie'),
+ DB::raw('pr_muestra_cie as muestra_cie'),
+ DB::raw('pr_poblacion_cie as poblacion_cie'),
+ DB::raw('pr_titulo_com as titulo_com'),
+ DB::raw('pr_vender_com as vender_com'),
+ DB::raw('pr_muestra_com as muestra_com'),
+ DB::raw('pr_poblacion_com as poblacion_com'),
+ DB::raw('pr_titulo_ing as titulo_ing'),
+ DB::raw('pr_vender_ing as vender_ing'),
+ DB::raw('pr_muestra_ing as muestra_ing'),
+ DB::raw('pr_poblacion_ing as poblacion_ing'),
+ DB::raw('pr_titulo_art as titulo_art'),
+ DB::raw('pr_vender_art as vender_art'),
+ DB::raw('pr_muestra_art as muestra_art'),
+ DB::raw('pr_poblacion_art as poblacion_art'),
+ DB::raw('pr_titulo_art as titulo_int'),
+ DB::raw('pr_vender_art as vender_int'),
+ DB::raw('pr_muestra_art as muestra_int'),
+ DB::raw('pr_poblacion_int as poblacion_int'),
+ DB::raw('colegio_id as colegio_id'),
+ DB::raw('ano as ano'),
+ DB::raw('grado_id as grado_id'))
+->where('ciudad_id','=',$ciudad)
+->where('ano','=',$ano)
+->get();
+
+$titulos = DB::table('titulo')->get();
+
+
+$sumamat = DB::table('campos')
+->select(DB::raw('sum(pr_vender_mat) as suma_mat'),
+DB::raw('sum(pr_muestra_mat) as muestra_mat'),
+DB::raw('sum(pr_poblacion_mat) as poblacion_mat'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+
+$sumaesp = DB::table('campos')
+->select(DB::raw('sum(pr_vender_esp) as suma_esp'),
+DB::raw('sum(pr_muestra_esp) as muestra_esp'),
+DB::raw('sum(pr_poblacion_esp) as poblacion_esp'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+
+$sumacie = DB::table('campos')
+->select(DB::raw('sum(pr_vender_cie) as suma_cie'),
+DB::raw('sum(pr_muestra_cie) as muestra_cie'),
+DB::raw('sum(pr_poblacion_cie) as poblacion_cie'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+
+
+$sumacom = DB::table('campos')
+->select(DB::raw('sum(pr_vender_com) as suma_com'),
+DB::raw('sum(pr_muestra_com) as muestra_com'),
+DB::raw('sum(pr_poblacion_com) as poblacion_com'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+
+$sumaing = DB::table('campos')
+->select(DB::raw('sum(pr_vender_ing) as suma_ing'),
+DB::raw('sum(pr_muestra_ing) as muestra_ing'),
+DB::raw('sum(pr_poblacion_ing) as poblacion_ing'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+$sumaart = DB::table('campos')
+->select(DB::raw('sum(pr_vender_art) as suma_art'),
+DB::raw('sum(pr_muestra_art) as muestra_art'),
+DB::raw('sum(pr_poblacion_art) as poblacion_art'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+
+$sumaint = DB::table('campos')
+->select(DB::raw('sum(pr_vender_int) as suma_int'),
+DB::raw('sum(pr_muestra_int) as muestra_int'),
+DB::raw('sum(pr_poblacion_int) as poblacion_int'),
+DB::raw('colegio_id as colegio_id'),
+DB::raw('ano as ano'))
+->where('ano','=',$ano)
+->where('ciudad_id','=',$ciudad)
+->groupBy('colegio_id')
+->get();
+
+if(DB::table('proventas')->where('ano','=',$ano)->first()){
+    return view('colegiomiig::generico')->with('general', $general)->with('colegios', $colegios)->with('titulos', $titulos)->with('sumamat', $sumamat)->with('sumaesp', $sumaesp)->with('sumacie', $sumacie)->with('sumacom', $sumacom)->with('sumaing', $sumaing)->with('sumaart', $sumaart)->with('sumaint', $sumaint)->with('esseg', $esseg)->with('essegcon', $essegcon)->with('representante', $representante)->with('regional', $regional)->with('ciudades', $ciudades);
+}
+    else{
+ return view('colegiomiig::respuesta-filtro');
+
+}
+
+});
+
+Route::get('/informe/gerentes-matriz', function () {
+
+$ciudades = DB::table('ciudades')->get();
+ return view('colegiomiig::filtro-informe')->with('ciudades', $ciudades);
+
+});
+
+Route::get('/filtro-gerentesnac', function () {
+
+ return view('colegiomiig::filtro-gerentenac');
+
+});
+
 
 
 
 
 Route::get('/informe/gerentes', function () {
-  
-        $representantes = DB::table('users')
-        ->where('id', '=', Auth::user()->id)
-        ->get();
+
+ $ano = Input::get('ano');
+
+ 
 
         $ciudades = DB::table('ciudades')
         ->get();
 
-         $titulos = DB::table('titulo')
-        ->get();
 
-        $proventas = DB::table('proventas')
+        $diferenciameta = DB::table('proventas')
+         ->select(DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_art+pr_vender_ing) as totalven'),
+         DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_art*pr_valor_art+pr_vender_ing*pr_valor_ing) as totalval'),
+         DB::raw('ciudad_id as ciudad_id'),
+         DB::raw('ano as ano'))
+         ->where('ano','=',$ano)
+         ->groupBy('ciudad_id')
+         ->get();
 
-      
-        ->groupBy('colegio_id')
-        ->get();
+          $diferenciaadopcion = DB::table('campos')
+         ->select(DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_art+pr_vender_ing) as totalven'),
+         DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_art*pr_valor_art+pr_vender_ing*pr_valor_ing) as totalval'),
+         DB::raw('ciudad_id as ciudad_id'),
+         DB::raw('ano as ano'))
+         ->where('ano','=',$ano)
+         ->groupBy('ciudad_id')
+         ->get();
 
-        foreach($proventas as $proventas){
-    $sumamat = $proventas->pr_vender_mat;
-        }
-    
-        $informesmat = DB::table('titulo')
-        ->join('proventas','titulo.id','=','proventas.pr_titulo_mat')
-        ->select(
-         DB::raw('sum(pr_vender_mat*precio) as vender_mat'), 
-         DB::raw('colegio_id as colegio_id'))
-        ->groupBy('colegio_id')
-        ->get();
-        foreach($informesmat as $informesmats){
-            $informesmats = $informesmats->vender_mat;
-        }
-        $informesesp = DB::table('campos')
-        ->join('proventas','campos.ciudad_id','=','proventas.ciudad_id')
-        ->select(
 
-  
-         DB::raw('sum(proventas.pr_vender_mat+proventas.pr_vender_esp+proventas.pr_vender_cie+proventas.pr_vender_com+proventas.pr_vender_int+proventas.pr_vender_art+proventas.pr_vender_ing) as totalweb'),
-         DB::raw('sum(campos.pr_vender_mat+campos.pr_vender_esp+campos.pr_vender_cie+campos.pr_vender_com+campos.pr_vender_int+campos.pr_vender_ing+campos.pr_vender_art) as totalwebadop'),
 
-         DB::raw('sum(proventas.pr_vender_mat*proventas.pr_valor_mat+proventas.pr_vender_esp*proventas.pr_valor_esp+proventas.pr_vender_cie*proventas.pr_valor_cie+proventas.pr_vender_com*proventas.pr_valor_com+proventas.pr_vender_int*proventas.pr_valor_int+proventas.pr_vender_art*proventas.pr_valor_art+proventas.pr_vender_ing*proventas.pr_valor_ing) as totalwebvalor'),
-         DB::raw('sum(campos.pr_vender_mat*campos.pr_valor_mat+campos.pr_vender_esp*campos.pr_valor_esp+campos.pr_vender_cie*campos.pr_valor_cie+campos.pr_vender_com*campos.pr_valor_com+campos.pr_vender_int*campos.pr_valor_int+campos.pr_vender_ing*campos.pr_valor_ing+campos.pr_vender_art*campos.pr_valor_art) as totalwebadopvalor'),
-         DB::raw('campos.ciudad_id as ciudad_id'))
-        ->groupBy('ciudad_id')
-        ->get();
-   
 
-        foreach ($informesesp as $informesesps) {
-        $total = $informesesps->totalwebadop;
- 
-        }
+
 
 
     
@@ -810,16 +1675,16 @@ Route::get('/informe/gerentes', function () {
          DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_ing+pr_vender_art) as total_met'),
          DB::raw('sum(pr_muestra_mat+pr_muestra_esp+pr_muestra_cie+pr_muestra_com+pr_muestra_int+pr_muestra_ing+pr_muestra_art) as total_muestramet'),
          DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_metval'),
-         DB::raw('ciudad_id as ciudad_id'))
+         DB::raw('ciudad_id as ciudad_id'),
+         DB::raw('ano as ano'))
+        ->where('ano','=',$ano)
         ->groupBy('ciudad_id')
         ->get();
-        foreach($informes as $informesweb){
-         $informesweb = $informesweb->total_metval;
-        }
-
-
-
-
+   
+        $rojo = DB::table("colegios")
+                ->join('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
+                ->where('colegios.ciudad_id',1)
+                ->where('fecha' ,'<', $date_future)->count();
 
 
 
@@ -847,13 +1712,12 @@ Route::get('/informe/gerentes', function () {
          DB::raw('sum(pr_muestra_ing) as muestra_ing'),
          DB::raw('sum(pr_muestra_art) as muestra_art'),
          DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_ing+pr_vender_art) as total_met'),
-         DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_metval'))
+         DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_metval'),
+         DB::raw('ano as ano'))
+        ->where('ano','=',$ano)
         ->get();
  
-        foreach($informes as $informesweb){
-         $informesweb = $informesweb->total_metval;
-        }
-
+   
 
         $informesadopcion = DB::table('campos')
         ->select(DB::raw('sum(pr_vender_mat*pr_valor_mat) as vender_mat'),
@@ -879,19 +1743,15 @@ Route::get('/informe/gerentes', function () {
          DB::raw('sum(pr_muestra_art) as muestra_art'),
          DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_ing+pr_vender_art) as total_adop'),
          DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_adopval'),
-         DB::raw('ciudad_id as ciudad_id'))
+         DB::raw('ciudad_id as ciudad_id'),
+         DB::raw('ano as ano'))
         ->groupBy('ciudad_id')
+        ->where('ano','=',$ano)
         ->get();
 
 
-        foreach($informesadopcion as $informeswebsite){
-       $informeswebadop = $informeswebsite->total_adopval;
-        
-        }
+   
 
- $colegiosman = DB::table('colegios')
-        ->where('representante_id', '=', Auth::user()->id)
-        ->get();
 
 
           $presupuestomet = DB::table('proventas')
@@ -902,8 +1762,9 @@ Route::get('/informe/gerentes', function () {
          DB::raw('sum(pr_muestra_int) as muestra_int'),
          DB::raw('sum(pr_muestra_ing) as muestra_ing'),
          DB::raw('sum(pr_muestra_art) as muestra_art'),
-         DB::raw('colegio_id as colegio_id'))
-
+         DB::raw('colegio_id as colegio_id'),
+         DB::raw('ano as ano'))
+         ->where('ano','=',$ano)
         ->get();
 
 
@@ -917,14 +1778,21 @@ Route::get('/informe/gerentes', function () {
          DB::raw('sum(pr_muestra_ing) as muestra_ing'),
          DB::raw('sum(pr_muestra_art) as muestra_art'),
          DB::raw('sum(pr_muestra_mat+pr_muestra_esp+pr_muestra_cie+pr_muestra_com+pr_muestra_int+pr_muestra_ing+pr_muestra_art) as total_adop'),
-         DB::raw('colegio_id as colegio_id'))
-
-        ->get();
+         DB::raw('colegio_id as colegio_id'),
+         DB::raw('ano as ano'))
+         ->where('ano','=',$ano)
+         ->get();
 
 
        
-
-
+        $esseg_con = DB::table('esseg_con')
+        ->select(DB::raw('sum(valor) as valor'),
+        DB::raw('ano as ano'),
+        DB::raw('ciudad_id as ciudad_id'))
+        ->where('ano','=',$ano)
+        ->groupBy('ciudad_id')
+        ->get();
+          
 
 
           $informesadopciontotales = DB::table('campos')
@@ -951,16 +1819,12 @@ Route::get('/informe/gerentes', function () {
          DB::raw('sum(pr_muestra_art) as muestra_art'),
          DB::raw('sum(pr_vender_mat+pr_vender_esp+pr_vender_cie+pr_vender_com+pr_vender_int+pr_vender_ing+pr_vender_art) as total_adop'),
          DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_adopval'),
-         DB::raw('representante_id as representante_id'))
-
-
+         DB::raw('representante_id as representante_id'),
+         DB::raw('ano as ano'))
+         ->where('ano','=',$ano)
         ->get();
 
 
-        foreach($informesadopcion as $informeswebsite){
-       $informeswebadop = $informeswebsite->total_adopval;
-         
-        }
 
         $date = date('Y-m-d');
         //convertimos la fecha 1 a objeto Carbon
@@ -970,70 +1834,171 @@ $carbon2 = new \Carbon\Carbon("2010-02-02 00:00:00");
 //de esta manera sacamos la diferencia en minutos
 $minutesDiff=$carbon1->diffInDays($carbon2);
 
-  $masa = DB::table('fecha_adopcion')
-    ->select(DB::raw('*, max(fecha) as fechaguard'))
-    ->groupBy('colegio_id')
-    ->orderBy('fecha', 'asc')
-    ->get();
 
 
-        $fechameta = DB::table('fecha_meta')->get();
-        $fechaadopcion = DB::table('fecha_adopcion')
-    ->select(DB::raw('*, max(fecha) as fechaguard'))
-    ->groupBy('colegio_id')
-    ->orderBy('fecha', 'asc')
-    ->get();
 
 
-            $latestPosts = DB::table('fecha_meta')
-                   ->select('fecha', DB::raw('MAX(fecha) as last_post_created_at'))
-
-                   ->groupBy('user_id');
 
 
-$rojo = DB::table("colegios")
-->join('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
-->join('campos','colegios.id','=','campos.colegio_id')
-->where('campos.ciudad_id', '=', 12)
-->where('fecha' ,'<', '2019-09-09')->count();
-
-$verde = DB::table("colegios")
-->join('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
-->join('campos','colegios.id','=','campos.colegio_id')
-->where('campos.ciudad_id', '=', 2)
-->where('fecha' ,'>', '2019-09-09')->count();
 
 
-  
-$query = DB::table('fecha_adopcion')
-    ->select(DB::raw('*, max(fecha) as id'))
-    ->groupBy('colegio_id')
-    ->orderBy('id', 'desc')
-    ->get();
 
         $esseg = DB::table('esseg')
         ->select(
          DB::raw('sum(esseg) as total_esseg'),
-         DB::raw('ciudad_id as ciudad_id'))
+         DB::raw('ciudad_id as ciudad_id'),
+        DB::raw('ano as ano'))
+        ->where('ano','=',$ano)
         ->groupBy('ciudad_id')
+
         ->get();
 
 
-           $essegtotal = DB::table('esseg')
-        ->join('proventas','proventas.colegio_id','=','esseg.colegio_id')->sum('esseg');
-        $essegcon = DB::table('esseg_con')->get();
+        $rojos= DB::table('colegios')
+        ->join('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
+        ->where('colegios.ciudad_id',2)->where('fecha' ,'<', '2019-09-28')
+        ->groupBy('fecha_adopcion.colegio_id')
+        ->orderBy('fecha_adopcion.fecha','desc')
+        ->get();
 
 
-         $informesmat = DB::table('titulo')
-        ->join('proventas','titulo.id','=','proventas.pr_titulo_mat')
+
+     $rojo = DB::table('fecha_adopcion')
+      ->join('colegios','colegios.id','=','fecha_adopcion.colegio_id')
         ->select(
-         DB::raw('sum(pr_vender_mat*precio) as vender_mat'), 
-         DB::raw('colegio_id as colegio_id'))
-        ->groupBy('colegio_id')
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('colegio_id as colegio_id'),
+        DB::raw('ciudad_id as ciudad_id'),
+        DB::raw('ano as ano'))
+       ->where('fecha' ,'<', $date_futuretres)
+       ->where('ano','=',$ano)
+       ->groupBy('ciudad_id')
+       ->get();
+
+
+       $amarillo = DB::table('fecha_adopcion')
+      ->join('colegios','colegios.id','=','fecha_adopcion.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('colegio_id as colegio_id'),
+        DB::raw('ciudad_id as ciudad_id'),
+        DB::raw('ano as ano'))
+       ->whereBetween('fecha',[$date_futuretres, $date_futurecinc])
+       ->where('ano','=',$ano)
+       ->groupBy('ciudad_id')
+       ->get();
+
+
+
+        $verde = DB::table('fecha_adopcion')
+      ->join('colegios','colegios.id','=','fecha_adopcion.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('colegio_id as colegio_id'),
+        DB::raw('ciudad_id as ciudad_id'),
+        DB::raw('ano as ano'))
+       ->where('fecha' ,'>', $date_futurecinc)
+       ->where('ano','=',$ano)
+         ->groupBy('ciudad_id')
+       ->get();
+       
+
+          $essegcol = DB::table('esseg')
+        ->join('colegios','colegios.id','=','esseg.colegio_id')
+        ->select(DB::raw('sum(esseg.esseg) as esseg'))
+        ->where('ano','=',$ano)
+        ->where('region_id','=',Auth::user()->regionid)
         ->get();
 
- 
-         return view('colegiomiig::informe', compact('informesweb','informesmat','informesesp','titulos','informeswebadop','representantes','ciudades','informes','informesadopcion','fechameta','fechaadopcion','proventas','esseg','essegcon','date','masa','informesadopcion','informestotales','informesadopciontotales','presupuestomet','presupuestoadop','colegiosman','dispapel','dispapelcam','date','date_futuretres','date_future','date_futuretres','date_futurecua','date_futurecinc'));
+           $essegcolcon = DB::table('esseg_con')
+        ->join('colegios','colegios.id','=','esseg_con.colegio_id')
+        ->select(DB::raw('sum(valor) as valor'))
+        ->where('ano','=',$ano)
+        ->where('region_id','=',Auth::user()->regionid)
+        ->get();
+
+
+
+
+
+      
+
+
+        $verdeweb = DB::table('colegios')
+      ->leftJoin('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
+      ->leftJoin('campos','colegios.id','=','campos.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('count(campos.colegio_id) as adopcion, campos.ciudad_id'),
+        DB::raw('colegios.ciudad_id as ciudad_id'),
+        DB::raw('fecha_adopcion.ano as ano'))
+       ->where('fecha' ,'<', '2019-10-15')
+       ->where('campos.ciudad_id' ,'>=', '1')
+       ->where('fecha_adopcion.ano','=',$ano)
+       ->groupBy('colegios.ciudad_id')
+       ->get();
+
+             $rojoweb = DB::table('colegios')
+      ->leftJoin('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
+      ->leftJoin('campos','colegios.id','=','campos.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('(campos.colegio_id) as adopcion, campos.ciudad_id'),
+        DB::raw('colegios.ciudad_id as ciudad_id'),
+        DB::raw('fecha_adopcion.ano as ano'))
+       ->where('fecha' ,'<', '2019-10-15')
+       ->whereNull('campos.ciudad_id')
+       ->where('fecha_adopcion.ano','=',$ano)
+       ->groupBy('colegios.ciudad_id')
+       ->get();
+
+          $amarilloweb = DB::table('colegios')
+      ->leftJoin('fecha_adopcion','colegios.id','=','fecha_adopcion.colegio_id')
+      ->leftJoin('campos','colegios.id','=','campos.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('count(campos.colegio_id) as adopcion,  campos.ciudad_id'),
+        DB::raw('fecha_adopcion.colegio_id as colegio_id'),
+        DB::raw('colegios.ciudad_id as ciudad_id'),
+        DB::raw('fecha_adopcion.ano as ano'))
+       ->where('fecha' ,'>', '2019-10-15')
+       ->whereNull('campos.ciudad_id')
+       ->where('fecha_adopcion.ano','=',$ano)
+
+        ->groupBy('colegios.ciudad_id')
+       ->get();
+
+    
+
+         $rojowebs = DB::table('fecha_adopcion')
+      ->join('colegios','colegios.id','=','fecha_adopcion.colegio_id')
+      ->leftJoin('campos','colegios.id','=','campos.colegio_id')
+        ->select(
+        DB::raw('count(fecha) as fecha'),
+        DB::raw('count(campos.colegio_id) as adopcion'),
+        DB::raw('fecha_adopcion.colegio_id as colegio_id'),
+        DB::raw('colegios.ciudad_id as ciudad_id'),
+        DB::raw('fecha_adopcion.ano as ano'))
+       ->where('fecha' ,'<', '2019-10-15')
+       ->where('fecha_adopcion.ano','=',$ano)
+        ->groupBy('colegios.id')
+       ->get();
+
+
+
+       
+
+
+
+
+  if(DB::table('proventas')->where('ano','=',$ano)->first()){
+         return view('colegiomiig::informe', compact('informesweb','informesmat','informesesp','titulos','informeswebadop','representantes','ciudades','informes','informesadopcion','fechameta','fechaadopcion','proventas','esseg','essegcon','date','masa','informesadopcion','informestotales','informesadopciontotales','presupuestomet','presupuestoadop','colegiosman','dispapel','dispapelcam','date','date_futuretres','date_future','date_futuretres','date_futurecua','date_futurecinc','esseg_con','diferenciameta','diferenciaadopcion','rojo','verde','amarillo','verdeweb','amarilloweb','rojoweb'));
+}
+ else{
+ return view('colegiomiig::respuesta-filtro');
+
+}
+
 });
 
 
@@ -1477,6 +2442,7 @@ Route::get('grado-oncenac/{id}', function ($id) {
 
 
 Route::get('grado-primeroadopcionnac/{id}', function ($id) {
+
     $colegios = DB::table('colegios')->where('id', "=", $id)->get();
     $titulo = DB::table('titulo')->get();
     $titulof = DB::table('titulo')->get();

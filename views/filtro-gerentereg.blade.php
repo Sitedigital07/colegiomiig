@@ -1,5 +1,4 @@
-@extends ('adminsite.auditor')
-
+@extends ('adminsite.representante')
 
 <!-- Define el titulo de la Página -->    
 @section('title')
@@ -13,19 +12,19 @@ Gestión de usuarios Libros & Libros
 
 @section('contenido')
 
-
 <div class="content-header">
                             <ul class="nav-horizontal text-center">
                                 
-                                <li class="active">
-                                    <a href="/gerentereg"><i class="gi gi-charts"></i> Matriz</a>
+                                <li>
+                                    <a href="/gerentereg"><i class="gi gi-charts"></i> Informe ventas</a>
                                 </li>
-
-                                 <li class="">
-                                    <a href="/filtro-gerentesreg"><i class="gi gi-charts"></i> Informe</a>
+                                 <li class="active">
+                                    <a href="/informe/vendedorreg"><i class="gi gi-charts"></i> Informe auditoria vs ventas</a>
                                 </li>
                             </ul>
                         </div>
+  
+
 
 <div class="container">
   <div class="row">
@@ -34,8 +33,10 @@ Gestión de usuarios Libros & Libros
                                 <div class="block">
                                     <!-- Basic Form Elements Title -->
                                     <div class="block-title">
-                                        
-                                        <h2><strong>Informe</strong> Gerente Regional</h2>
+                                        <div class="block-options pull-right">
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
+                                        </div>
+                                        <h2><strong>Informe</strong> Gerentes</h2>
                                     </div>
                                     <!-- END Form Elements Title -->
                                     
@@ -43,23 +44,12 @@ Gestión de usuarios Libros & Libros
                                      {{ Form::open(array('method' => 'GET','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/informe/gerentesweb'))) }}
 
 
-                                     	<div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-text-input">Ciudad</label>
-                                            <div class="col-md-9">
-                                             <select class="selectpicker col-xs-12 col-sm-12 col-md-12 col-lg-12 form-control input-small" data-show-subtext="true" data-live-search="true" name="ciudad" required="required">
-                                              <option value="" selected disabled hidden>Seleccione ciudad</option>
-                                               @foreach($ciudades as $ciudades)
-                                              <option value="{{$ciudades->ids}}">{{$ciudades->n_ciudad}}</option>
-                                               @endforeach
-                                              </select>
-                                            </div>
-                                        </div>
-                         
+                                
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="example-email-input">Año</label>
+                                            <label class="col-md-3 control-label" for="example-email-input">Seleccione año</label>
                                             <div class="col-md-9">
-                                             <select name="ano" class="form-control" required="required">
+                                             <select name="ano" class="form-control" required>
                                               <option value="" selected>Seleccione año</option>
                                               <option value="2016">2016</option>
                                               <option value="2017">2017</option>
@@ -81,7 +71,7 @@ Gestión de usuarios Libros & Libros
 
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">
-                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Aceptar</button>
+                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
                                                 <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
                                             </div>
                                         </div>
@@ -98,5 +88,4 @@ Gestión de usuarios Libros & Libros
 
   
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-
 @stop

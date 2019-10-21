@@ -24,7 +24,11 @@ Gestión de usuarios Libros & Libros
                                 </li>
 
                                   <li class="active">
-                                    <a href="/informe/gerentes"><i class="gi gi-file"></i> Informe Gerentes</a>
+                                    <a href="/filtro-gerentesnac"><i class="gi gi-file"></i> Informe Gerentes</a>
+                                </li>
+
+                                 <li class="active">
+                                    <a href="/informe/gerentes-matriz"><i class="gi gi-file"></i> Matriz</a>
                                 </li>
                             
                             </ul>
