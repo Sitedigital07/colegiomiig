@@ -38,6 +38,7 @@
 					<td>Presupuesto Esseg</td>
 					<td>Consumo</td>
 					<td>Descuento</td>
+					<td>Descuento Real</td>
 				</tr>
 				
 			</thead>
@@ -79,11 +80,22 @@
 				@endif
 				@endforeach
 
+				@if(DB::table('descuento')->where('colegio_id','=',$colegiosweb->id)->where('ano','=',$ano)->count() == 0)
+				<td>0</td>
+				@else
+				@foreach($adopciones as $adopcionesws)
+				@if($adopcionesws->colegio_id == $colegiosweb->id)
+					<th>{{$adopcionesws->descuento}} %</th>
+					@else
+					@endif
+					@endforeach
+				@endif
+
 				@if(DB::table('campos')->where('colegio_id','=',$colegiosweb->id)->where('ano','=',$ano)->count() == 0)
 				<th>Sin Descuento</th>
 				@else
 				@foreach($adopciones as $adopcionesw)
-			
+		
 			
 				@if($adopcionesw->colegio_id == $colegiosweb->id)
 
@@ -98,6 +110,7 @@
 		
 				@endforeach
 				@endif
+
 			</tr> 
 			</tbody>
 		</table>
