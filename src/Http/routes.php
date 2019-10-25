@@ -87,6 +87,7 @@ $colegios = DB::table('colegios')
                 
           )
 ->where('ciudad_id','=',$ciudad)
+->orderBy('representante_id')
 ->get();
 
 
@@ -1426,6 +1427,7 @@ $colegios = DB::table('colegios')
                 
           )
 ->where('ciudad_id','=',$ciudad)
+->orderBy('representante_id')
 ->get();
 
 
