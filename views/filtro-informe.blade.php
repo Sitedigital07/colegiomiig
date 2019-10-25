@@ -45,12 +45,12 @@ Gestión de usuarios Libros & Libros
                                         <div class="block-options pull-right">
                                             <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
                                         </div>
-                                        <h2><strong>Informe</strong> Facturación</h2>
+                                        <h2><strong>Informe</strong> Matriz</h2>
                                     </div>
                                     <!-- END Form Elements Title -->
                                     
                                     <!-- Basic Form Elements Content -->
-                                     {{ Form::open(array('method' => 'GET','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/informe/representantes'))) }}
+                                     {{ Form::open(array('method' => 'GET','class' => 'form-horizontal','id' => 'defaultForm', 'url' => array('/informe/representantesplata'))) }}
 
 
                                   
