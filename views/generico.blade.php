@@ -87,7 +87,7 @@
 			
 				@if($adopcionesw->colegio_id == $colegiosweb->id)
 
-					@if($adopcionesw->esseg == 0)
+					@if($adopcionesw->esseg == '0' OR $adopcionesw->total_metval =='0')
 						<th>0%</th>
 				
 				@else
