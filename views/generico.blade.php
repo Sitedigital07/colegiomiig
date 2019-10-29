@@ -33,12 +33,15 @@
 				<tr>
 					<td>Regional</td>
 					<td>Ciudad</td>
-					<td>Dane</td>
+					<td>Código DANE</td>
 					<td>Representante</td>
 					<td>Presupuesto Esseg</td>
 					<td>Consumo</td>
+					<td>Fecha Meta</td>
+					<td>Fecha Adopción</td>
 					<td>Descuento</td>
 					<td>Descuento Real</td>
+					
 				</tr>
 				
 			</thead>
@@ -79,6 +82,23 @@
 				@else
 				@endif
 				@endforeach
+				
+
+				@if(DB::table('fecha_meta')->where('colegio_id','=',$colegiosweb->id)->where('ano','=',$ano)->count()==0)
+				<th>Sin Fecha</th>
+				@else
+				<th>{{str_replace(str_split('\\/:*?"[]|'),'',DB::table('fecha_meta')->where('colegio_id','=',$colegiosweb->id)->where('ano','=',$ano)->pluck('fecha'))}}</th>
+				@endif
+
+				@if(DB::table('fecha_adopcion')->where('colegio_id','=',$colegiosweb->id)->where('ano','=',$ano)->count()==0)
+				<th>Sin Fecha</th>
+				@else
+				<th>{{str_replace(str_split('\\/:*?"[]|'),'',DB::table('fecha_adopcion')->where('colegio_id','=',$colegiosweb->id)->where('ano','=',$ano)->pluck('fecha'))}}</th>
+				@endif
+
+
+				
+			
 
 				@if(DB::table('descuento')->where('colegio_id','=',$colegiosweb->id)->where('ano','=',$ano)->count() == 0)
 				<td>0</td>
@@ -119,32 +139,32 @@
 			<thead>
 				<tr>
 					<th>Grado</th>
-					<th style="background:#32ac63; color:#fff">T.Matemáticas</th>
-					<th>Venta</th>
+					<th style="background:#32ac63; color:#fff">Matemáticas</th>
+					<th>Proy. Venta</th>
 					<th>Muestras</th>
 
-					<th style="background:#32ac63; color:#fff">T.Español</th>
-					<th>Venta</th>
+					<th style="background:#32ac63; color:#fff">Español</th>
+					<th>Proy. Venta</th>
 					<th>Muestras</th>
 			
-					<th style="background:#32ac63; color:#fff">T.Ciencias</th>
-					<th>Venta</th>
+					<th style="background:#32ac63; color:#fff">Ciencias</th>
+					<th>Proy. Venta</th>
 					<th>Muestras</th>
 
-					<th style="background:#32ac63; color:#fff">T.Comprensión</th>
-					<th>Venta</th>
+					<th style="background:#32ac63; color:#fff">Comprensión</th>
+					<th>Proy. Venta</th>
 					<th>Muestras</th>
 					
-					<th style="background:#32ac63; color:#fff">T.Inglés</th>
-					<th>Venta</th>
+					<th style="background:#32ac63; color:#fff">Inglés</th>
+					<th>Proy. Venta</th>
 					<th>Muestras</th>
 			
-					<th style="background:#32ac63; color:#fff">T.Artes</th>
-					<th>Venta</th>
+					<th style="background:#32ac63; color:#fff">Artes</th>
+					<th>Proy. Venta</th>
 					<th>Muestras</th>
 		
-					<th style="background:#32ac63; color:#fff">T.Interes</th>
-					<th>Venta</th>
+					<th style="background:#32ac63; color:#fff">Interes</th>
+					<th>Proy. Venta</th>
 					<th>Muestras</th>
 		
 				</tr>
