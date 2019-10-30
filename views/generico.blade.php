@@ -321,8 +321,8 @@
 			</tbody>
 			<tfooter>
 				<tr>
-					<th>--</th>
-					<th>--</th>
+					<th></th>
+					<th></th>
 					@foreach($sumamat as $sumamats)
 					@if($sumamats->colegio_id == $colegiosweb->id)
 					<th>{{$sumamats->suma_mat}}</th>
@@ -331,7 +331,7 @@
 					@else 
 					@endif
 					@endforeach
-					<th>--</th>
+					<th></th>
 					@foreach($sumaesp as $sumaesps)
 					@if($sumaesps->colegio_id == $colegiosweb->id)
 					<th>{{$sumaesps->suma_esp}}</th>
@@ -340,7 +340,7 @@
 					@else
 					@endif
 					@endforeach
-					<th>--</th>
+					<th></th>
 					@foreach($sumacie as $sumacies)
 					@if($sumacies->colegio_id == $colegiosweb->id)
 					<th>{{$sumacies->suma_cie}}</th>
@@ -349,7 +349,7 @@
 					@else
 					@endif
 					@endforeach
-					<th>--</th>
+					<th></th>
 					@foreach($sumacom as $sumacoms)
 					@if($sumacoms->colegio_id == $colegiosweb->id)
 					<th>{{$sumacoms->suma_com}}</th>
@@ -358,7 +358,7 @@
 					@else
 					@endif
 					@endforeach
-					<th>--</th>
+					<th></th>
 					@foreach($sumaing as $sumaings)
 					@if($sumaings->colegio_id == $colegiosweb->id)
 					<th>{{$sumaings->suma_ing}}</th>
@@ -367,7 +367,7 @@
 					@else
 					@endif
 					@endforeach
-					<th>--</th>
+					<th></th>
 					@foreach($sumaart as $sumaarts)
 					@if($sumaarts->colegio_id == $colegiosweb->id)
 					<th>{{$sumaarts->suma_art}}</th>
@@ -376,7 +376,7 @@
 					@else
 					@endif
 					@endforeach
-					<th>--</th>
+					<th></th>
 					@foreach($sumaint as $sumaints)
 					@if($sumaints->colegio_id == $colegiosweb->id)
 					<th>{{$sumaints->suma_int}}</th>
