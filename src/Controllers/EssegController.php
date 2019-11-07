@@ -102,7 +102,7 @@ Excel::create('Filename', function($excel) {
 				}
 				if(!empty($insert)){
 					DB::table('esseg_con')->insert($insert);
-					dd('Insert Record successfully.');
+					return Redirect('/carga-esseg')->with('status', 'ok_createimp');
 				}
 			}
 		}
