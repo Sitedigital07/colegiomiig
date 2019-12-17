@@ -8,6 +8,10 @@ Gestión de usuarios Libros & Libros
 
 @section('cabecera')
  @parent
+  <link rel="stylesheet" href="/validaciones/dist/css/bootstrapValidator.css"/>
+    <script type="text/javascript" src="/validaciones/vendor/jquery/jquery.min.js"></script>
+
+    <script type="text/javascript" src="/validaciones/dist/js/bootstrapValidator.js"></script>
 @stop
 
 @section('contenido')
@@ -55,7 +59,7 @@ Gestión de usuarios Libros & Libros
                                        <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-text-input">Ciudades</label>
                                             <div class="col-md-9">
-                                             <select class="selectpicker col-xs-12 col-sm-12 col-md-12 col-lg-12 form-control input-small" data-show-subtext="true" data-live-search="true" name="ciudad" required>
+                                             <select class="selectpicker col-xs-12 col-sm-12 col-md-12 col-lg-12 form-control input-small" data-show-subtext="true" data-live-search="true" name="ciudad" id="ciudad" required>
                                               <option value="" selected disabled hidden>Seleccione ciudad</option>
                                                @foreach($ciudades as $ciudades)
                                               <option value="{{$ciudades->ids}}">{{$ciudades->n_ciudad}}</option>
@@ -65,7 +69,16 @@ Gestión de usuarios Libros & Libros
                                         </div>
                                     
 
-                                        
+                                           <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Representante</label>
+                                            <div class="col-md-9">
+                                             <select class="selectpicker col-xs-12 col-sm-12 col-md-12 col-lg-12 form-control input-small" data-show-subtext="true" data-live-search="true" name="representante" id="representante" required>
+                                              <option value="" disabled selected>Seleccione Represente</option>
+                                             <option value=""></option>
+                                              </select>
+                                            </div>
+                                        </div>
+                                    
 
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="example-email-input">Seleccione año</label>
@@ -106,6 +119,21 @@ Gestión de usuarios Libros & Libros
 </div>
 
 
+ <script type="text/javascript">
+     
+      $('#ciudad').on('change',function(e){
+        console.log(e);
+
+        var cat_id = e.target.value;
+
+        $.get('/mema/ajax-subcatder?cat_id=' + cat_id, function(data){
+            $('#representante').empty();
+            $.each(data, function(index, subcatObj){
+              $('#representante').append('<option value="'+subcatObj.id+'">'+subcatObj.name+' '+subcatObj.last_name+'</option>');
+            });
+        });
+      });
+   </script>   
 
   
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>

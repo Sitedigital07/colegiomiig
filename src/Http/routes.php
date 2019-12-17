@@ -73,6 +73,7 @@ Route::get('/informe/representantesadm', function () {
 
 $ciudad = Input::get('ciudad');
 $ano = Input::get('ano');
+$representante = Input::get('representante');
 
 
 
@@ -87,6 +88,7 @@ $colegios = DB::table('colegios')
                 
           )
 ->where('ciudad_id','=',$ciudad)
+->where('representante_id','=',$representante)
 ->orderBy('representante_id')
 ->get();
 
@@ -285,11 +287,29 @@ $adopciones = DB::table('campos')
  ->groupBy('campos.colegio_id')
  ->get();
 
+$adopcionescon = DB::table('campos')
+->join('esseg_con','esseg_con.colegio_id','=','campos.colegio_id')
+->leftJoin('descuento','descuento.colegio_id','=','campos.colegio_id')
+->leftJoin('fecha_meta','fecha_meta.colegio_id','=','campos.colegio_id')
+->leftJoin('fecha_adopcion','fecha_adopcion.colegio_id','=','campos.colegio_id')
+
+ ->select(
+ DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_metval'),
+ DB::raw('campos.colegio_id as colegio_id'),
+ DB::raw('fecha_meta.fecha as fecha_meta'),
+  DB::raw('fecha_adopcion.fecha as fecha_adopcion'),
+  DB::raw('valor as valor'),
+  DB::raw('descuento as descuento'),
+ DB::raw('campos.ano as ano'))
+ ->where('campos.ano','=',$ano)
+ ->where('campos.ciudad_id','=',$ciudad)
+ ->groupBy('campos.colegio_id')
+ ->get();
 
 
 
 if(DB::table('proventas')->where('ano','=',$ano)->first()){
-    return view('colegiomiig::generico')->with('general', $general)->with('colegios', $colegios)->with('titulos', $titulos)->with('sumamat', $sumamat)->with('sumaesp', $sumaesp)->with('sumacie', $sumacie)->with('sumacom', $sumacom)->with('sumaing', $sumaing)->with('sumaart', $sumaart)->with('sumaint', $sumaint)->with('esseg', $esseg)->with('essegcon', $essegcon)->with('representante', $representante)->with('regional', $regional)->with('ciudades', $ciudades)->with('ano', $ano)->with('descuentos', $descuentos)->with('adopciones', $adopciones);
+    return view('colegiomiig::generico')->with('general', $general)->with('colegios', $colegios)->with('titulos', $titulos)->with('sumamat', $sumamat)->with('sumaesp', $sumaesp)->with('sumacie', $sumacie)->with('sumacom', $sumacom)->with('sumaing', $sumaing)->with('sumaart', $sumaart)->with('sumaint', $sumaint)->with('esseg', $esseg)->with('essegcon', $essegcon)->with('representante', $representante)->with('regional', $regional)->with('ciudades', $ciudades)->with('ano', $ano)->with('descuentos', $descuentos)->with('adopciones', $adopciones)->with('adopcionescon', $adopcionescon);
 }
     else{
  return view('colegiomiig::respuesta-filtro');
@@ -1620,9 +1640,29 @@ $adopciones = DB::table('campos')
  ->groupBy('campos.colegio_id')
  ->get();
 
+$adopcionescon = DB::table('campos')
+->join('esseg_con','esseg_con.colegio_id','=','campos.colegio_id')
+->leftJoin('descuento','descuento.colegio_id','=','campos.colegio_id')
+->leftJoin('fecha_meta','fecha_meta.colegio_id','=','campos.colegio_id')
+->leftJoin('fecha_adopcion','fecha_adopcion.colegio_id','=','campos.colegio_id')
+
+ ->select(
+ DB::raw('sum(pr_vender_mat*pr_valor_mat+pr_vender_esp*pr_valor_esp+pr_vender_cie*pr_valor_cie+pr_vender_com*pr_valor_com+pr_vender_int*pr_valor_int+pr_vender_ing*pr_valor_ing+pr_vender_art*pr_valor_art) as total_metval'),
+ DB::raw('campos.colegio_id as colegio_id'),
+ DB::raw('fecha_meta.fecha as fecha_meta'),
+  DB::raw('fecha_adopcion.fecha as fecha_adopcion'),
+  DB::raw('valor as valor'),
+  DB::raw('descuento as descuento'),
+ DB::raw('campos.ano as ano'))
+ ->where('campos.ano','=',$ano)
+ ->where('campos.ciudad_id','=',$ciudad)
+ ->groupBy('campos.colegio_id')
+ ->get();
+
+
 
 if(DB::table('proventas')->where('ano','=',$ano)->first()){
-    return view('colegiomiig::generico')->with('general', $general)->with('colegios', $colegios)->with('titulos', $titulos)->with('sumamat', $sumamat)->with('sumaesp', $sumaesp)->with('sumacie', $sumacie)->with('sumacom', $sumacom)->with('sumaing', $sumaing)->with('sumaart', $sumaart)->with('sumaint', $sumaint)->with('esseg', $esseg)->with('essegcon', $essegcon)->with('representante', $representante)->with('regional', $regional)->with('ciudades', $ciudades)->with('ano', $ano)->with('adopciones', $adopciones);
+    return view('colegiomiig::generico')->with('general', $general)->with('colegios', $colegios)->with('titulos', $titulos)->with('sumamat', $sumamat)->with('sumaesp', $sumaesp)->with('sumacie', $sumacie)->with('sumacom', $sumacom)->with('sumaing', $sumaing)->with('sumaart', $sumaart)->with('sumaint', $sumaint)->with('esseg', $esseg)->with('essegcon', $essegcon)->with('representante', $representante)->with('regional', $regional)->with('ciudades', $ciudades)->with('ano', $ano)->with('adopciones', $adopciones)->with('adopcionescon', $adopcionescon);
 }
     else{
  return view('colegiomiig::respuesta-filtro');

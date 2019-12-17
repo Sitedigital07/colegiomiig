@@ -39,8 +39,8 @@
 					<td>Consumo</td>
 					<td>Fecha Meta</td>
 					<td>Fecha Adopción</td>
-					<td>Descuento</td>
-					<td>Descuento Real</td>
+					<td>Descuento venta directa</td>
+					<td>Descuento más ESSEG</td>
 					
 				</tr>
 				
@@ -78,7 +78,7 @@
 		
 				@foreach($essegcon as $essegcons)
 			    @if($essegcons->colegio_id == $colegiosweb->id)
-				<th>{{number_format($essegcons->valor,0,",",".")}}</th>
+				<th>$ {{number_format($essegcons->valor,0,",",".")}}</th>
 				@else
 				@endif
 				@endforeach
@@ -114,16 +114,16 @@
 				@if(DB::table('campos')->where('colegio_id','=',$colegiosweb->id)->where('ano','=',$ano)->count() == 0)
 				<th>Sin Descuento</th>
 				@else
-				@foreach($adopciones as $adopcionesw)
+				@foreach($adopcionescon as $adopcionesw)
 		
 			
 				@if($adopcionesw->colegio_id == $colegiosweb->id)
 
-					@if($adopcionesw->esseg == '0' OR $adopcionesw->total_metval =='0')
+					@if($adopcionesw->valor == '0' OR $adopcionesw->total_metval =='0')
 						<th>0%</th>
 				
 				@else
-				<th>{{number_format($adopcionesw->esseg/$adopcionesw->total_metval*100+$adopcionesw->descuento,2,",",".")}} %</th>
+				<th>{{number_format($adopcionesw->valor/$adopcionesw->total_metval*100+$adopcionesw->descuento,2,",",".")}} %</th>
 				@endif
 				@endif
 		
