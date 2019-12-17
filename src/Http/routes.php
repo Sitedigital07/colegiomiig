@@ -1417,6 +1417,7 @@ Route::get('/informe/representantesplata', function () {
 
 $ciudad = Input::get('ciudad');
 $ano = Input::get('ano');
+$representante = Input::get('representante');
 
 
 
@@ -1431,6 +1432,7 @@ $colegios = DB::table('colegios')
                 
           )
 ->where('ciudad_id','=',$ciudad)
+->where('representante_id','=',$representante)
 ->orderBy('representante_id')
 ->get();
 
@@ -1457,6 +1459,7 @@ $essegcon = DB::table('esseg_con')
 ->where('ciudad_id','=',$ciudad)
 ->where('ano','=',$ano)
 ->get();
+
 
 
 
@@ -1513,7 +1516,10 @@ $general = DB::table('campos')
 ->where('ano','=',$ano)
 ->get();
 
+
+
 $titulos = DB::table('titulo')->get();
+
 
 
 $sumamat = DB::table('campos')
@@ -1527,7 +1533,6 @@ DB::raw('ano as ano'))
 ->groupBy('colegio_id')
 ->get();
 
-
 $sumaesp = DB::table('campos')
 ->select(DB::raw('sum(pr_vender_esp) as suma_esp'),
 DB::raw('sum(pr_muestra_esp) as muestra_esp'),
@@ -1538,6 +1543,7 @@ DB::raw('ano as ano'))
 ->where('ciudad_id','=',$ciudad)
 ->groupBy('colegio_id')
 ->get();
+
 
 
 $sumacie = DB::table('campos')
